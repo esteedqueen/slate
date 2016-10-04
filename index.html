@@ -659,6 +659,227 @@ The above returns User JSON object response.
 Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
 </aside>
 
+<h2 id="user-sign-out">User Sign Out</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/sign_out"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"DELETE"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/sign_out"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>A successful sign out request returns 204 No content</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>An unsuccessful sign in request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unauthorised"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">DELTE https://tressapi-staging.herokuapp.com/api/v2/users/sign_out</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user who is logging out</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Delete all persisted records on client
+</aside>
+
+<h2 id="change-password">Change Password</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"current_password"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">""</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"password"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">""</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"password_confirmation"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">""</span>
+  <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">boundary</span> <span class="o">=</span> <span class="s">"---011000010111000001101001"</span>
+
+<span class="k">var</span> <span class="nv">body</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">for</span> <span class="n">param</span> <span class="k">in</span> <span class="n">parameters</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">paramName</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">!</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"--</span><span class="se">\(</span><span class="n">boundary</span><span class="se">)\r\n</span><span class="s">"</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Disposition:form-data; name=</span><span class="se">\"\(</span><span class="n">paramName</span><span class="se">)\"</span><span class="s">"</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"fileName"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">contentType</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"content-type"</span><span class="p">]</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">fileContent</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOfFile</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">println</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"; filename=</span><span class="se">\"\(</span><span class="n">filename</span><span class="se">)\"\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Type: </span><span class="se">\(</span><span class="n">contentType</span><span class="se">)\r\n\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="n">fileContent</span><span class="o">!</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">paramValue</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"value"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"</span><span class="se">\r\n\r\n\(</span><span class="n">paramValue</span><span class="se">)</span><span class="s">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"PATCH"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPBody</span> <span class="o">=</span> <span class="n">postData</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"current_password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n\r\n-----011000010111000001101001--"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>An unsuccessful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong password"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;/update_password</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose id is on the request path</td>
+</tr>
+</tbody></table>
+
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>current_password</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>password_confirmation</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
 <h2 id="update-or-edit-user">Update or Edit User</h2>
 
 <h3 id="without-avatar-image-upload">Without Avatar Image Upload</h3>
@@ -2022,6 +2243,218 @@ Remember — Same Users JSONArray Response as above
 <td>Page number.</td>
 </tr>
 </tbody></table>
+
+<h1 id="posts-hairstyles">Posts (Hairstyles)</h1>
+
+<h2 id="create-a-post">Create a Post</h2>
+
+<p>This endpoint creates a post.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"caption"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"@CoCo check this out"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"image"</span><span class="p">,</span>
+    <span class="s">"fileName"</span><span class="p">:</span> <span class="p">[</span><span class="s">"0"</span><span class="p">:</span> <span class="p">[]]</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"products"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"KeraCare Natural Hair Range"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"price_range_id"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"1"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"category_id"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"2"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"new_salon_name"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"La Villa Hair Shop"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"new_salon_location"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"East Legon, Accra"</span>
+  <span class="p">]</span>
+    <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"new_salon_latitude"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"0.00000"</span>
+  <span class="p">],</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"new_salon_longitude"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"0.0000"</span>
+  <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">boundary</span> <span class="o">=</span> <span class="s">"---011000010111000001101001"</span>
+
+<span class="k">var</span> <span class="nv">body</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">for</span> <span class="n">param</span> <span class="k">in</span> <span class="n">parameters</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">paramName</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">!</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"--</span><span class="se">\(</span><span class="n">boundary</span><span class="se">)\r\n</span><span class="s">"</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Disposition:form-data; name=</span><span class="se">\"\(</span><span class="n">paramName</span><span class="se">)\"</span><span class="s">"</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"fileName"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">contentType</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"content-type"</span><span class="p">]</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">fileContent</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOfFile</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">println</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"; filename=</span><span class="se">\"\(</span><span class="n">filename</span><span class="se">)\"\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Type: </span><span class="se">\(</span><span class="n">contentType</span><span class="se">)\r\n\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="n">fileContent</span><span class="o">!</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">paramValue</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"value"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"</span><span class="se">\r\n\r\n\(</span><span class="n">paramValue</span><span class="se">)</span><span class="s">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/posts"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@CoCo check this out\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"image\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nKeraCare Natural Hair Range\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_name\"\r\n\r\nLa Villa Hair Shop\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_location\"\r\n\r\nEast Legon, Accra\r\n-----011000010111000001101001--"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/posts"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> 
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>A successful create post request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/079/medium/ronkeraji.jpg.jpg?1475618385"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a minute"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@CoCo check this out"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KeraCare Natural Hair Range"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">", "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suldwu5ohzd5dlqrpvtphq"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T21:59:45Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T21:59:45Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/29/posts</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<p><code class="prettyprint">Authorization: xxxxxxxxxxxxxxxxxx8790730598790</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose is making the request</td>
+</tr>
+</tbody></table>
+
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>image</td>
+<td>Required. File image</td>
+</tr>
+<tr>
+<td>products</td>
+<td>Required. Products used on hairstyle</td>
+</tr>
+<tr>
+<td>price_range_id</td>
+<td>Required. Must choose one from dropdown</td>
+</tr>
+<tr>
+<td>category_id</td>
+<td>Required. Must choose one from dropdown</td>
+</tr>
+<tr>
+<td>new_salon_name</td>
+<td>Required. Name of Salon</td>
+</tr>
+<tr>
+<td>new_salon_location</td>
+<td>Required. Salon Location Text of chosen Location (From Google Maps API Autocompleter)</td>
+</tr>
+<tr>
+<td>new_salon_latitude</td>
+<td>Required. Salon Latitude of chosen Location  (From Google Maps API Autocompleter)</td>
+</tr>
+<tr>
+<td>new_salon_longitude</td>
+<td>Required. Name of Salon</td>
+</tr>
+<tr>
+<td>caption</td>
+<td>Optional. Free style text on User&rsquo;s feeling</td>
+</tr>
+<tr>
+<td>tag_list</td>
+<td>Optional. Always check if caption string has hashtags, if yes, add the strings of the hashtags seperated by commas as tag_list. E.g if caption has <code class="prettyprint">Rocking my hairstyle #throwbackthursday #blessed</code>. <code class="prettyprint">tag_list</code> will be: <code class="prettyprint">throwbackthursday, blessed</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the Post JSON object on the client.
+</aside>
 
       </div>
       <div class="dark-box">
