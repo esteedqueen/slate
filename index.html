@@ -2456,6 +2456,1321 @@ Remember — Same Users JSONArray Response as above
 Persist the Post JSON object on the client.
 </aside>
 
+<h2 id="get-a-specific-post">Get a Specific Post</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/53"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle  Lewis"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esther222"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lolavitahair Salon"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/053/medium/image_name%22_.?1459115640"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 months"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fleeky fleeky!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Twists"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lolavitahair Salon, Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxg53kdu-jdy7-itpwis_a"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-27T21:53:55Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-06T15:09:22Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific post.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/&lt;id&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the post to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="feeds">Feeds</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPBody</span> <span class="o">=</span> <span class="n">postData</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">79</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/079/medium/ronkeraji.jpg.jpg?1475618387"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 hour"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@CoCo check this out"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KeraCare Natural Hair Range"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">", "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suldwu5ohzd5dlqrpvtphq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T21:59:45Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T21:59:50Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">78</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/078/medium/9109768995_f6c2675fd4_c.jpg.jpg?1473780658"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21 days"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@CoCo @gerald @obi check this out"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mongolian Hair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">", "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mixes1yls6_0z_6ioo7lkg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-13T15:30:51Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-13T15:31:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/077/medium/ronke.jpg.jpg?1472725902"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@Obi @gerald check this out!"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21 days"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@Obi @gerald check this out!"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"21 days"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 month"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@CoCo check this out"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mongolian Hair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">", "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"o1dp5sb4h5wtiyjlvnkefq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-01T10:31:36Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-01T10:33:29Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Natural Hair Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dzorwulu, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/076/medium/image_name%22_.?1471345416"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Looks great! #tressupnaturalista"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Amazing .. Love this😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘👏👏👏👏👏👏👏"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Love my #hair #tressupnaturalista"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Natural Hair Salon, Dzorwulu, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2wsjfzu8ykmzsmd4jtxira"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T11:03:29Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-22T14:32:52Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Native Touch"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Leeds, United Kingdom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/075/medium/image_name%22_.?1470901386"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I love this @mseolatunde @Morenike"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOL cat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Native Touch, Leeds, United Kingdom"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ghd4jiqhzauapggh6gsnww"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-11T07:43:00Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-22T14:32:32Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Self"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/074/medium/image_name%22_.?1470826829"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@esther222 heyyyyyy"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hello @esther222"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#naturalhair @esther"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Self, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"faoo0bxoadnuulqc0ijyaw"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-10T11:00:24Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-19T14:26:38Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">73</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Graph"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fbuser"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/054/small/picture.?1466030510"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holla Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"East Palo Alto, CA, United States"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/073/medium/image_name%22_.?1466030672"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holla Salon, East Palo Alto, CA, United States"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ac6zxeeu2amkt-tfeys2zg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T22:44:28Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-15T16:03:58Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surulere, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/071/medium/image_name%22_.?1466004158"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I love what I'm seeing. This will be my next hair. Oooh and I think it will actually fit my face. Love this so much"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">71</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weaves"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:12:33.442Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:12:33.442Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Love my hair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Salon, Surulere, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"almog9fejygmpepuot3y7g"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T15:22:33Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-22T14:32:21Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lagoon Villa Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lekki Phase 1, Lekki, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/070/medium/image_name%22_.?1465989570"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Heat Protectant, Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lagoon Villa Salon, Lekki Phase 1, Lekki, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b1y933xfj6lw3vdzbwji1g"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T11:19:27Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-19T14:26:54Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Solape Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enugu, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/069/medium/image_name%22_.?1465988129"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@bolanlemi"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">49</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#hair"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">69</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Weaves"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:12:33.442Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:12:33.442Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:43.027Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.023Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2600 - 5000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Love the hair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Brazilian Weaves"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Solape Salon, Enugu, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dt2g7zn5utin3wffm3vdrq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T10:55:24Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-15T13:45:13Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Linda"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Somolu, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/068/medium/image_name%22_.?1465970941"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm Cut"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:24.895Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.008Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1600 - 2500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bleh"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Linda, Somolu, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_gycx2q1k8ttzougmwmd5g"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T06:08:57Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-15T06:09:03Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lola Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"North Legon, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/067/medium/image_name%22_.?1465836144"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm Cut"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:24.895Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.008Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1600 - 2500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lolavitahair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lola Salon, North Legon, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82nxemr7o8rrvj6umaegsg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:42:19Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:42:25Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle Villa Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oshodi-Isolo, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/066/medium/image_name%22_.?1465835389"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holla Holla"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle Villa Salon, Oshodi-Isolo, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gaybf6b7cio6h37tgig-ng"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:29:47Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:29:51Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Mary"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gbagada, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/065/medium/image_name%22_.?1465834465"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You would love this!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Twists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Mary, Gbagada, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"appedeijdktque51axdtua"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:14:23Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T16:14:26Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/064/medium/image_name%22_.?1465832220"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bliss!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Twists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle Salon, Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qgfmdxqulhy6fhsiufxt6w"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:36:57Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:37:01Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Shirley Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"East Legon, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/063/medium/image_name%22_.?1465831664"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Love love love love this"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Twists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Shirley Salon, East Legon, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sm8x7bl21gx9_f5fqhhrow"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:27:42Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:27:46Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dzorwulu, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/062/medium/image_name%22_.?1465831091"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#Throwback"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Heat Protectant, Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Black Cotton Salon, Dzorwulu, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1eehofjj-4ztr5bnwsydaq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:18:04Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:18:17Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HairTalk"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dansoman, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/061/medium/image_name%22_.?1465830636"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I remember this @esther2"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:24.895Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.008Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60 - 100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1600 - 2500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yagazie shot this!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Havana Mambo Twists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HairTalk, Dansoman, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uvorulizrma2jbfcaoed-q"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:10:29Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T15:10:41Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Agatha's Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"East Legon, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/060/medium/image_name%22_.?1465829410"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Bulk Twist"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Agatha's Salon, East Legon, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yfizmdcj_m4gdcwtm7u3zq"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T14:50:05Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T14:50:11Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">59</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Solape Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"East Legon, Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/059/medium/image_name%22_.?1465820518"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corn Row"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-16T12:36:12.119Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-12-16T12:36:12.119Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:43.027Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.023Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2600 - 5000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bleh blah"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Solape Salon, East Legon, Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qvm3bpf79jq_ns9tkosvtg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T12:21:55Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T12:22:00Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good luck Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/058/medium/image_name%22_.?1465819764"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Perm Cut"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:13:12.703Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:16:43.027Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:25:29.023Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"110 - 200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2600 - 5000"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shea Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Good luck Salon, Accra, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ldu1czao2g8qpmmcijyrkg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T12:09:18Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-13T12:09:26Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Omoge Wuraola Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ojuelegba Bus Stop, Surulere, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/056/medium/image_name%22_.?1460436368"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">43</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holla"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In love with my bun!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Obia Natural Hair Curl Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Omoge Wuraola Salon, Ojuelegba Bus Stop, Surulere, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yu-hdnwphyfdhvvnajs5mg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-12T04:46:06Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-06T15:09:22Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gerald Pharin"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bolanlemi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/042/small/avatar_name\"_.?1460374996"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Mary's Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adenta Municipality, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/055/medium/image_name%22_.?1460383428"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@mseolatunde"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2 months"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Looks great for grad!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twist Butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Auntie Mary's Salon, Adenta Municipality, Greater Accra, Ghana"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lbrc1ms-kotyqbkwj72ykw"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-11T14:03:41Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-06T15:09:22Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle  Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esther222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/054/medium/image_name%22_.?1459182997"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:10:20.535Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluff"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffy kitten"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">", "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"noz0ruhc286r3cgew2lo4w"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-28T16:36:35Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-06T15:09:22Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle  Lewis"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esther222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lolavitahair Salon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/053/medium/image_name%22_.?1459115640"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Braids"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T17:08:59.307Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-06T18:15:52.758Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T11:21:37.935Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fleeky fleeky!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kinky Twists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lolavitahair Salon, Apapa, Lagos, Nigeria"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxg53kdu-jdy7-itpwis_a"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-27T21:53:55Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-06-06T15:09:22Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">47</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This section contains endpoints that retrieve several types of feeds on Tress.</p>
+
+<h3 id="all">All</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10,page=1</code></p>
+
+<p>This endpoint retrieves all posts by pagination, 10 at a time.</p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<p>Pagination for endless acrolling</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>Numbers of users to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+<h3 id="following">Following</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts?per_page=10,page=1</code></p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<p>Pagination for endless acrolling</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>Numbers of users to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
+</tr>
+</tbody></table>
+
+<h5 id="headers">Headers</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose feed you&rsquo;re requesting.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+<h3 id="trending">Trending</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/trending?per_page=10,page=1</code></p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<p>Pagination for endless acrolling</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>10</td>
+<td>Numbers of users to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+<h3 id="hashtagged-feed">Hashtagged Feed</h3>
+
+<h3 id="category-feed">Category Feed</h3>
+
+<h3 id="price-range-feed">Price Range Feed</h3>
+
+<h3 id="extensive-filter-feed">Extensive Filter Feed</h3>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
