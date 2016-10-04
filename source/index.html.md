@@ -74,6 +74,7 @@ The endpoints in this section creates a new user account via several options.
 
 
 ### Via email
+
 ```swift
 let headers = [
   "x-tress-client-key-id": "fjsdkfas4904952",
@@ -459,6 +460,204 @@ Parameter | Description
 --------- | -----------
 email | Required
 password | Required
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+## User Sign Out
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/sign_out")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "DELETE"
+request.allHTTPHeaderFields = headers
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/sign_out")
+  .delete(null)
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+> A successful sign out request returns 204 No content
+
+```json
+
+```
+
+> An unsuccessful sign in request returns JSON structured like this:
+
+```json
+{
+  "success": false,
+  "message": "Unauthorised"
+}
+```
+#### HTTP Request
+
+`DELTE https://tressapi-staging.herokuapp.com/api/v2/users/sign_out`
+
+##### Headers
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user who is logging out
+
+<aside class="notice">
+Delete all persisted records on client
+</aside>
+
+## Change Password
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+let parameters = [
+  [
+    "name": "current_password",
+    "value": ""
+  ],
+  [
+    "name": "password",
+    "value": ""
+  ],
+  [
+    "name": "password_confirmation",
+    "value": ""
+  ]
+]
+
+let boundary = "---011000010111000001101001"
+
+var body = ""
+var error: NSError? = nil
+for param in parameters {
+  let paramName = param["name"]!
+  body += "--\(boundary)\r\n"
+  body += "Content-Disposition:form-data; name=\"\(paramName)\""
+  if let filename = param["fileName"] {
+    let contentType = param["content-type"]!
+    let fileContent = String(contentsOfFile: filename, encoding: NSUTF8StringEncoding, error: &error)
+    if (error != nil) {
+      println(error)
+    }
+    body += "; filename=\"\(filename)\"\r\n"
+    body += "Content-Type: \(contentType)\r\n\r\n"
+    body += fileContent!
+  } else if let paramValue = param["value"] {
+    body += "\r\n\r\n\(paramValue)"
+  }
+}
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "PATCH"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
+RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"current_password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n\r\n-----011000010111000001101001--");
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password")
+  .patch(body)
+  .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "id": 58,
+  "email": "example@gmail.com",
+  "digits_id": null,
+  "username": "monalisa",
+  "country_code": null,
+  "firstname": null,
+  "lastname": null,
+  "fullname": " ",
+  "hair_type_id": null,
+  "phone_number": null,
+  "bio": null,
+  "avatar": "http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&d=www.tressapp.co/images/esther.jpg",
+  "authentication_token": "meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298",
+  "posts": [],
+  "most_popular_posts": [],
+  "followers": [],
+  "following": [],
+  "comments": [],
+  "posts_count": 0,
+  "comments_count": 0,
+  "followers_count": 0,
+  "following_count": 0,
+  "posts_total_likes": 0,
+  "posts_liked": [],
+  "posts_bookmarked": [],
+  "posts_bookmarked_count": 0,
+  "created_at": "2016-10-04T10:46:39Z",
+  "updated_at": "2016-10-04T10:46:39Z"
+}
+```
+
+> An unsuccessful request returns JSON structured like this:
+
+```json
+{
+  "success": false,
+  "message": "Wrong password"
+}
+```
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v2/users/<id>/update_password`
+
+##### Headers
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose id is on the request path
+
+
+#### Request Body Parameters
+
+Parameter | Description
+--------- | -----------
+current_password | Required
+password | Required
+password_confirmation | Required
 
 <aside class="notice">
 Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
@@ -1685,3 +1884,179 @@ Parameter | Default | Description
 --------- | ------- | -----------
 per_page | 25 | Numbers of objects to return at a time
 page | 1 | Page number.
+
+
+# Posts (Hairstyles)
+
+## Create a Post
+This endpoint creates a post.
+
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+let parameters = [
+  [
+    "name": "caption",
+    "value": "@CoCo check this out"
+  ],
+  [
+    "name": "image",
+    "fileName": ["0": []]
+  ],
+  [
+    "name": "products",
+    "value": "KeraCare Natural Hair Range"
+  ],
+  [
+    "name": "price_range_id",
+    "value": "1"
+  ],
+  [
+    "name": "category_id",
+    "value": "2"
+  ],
+  [
+    "name": "new_salon_name",
+    "value": "La Villa Hair Shop"
+  ],
+  [
+    "name": "new_salon_location",
+    "value": "East Legon, Accra"
+  ]
+    [
+    "name": "new_salon_latitude",
+    "value": "0.00000"
+  ],
+  [
+    "name": "new_salon_longitude",
+    "value": "0.0000"
+  ]
+]
+
+let boundary = "---011000010111000001101001"
+
+var body = ""
+var error: NSError? = nil
+for param in parameters {
+  let paramName = param["name"]!
+  body += "--\(boundary)\r\n"
+  body += "Content-Disposition:form-data; name=\"\(paramName)\""
+  if let filename = param["fileName"] {
+    let contentType = param["content-type"]!
+    let fileContent = String(contentsOfFile: filename, encoding: NSUTF8StringEncoding, error: &error)
+    if (error != nil) {
+      println(error)
+    }
+    body += "; filename=\"\(filename)\"\r\n"
+    body += "Content-Type: \(contentType)\r\n\r\n"
+    body += fileContent!
+  } else if let paramValue = param["value"] {
+    body += "\r\n\r\n\(paramValue)"
+  }
+}
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/29/posts")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.allHTTPHeaderFields =
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
+RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@CoCo check this out\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"image\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nKeraCare Natural Hair Range\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_name\"\r\n\r\nLa Villa Hair Shop\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_location\"\r\n\r\nEast Legon, Accra\r\n-----011000010111000001101001--");
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/29/posts")
+  .post(body)
+  .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", 
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful create post request returns JSON structured like this:
+
+```json
+{
+  "id": 79,
+  "user_id": 29,
+  "fullname": "Shola Lewis",
+  "username": "CoCo",
+  "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+  "salon_name": null,
+  "salon_location": null,
+  "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/079/medium/ronkeraji.jpg.jpg?1475618385",
+  "comments_count": 0,
+  "comments": [],
+  "category": {
+    "id": 2,
+    "name": "Natural Hair",
+    "created_at": "2015-10-06T17:10:20.535Z",
+    "updated_at": "2015-10-06T17:10:20.535Z"
+  },
+  "price_range": {
+    "id": 1,
+    "price": "0 - 50",
+    "created_at": "2015-10-06T18:15:52.758Z",
+    "updated_at": "2016-02-09T11:21:37.935Z",
+    "price_gh": "0 - 50",
+    "price_ng": "0 - 1500"
+  },
+  "time_ago": "a minute",
+  "likes": 0,
+  "caption": "@CoCo check this out",
+  "stylename": null,
+  "price_range_id": 1,
+  "duration": null,
+  "products": "KeraCare Natural Hair Range",
+  "category_id": 2,
+  "salon": ", ",
+  "slug": "suldwu5ohzd5dlqrpvtphq",
+  "created_at": "2016-10-04T21:59:45Z",
+  "updated_at": "2016-10-04T21:59:45Z"
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v2/users/29/posts`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### Request Body Parameters
+
+Parameter | Description
+--------- | -----------
+image | Required. File image
+products | Required. Products used on hairstyle
+price_range_id | Required. Must choose one from dropdown
+category_id | Required. Must choose one from dropdown
+new_salon_name | Required. Name of Salon
+new_salon_location | Required. Salon Location Text of chosen Location (From Google Maps API Autocompleter)
+new_salon_latitude | Required. Salon Latitude of chosen Location  (From Google Maps API Autocompleter)
+new_salon_longitude | Required. Name of Salon
+caption | Optional. Free style text on User's feeling
+tag_list | Optional. Always check if caption string has hashtags, if yes, add the strings of the hashtags seperated by commas as tag_list. E.g if caption has `Rocking my hairstyle #throwbackthursday #blessed`. `tag_list` will be: `throwbackthursday, blessed`
+
+<aside class="notice">
+Persist the Post JSON object on the client.
+</aside>
+
