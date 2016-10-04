@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Tress API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;swift&quot;,&quot;java&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="swift">swift</a>
+              <a href="#" data-language-name="java">java</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,8 +111,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href="mailto:esther@tressapp.co?Subject=Request for Developer Client Key" target="_top">Email for Client Authentication Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -121,89 +119,1083 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Tress API! You can use our API to access Tress API endpoints.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>The base url for the staging server is:</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p><code class="prettyprint">https://tressapi-staging.herokuapp.com/api/v2</code></p>
 
-<h1 id="authentication">Authentication</h1>
+<p>This doc contains all the HTTP Requests for the endpoints.</p>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<h1 id="client-authentication">Client Authentication</h1>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>For client authentication, use this code:</p>
+</blockquote>
+<pre class="highlight swift"><code><span class="cp"># With Swift, you can just pass the correct header with each request</span>
+<span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">"meowmeowmeow"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">"meowmeowmeow"</span>
+<span class="p">]</span>
+</code></pre>
+<pre class="highlight java"><code><span class="err">#</span> <span class="n">With</span> <span class="n">Java</span> <span class="n">OkHttp</span><span class="o">,</span> <span class="n">you</span> <span class="n">can</span> <span class="n">just</span> <span class="n">pass</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">header</span> <span class="n">with</span> <span class="n">each</span> <span class="n">request</span>
+<span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"url"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">"meowmeowmeow"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">"meowmeowmeow"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with the give Client Key ID and Key Secret.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Tress uses Client Key ID and Client Key Secret to allow access to the API. You can email <a href="esther@tressapp.co">our developer team</a> to request for access.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p>Tress expects the Client Key ID and Client Key Secret to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><code class="prettyprint">X-Tress-Client-Key-Id: meowmeowmeow</code></p>
+
+<p><code class="prettyprint">X-Tress-Client-Key-Secret: meowmeowmeowmeowmeowmeowmeowmeowmeow</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>meowmeowmeow</code> with the Client key Id and secret provided.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<h1 id="users">Users</h1>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id="create-a-user-account">Create a User Account</h2>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<p>The endpoints in this section creates a new user account via several options.</p>
+
+<h3 id="via-email">Via email</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">"fjsdkfas4904952"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">"ri04r0-8r5-34089-52589"</span><span class="p">,</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
+  <span class="s">"cache-control"</span><span class="p">:</span> <span class="s">"no-cache"</span><span class="p">,</span>
+  <span class="s">"postman-token"</span><span class="p">:</span> <span class="s">"10ae502f-a306-5529-0a83-dddbbffd03b9"</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s">"user"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s">"email"</span><span class="p">:</span> <span class="s">"ea.olatunde@gmail.com"</span><span class="p">,</span>
+    <span class="s">"username"</span><span class="p">:</span> <span class="s">"monalisa"</span><span class="p">,</span>
+    <span class="s">"password"</span><span class="p">:</span> <span class="s">"1234567890"</span>
+  <span class="p">]]</span>
+
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n\t\"user\": {\n\t\t\"email\": \"ea.olatunde@gmail.com\",\n\t\t\"username\": \"monalisa\",\n\t\t\"password\": \"1234567890\"\n\t}\n}"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">"irr0283-1=8573028"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">"123jr59kled85903"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>A successful sign up request returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<blockquote>
+<p>An unsuccessful sign up request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid username"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
-<h3 id="http-request">HTTP Request</h3>
+<h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>Required. Must be unique and match this format: <code class="prettyprint">/\A[a-zA-Z0-9\-\_\.]+\z/</code> - usernames can only use letters, numbers, underscores and periods. No spaces allowed.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+<h3 id="via-facebook">Via Facebook</h3>
+
+<p>Authenticate via the <a href="https://developers.facebook.com/docs/ios/">iOS</a> or <a href="https://developers.facebook.com/docs/android">Android</a> <a href="https://developers.facebook.com/docs/apis-and-sdks">Facebook SDK</a> and make a request with the authenticated response containing the user&rsquo;s access token as query parameter and facebook user details + user entered details as body parameters to the endpoint below.
+Please contact <a href="esther@tressapp.co">our developer team</a> for Facebook API Key and Secret.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>The request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"here"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example here "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/auth/facebook/callback</code></p>
+
+<h4 id="request-query-parameter">Request Query Parameter</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+</tbody></table>
+
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Required. Obtained from Facebook SDK authenticated response. If email is an <code class="prettyprint">@facebook.com</code> email, you must require the user to enter a valid email.</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Required. You must require the user to enter a username</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>birthday</td>
+<td>Required. Obtained from Facebook SDK authenticated response</td>
+</tr>
+<tr>
+<td>hair_type_id</td>
+<td>Required. You must require the user to choose from a dropdown of hair type options</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+<h3 id="via-phone-number">Via Phone Number</h3>
+
+<p>Authenticate via the <a href="https://docs.fabric.io/apple/digits/sign-in-with-phone-number.html">iOS</a> or <a href="https://docs.fabric.io/android/digits/sign-in-with-phone-number.html">Android</a> <a href="https://docs.fabric.io/ios/fabric/overview.html">Fabric Digits SDK</a> on the client and make a request with the authenticated response containing the user&rsquo;s Auth Headers Hashmap and phone number to the endpoint below to verify on the server.</p>
+
+<p>Please contact <a href="esther@tressapp.co">our developer team</a> for Twitter Key &amp; Secret required.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="n">Verify</span> <span class="n">Digits</span> <span class="n">User</span> <span class="n">on</span> <span class="n">Server</span>
+<span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">FormBody</span><span class="o">.</span><span class="na">Builder</span> <span class="n">formBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FormBody</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+        <span class="c1">// dynamically add more parameter like this:</span>
+        <span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"phone_number"</span><span class="o">,</span> <span class="n">phone_number</span><span class="o">);</span>
+
+<span class="n">RequestBody</span> <span class="n">formBody</span> <span class="o">=</span> <span class="n">formBuilder</span><span class="o">.</span><span class="na">build</span><span class="o">();</span>
+<span class="n">Headers</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">Headers</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">hashMap</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="n">AppController</span><span class="o">.</span><span class="na">digitsVerifyUrl</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">headers</span><span class="o">(</span><span class="n">headers</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">formBody</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>If the digits server verification is successful, there are two possible responses:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">938708492</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w"> 
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"digits_auth_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"444hjsfkszk"</span><span class="w"> 
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-requests">HTTP Requests</h4>
+
+<ul>
+<li><p>(1) Verify Digits User on Server</p>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2verify_digits_account</code> </p>
+
+<h4 id="request-headers">Request Headers</h4>
+
+<p>Hashmap of Auth Headers | (contains different params shown below) Obtained from Digits SDK authenticated response</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>X-Auth-Service-Providers</td>
+<td></td>
+</tr>
+<tr>
+<td>X-Verify-Credentials-Authorization</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>Send the Hashmap of the parameters above as a Request Header</p>
+
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phone_number</td>
+<td>Required. Obtained from Digits SDK authenticated response</td>
+</tr>
+</tbody></table></li>
+</ul>
+
+<p>If the digits server verification is successful, there are two possible responses:</p>
+
+<p>(1) If there&rsquo;s user with the number and matching digits token, it means the user already has an account on Tress, then you will get the User JSON:</p>
+
+<p>(2) But if there&rsquo;s no matching number or token, you will get a non User JSON with two elements <code class="prettyprint">success</code> and <code class="prettyprint">digits_auth_id</code>    </p>
+
+<aside class="notice">
+<ol>
+  <li>If you get a User JSON object, persist the User on the client including the authentication_token for future user authenticated requests.</li>
+
+  <li>If you get response a non User JSON with two elements `success` and `digits_auth_id`, continue to make the HTTP Request (2)</li>
+</ol>
+
+</aside>
+
+<ul>
+<li>(2) Create a New Digits User on Server</li>
+</ul>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2digits_user</code>
+    #### Request Body Parameters</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>phone_number</td>
+<td>Required. Obtained from Digits SDK authenticated response</td>
+</tr>
+<tr>
+<td>digits_id</td>
+<td>Required. Obtained from Digits SDK authenticated response</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Required. User must enter this</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Required. User must enter this</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Required. User must enter this</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Required. User must enter this</td>
+</tr>
+<tr>
+<td>hair_type_id</td>
+<td>Required. User must choose this from dropdown</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The above returns User JSON object response.
+</aside>
+
+<h2 id="user-sign-in">User Sign In</h2>
+
+<h3 id="via-email">Via email</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"application/json"</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s">"user"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s">"email"</span><span class="p">:</span> <span class="s">"ea.olatunde@gmail.com"</span><span class="p">,</span>
+    <span class="s">"password"</span><span class="p">:</span> <span class="s">"1234567890"</span>
+  <span class="p">]]</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"user\": {\n        \"email\": \"oliverakol@gmail.com\",\n        \"password\": \"oliverakol009\"\n    }\n}"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://www.tressapp.co/api/v2/users/sign_in"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>A successful sign in request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>An unsuccessful sign in request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Error with your email or password"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/sign_in</code></p>
+
+<h4 id="request-body-parameters">Request Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+<h2 id="update-or-edit-user">Update or Edit User</h2>
+
+<h3 id="without-avatar-image-upload">Without Avatar Image Upload</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"hair_type_id"</span><span class="p">,</span>
+    <span class="s">"value"</span><span class="p">:</span> <span class="s">"1"</span>
+  <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">boundary</span> <span class="o">=</span> <span class="s">"---011000010111000001101001"</span>
+
+<span class="k">var</span> <span class="nv">body</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">for</span> <span class="n">param</span> <span class="k">in</span> <span class="n">parameters</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">paramName</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">!</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"--</span><span class="se">\(</span><span class="n">boundary</span><span class="se">)\r\n</span><span class="s">"</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Disposition:form-data; name=</span><span class="se">\"\(</span><span class="n">paramName</span><span class="se">)\"</span><span class="s">"</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"fileName"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">contentType</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"content-type"</span><span class="p">]</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">fileContent</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOfFile</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">println</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"; filename=</span><span class="se">\"\(</span><span class="n">filename</span><span class="se">)\"\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Type: </span><span class="se">\(</span><span class="n">contentType</span><span class="se">)\r\n\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="n">fileContent</span><span class="o">!</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">paramValue</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"value"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"</span><span class="se">\r\n\r\n\(</span><span class="n">paramValue</span><span class="se">)</span><span class="s">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"hair_type_id\"\r\n\r\n1\r\n-----011000010111000001101001--"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://stage.tressapp.co/api/v2/users/95"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>A successful user update request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
+
+<h4 id="request-parameters">Request Parameters</h4>
+
+<h5 id="path">Path</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Required. This is the id of the user</td>
+</tr>
+</tbody></table>
+
+<h5 id="headers">Headers</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose id is on the request path</td>
+</tr>
+</tbody></table>
+
+<h5 id="body">Body</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hair_type_id</td>
+<td>Hair Type ID</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email address</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Firstname</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Lastname</td>
+</tr>
+<tr>
+<td>username</td>
+<td>username</td>
+</tr>
+</tbody></table>
+
+<h3 id="with-avatar-image-upload">With Avatar Image Upload</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span>
+    <span class="s">"name"</span><span class="p">:</span> <span class="s">"user[avatar]"</span><span class="p">,</span>
+    <span class="s">"fileName"</span><span class="p">:</span> <span class="p">[</span><span class="s">"0"</span><span class="p">:</span> <span class="p">[]]</span>
+  <span class="p">]</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">boundary</span> <span class="o">=</span> <span class="s">"---011000010111000001101001"</span>
+
+<span class="k">var</span> <span class="nv">body</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">NSError</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="k">for</span> <span class="n">param</span> <span class="k">in</span> <span class="n">parameters</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">paramName</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"name"</span><span class="p">]</span><span class="o">!</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"--</span><span class="se">\(</span><span class="n">boundary</span><span class="se">)\r\n</span><span class="s">"</span>
+  <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Disposition:form-data; name=</span><span class="se">\"\(</span><span class="n">paramName</span><span class="se">)\"</span><span class="s">"</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">filename</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"fileName"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">contentType</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"content-type"</span><span class="p">]</span><span class="o">!</span>
+    <span class="k">let</span> <span class="nv">fileContent</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">contentsOfFile</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">error</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">println</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"; filename=</span><span class="se">\"\(</span><span class="n">filename</span><span class="se">)\"\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"Content-Type: </span><span class="se">\(</span><span class="n">contentType</span><span class="se">)\r\n\r\n</span><span class="s">"</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="n">fileContent</span><span class="o">!</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="k">let</span> <span class="nv">paramValue</span> <span class="o">=</span> <span class="n">param</span><span class="p">[</span><span class="s">"value"</span><span class="p">]</span> <span class="p">{</span>
+    <span class="n">body</span> <span class="o">+=</span> <span class="s">"</span><span class="se">\r\n\r\n\(</span><span class="n">paramValue</span><span class="se">)</span><span class="s">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"PATCH"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPBody</span> <span class="o">=</span> <span class="n">postData</span>
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"user[avatar]\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001--"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/53"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>A successful user update request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"digits_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"authentication_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-10-04T10:46:39Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
+
+<h4 id="request-parameters">Request Parameters</h4>
+
+<h5 id="path">Path</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Required. This is the id of the user</td>
+</tr>
+</tbody></table>
+
+<h5 id="headers">Headers</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose id is on the request path</td>
+</tr>
+</tbody></table>
+
+<h5 id="body">Body</h5>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>avatar</td>
+<td>uploaded image filename</td>
+</tr>
+<tr>
+<td>hair_type_id</td>
+<td>Hair Type id</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email address</td>
+</tr>
+<tr>
+<td>firstname</td>
+<td>Firstname</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Lastname</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Username</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+<h2 id="reset-password">Reset Password</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"application/json"</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s">"user"</span><span class="p">:</span> <span class="p">[</span><span class="s">"email"</span><span class="p">:</span> <span class="s">"example@gmail.com"</span><span class="p">]]</span>
+
+<span class="k">let</span> <span class="nv">postData</span> <span class="o">=</span> <span class="kt">NSJSONSerialization</span><span class="o">.</span><span class="nf">dataWithJSONObject</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPBody</span> <span class="o">=</span> <span class="n">postData</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
+<span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"user\": {\n        \"email\": \"example@gmail.com\"\n    }\n}"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>A successful reset password returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea.olatunde@gmail.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>An unsuccessful reset password returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email not found"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint helps a user resets their password.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/password</code></p>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email</td>
+<td>The email of the user to reset the password</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-users">Get Users</h2>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>All users request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Obi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/2f1a045b41776275e79517ad7ffc8ab9?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gerald"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/f297a7254188da5e2741f654724a4fc3?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"akosua.kesewa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/063e87f56fda4c58d02e9f27c35488c9?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tress"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/1521f4e439ec418c8f71a56ad9470492?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product lead"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/015/small/1449750973685.?1449751040"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mseolatunde"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/023/small/imageName\"_.?1454660075"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle Oni"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/ace2dbcbae76d8e11e6829453ff475ed?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moji Shola"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">53</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cascas"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/7b0aecbc91e1bf7b4af2d2cac9d181b8?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cass Sarfo"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Morenike"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/8062e42ee074b6dbb7b1091f44dc70c6?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"More Nike"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">56</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/056/small/avatar_name\"_.?1471268402"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess Sarfo"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esther2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/019/small/1449208576522.?1454660074"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234 Olatunde"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CoCo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola Lewis"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jjhuj"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/024/small/avatar_name\"_.?1454660076"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hellokjhh Jhjn"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"esther222"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bolanle  Lewis"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bolanlemi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/042/small/avatar_name\"_.?1460374996"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gerald Pharin"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fbuser"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/054/small/picture.?1466030510"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Open Graph"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monalisa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" "</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This shows the various ways you can retrieve users from the server.</p>
+
+<h3 id="by-pagination">By Pagination</h3>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?per_page=25,page=1</code></p>
+
+<p>This endpoint retrieves all users by pagination, 25 at a time.</p>
+
+<h4 id="query-parameters">Query Parameters</h4>
 
 <table><thead>
 <tr>
@@ -213,57 +1205,179 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>per_page</td>
+<td>25</td>
+<td>Numbers of users to return at a time</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
+</tr>
+</tbody></table>
+
+<h3 id="pagination-search-by-username-firstname-or-lastname">Pagination + Search by Username, Firstname or Lastname</h3>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1</code></p>
+
+<p>This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.</p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search</td>
+<td></td>
+<td>Username, Firstname or Lastname</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>25</td>
+<td>Numbers of users to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — Same Users JSONArray Response as above
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="pagination-search-by-username-only">Pagination + Search by Username Only</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>NB: Useful for @mentions users query</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1</code></p>
+
+<p>This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.</p>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search</td>
+<td></td>
+<td>Username, Firstname or Lastname</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>25</td>
+<td>Numbers of users to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Remember — Same Users JSONArray Response as above
+</aside>
+
+<h2 id="get-a-specific-user">Get a Specific User</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/18731"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/18731"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
 </code></pre>
 
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18731</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"syl"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sylvia"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"lastname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gyabaah"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sylvia Gyabaah"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"bio"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://gravatar.com/avatar/698fe0523825f063c4af68ded1ea7691?s=350&amp;d=www.tressapp.co/images/esther.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_type_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"followers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="mi">318</span><span class="p">,</span><span class="w">
+    </span><span class="mi">313</span><span class="p">,</span><span class="w">
+    </span><span class="mi">319</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"following"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="mi">1479</span><span class="p">,</span><span class="w">
+    </span><span class="mi">263</span><span class="p">,</span><span class="w">
+    </span><span class="mi">12673</span><span class="p">,</span><span class="w">
+    </span><span class="mi">10127</span><span class="p">,</span><span class="w">
+    </span><span class="mi">12586</span><span class="p">,</span><span class="w">
+    </span><span class="mi">319</span><span class="p">,</span><span class="w">
+    </span><span class="mi">318</span><span class="p">,</span><span class="w">
+    </span><span class="mi">313</span><span class="p">,</span><span class="w">
+    </span><span class="mi">98</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"followers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"following_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_total_likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts_liked"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="mi">2791</span><span class="p">,</span><span class="w">
+    </span><span class="mi">2878</span><span class="p">,</span><span class="w">
+    </span><span class="mi">2906</span><span class="p">,</span><span class="w">
+    </span><span class="mi">2980</span><span class="p">,</span><span class="w">
+    </span><span class="mi">2984</span><span class="p">,</span><span class="w">
+    </span><span class="mi">3423</span><span class="p">,</span><span class="w">
+    </span><span class="mi">3392</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nt">"posts_bookmarked_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"verified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-04T18:55:51Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-17T07:54:42Z"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves a specific user.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id="by-id">By ID</h3>
 
-<h3 id="http-request">HTTP Request</h3>
+<h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h4 id="url-parameters">URL Parameters</h4>
 
 <table><thead>
 <tr>
@@ -272,8 +1386,640 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>id</td>
+<td>The ID of the user to retrieve</td>
+</tr>
+</tbody></table>
+
+<h3 id="by-username">By Username</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;username&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>The username of the user to retrieve</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-recommended-users-to-follow">Get Recommended Users to Follow</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
+<span class="p">]</span>
+
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="kt">HTTPBody</span> <span class="o">=</span> <span class="n">postData</span>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"top users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">319</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beauty"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/319/small/1454594435048.?1454662651"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chique Laddo"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/484/medium/image_name%22_.?1466247733"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2484</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/001/973/medium/image_name%22_.?1464095649"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1973</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/000/375/medium/1455109251590.?1455110137"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">375</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">321.25</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20659</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Onifaari"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/020/659/small/picture.?1468059388"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shade Oni"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/588/medium/image_name%22_.?1469633825"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5588</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/190/medium/image_name%22_.?1470142303"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6190</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/779/medium/image_name%22_.?1468063142"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3779</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">252.75</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10930</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Olayinka11"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/010/930/small/avatar_name\"_.?1467280654"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Olayinka Hassan"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/364/medium/image_name%22_.?1468708239"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4364</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/363/medium/image_name%22_.?1468707950"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4363</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/737/medium/image_name%22_.?1466754293"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2737</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">179.8125</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15489</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_lhizzle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/015/489/small/picture.?1467151688"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Oyinlola Makinde"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/564/medium/image_name%22_.?1468925456"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4564</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/322/medium/image_name%22_.?1468676422"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4322</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/321/medium/image_name%22_.?1468676420"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4321</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">179.333333333333</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">34802</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MissMalaikaGh"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/034/802/small/avatar_name\"_.?1470424409"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Miss Malaika Gh"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/546/medium/image_name%22_.?1470414575"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6546</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/403/medium/image_name%22_.?1470334072"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6403</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/411/medium/image_name%22_.?1470337978"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6411</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">141.741379310345</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17510</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prettyjeny"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/017/510/small/picture.?1467397047"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jennifer Kelechi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/392/medium/image_name%22_.?1467618101"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3392</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/245/medium/image_name%22_.?1467445786"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3245</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/172/medium/image_name%22_.?1468492708"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4172</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">123.2</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">318</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aina"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/318/small/avatar_name\"_.?1468355069"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Aina  Gray"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/000/950/medium/image_name%22_.?1458347695"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">950</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/000/350/medium/1454588277094.?1454662301"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">350</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/000/417/medium/image_name%22_.?1455541820"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">417</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">122.25</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3691</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hajia4real"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/003/691/small/avatar_name\"_.?1469193226"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Charity Yeboah"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/310/medium/image_name%22_.?1469436844"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5310</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/007/medium/image_name%22_.?1469193640"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5007</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/006/medium/image_name%22_.?1469192248"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5006</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">119.727272727273</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6391</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AnAfricanCityTv"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/006/391/small/avatar_name\"_.?1463655267"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An African City"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/650/medium/image_name%22_.?1467910027"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3650</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/803/medium/image_name%22_.?1469816783"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5803</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/300/medium/image_name%22_.?1465574437"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2300</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">114.222222222222</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">42195</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Meritned"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/042/195/small/avatar_name\"_.?1472324382"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Merit Nwaneri"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/009/513/medium/image_name%22_.?1473084712"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9513</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/008/489/medium/image_name%22_.?1472325285"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8489</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/010/056/medium/image_name%22_.?1473883985"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10056</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">107.714285714286</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24379</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"E.Bee"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/024/379/small/avatar_name\"_.?1468850976"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reuelah Bee"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/525/medium/image_name%22_.?1468854833"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4525</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/514/medium/image_name%22_.?1468848824"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4514</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/010/515/medium/image_name%22_.?1474751136"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10515</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">107.333333333333</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10933</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oyiwosa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/010/933/small/avatar_name\"_.?1466706231"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess  Gift"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/564/medium/image_name%22_.?1467807827"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3564</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/452/medium/image_name%22_.?1467704406"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3452</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/187/medium/image_name%22_.?1468507651"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4187</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">106.416666666667</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8067</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ezi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/008/067/small/avatar_name\"_.?1473928772"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ezi Ayesu"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/785/medium/image_name%22_.?1468071660"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3785</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/010/041/medium/image_name%22_.?1473879293"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10041</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/233/medium/image_name%22_.?1465373483"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2233</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">103.666666666667</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daaviyawa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/128/small/1447875460237.?1454662589"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ellen Tsetse"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/573/medium/image_name%22_.?1467820137"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3573</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/449/medium/image_name%22_.?1467702243"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3449</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/866/medium/image_name%22_.?1470651041"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6866</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">94.4158415841584</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7772</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shola"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/007/772/small/avatar_name\"_.?1467896402"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sholastica Jones"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/894/medium/image_name%22_.?1467028395"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2894</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/589/medium/image_name%22_.?1471295809"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7589</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/819/medium/image_name%22_.?1469819388"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5819</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">89.0588235294118</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">26758</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cicipearls"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/026/758/small/avatar_name\"_.?1469085890"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cynthia Eires"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/941/medium/image_name%22_.?1469129684"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4941</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/865/medium/image_name%22_.?1469086793"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4865</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/353/medium/image_name%22_.?1469462537"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5353</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">81.6666666666667</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">828</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pat"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/828/small/avatar_name\"_.?1465929173"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pat Ladyp"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/624/medium/image_name%22_.?1466597371"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2624</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/002/850/medium/image_name%22_.?1466949684"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2850</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/001/673/medium/image_name%22_.?1462221721"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1673</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">78.9130434782609</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">37682</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lissyswissy"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/037/682/small/avatar_name\"_.?1471083213"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Liss Okoh"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/328/medium/image_name%22_.?1471084194"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7328</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/705/medium/image_name%22_.?1471381577"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7705</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/327/medium/image_name%22_.?1471083404"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7327</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">78.3333333333333</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">24174</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ebony124"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/024/174/small/picture.?1468805394"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Princess Nkem"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/484/medium/image_name%22_.?1468824413"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4484</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/485/medium/image_name%22_.?1468824490"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4485</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/481/medium/image_name%22_.?1468805992"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4481</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">72.3333333333333</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">25600</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gg"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/025/600/small/avatar_name\"_.?1468936580"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adeola Morenikeji"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/636/medium/image_name%22_.?1468938574"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4636</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/630/medium/image_name%22_.?1468938113"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4630</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/628/medium/image_name%22_.?1468937509"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4628</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">70.75</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">31609</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tekyiwaa"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/031/609/small/avatar_name\"_.?1469800631"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sandra Mensah-Arthur "</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/005/944/medium/image_name%22_.?1469916111"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5944</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/409/medium/image_name%22_.?1470335860"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6409</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/008/022/medium/image_name%22_.?1471771145"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8022</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">67.78125</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">21628</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hothot"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/021/628/small/avatar_name\"_.?1469394491"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Millicent Saya"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/969/medium/image_name%22_.?1468293725"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3969</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/195/medium/image_name%22_.?1468520429"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4195</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/006/754/medium/image_name%22_.?1470544070"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6754</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mi">62</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">36928</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"womaninthejungle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/036/928/small/avatar_name\"_.?1470912716"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wunmi Akinlagun"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/120/medium/image_name%22_.?1470832428"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7120</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/179/medium/image_name%22_.?1470912429"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7179</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/007/178/medium/image_name%22_.?1470912297"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7178</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">58.3333333333333</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18967</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mzz_EpHyA"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/018/967/small/avatar_name\"_.?1468404586"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natalia Dassah"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/058/medium/image_name%22_.?1468403645"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4058</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/003/936/medium/image_name%22_.?1468247398"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3936</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/004/059/medium/image_name%22_.?1468404130"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4059</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">57.5</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">39899</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tee55"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/users/avatars/000/039/899/small/avatar_name\"_.?1471630733"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tina Paul"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"most_popular_posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/008/381/medium/image_name%22_.?1472212381"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8381</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/008/106/medium/image_name%22_.?1471877334"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8106</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-production/posts/images/000/008/025/medium/image_name%22_.?1471775085"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8025</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nt">"popularity"</span><span class="p">:</span><span class="w"> </span><span class="mf">56.6923076923077</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">896</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves suggested/recommended top users and their top 3 posts for users to follow.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25,page=1</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<p><code class="prettyprint">Authorization: xxxxxxxxxxxxxxxxxx8790730598790</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose is making the request</td>
+</tr>
+</tbody></table>
+
+<h4 id="query-parameters">Query Parameters</h4>
+
+<p>For pagination and endless scrolling</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>per_page</td>
+<td>25</td>
+<td>Numbers of objects to return at a time</td>
+</tr>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>Page number.</td>
 </tr>
 </tbody></table>
 
@@ -338,9 +2084,8 @@ Remember — a happy kitten is an authenticated kitten!
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="swift">swift</a>
+                <a href="#" data-language-name="java">java</a>
           </div>
       </div>
     </div>
