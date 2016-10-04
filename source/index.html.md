@@ -8,8 +8,8 @@ language_tabs:
 toc_footers:
   - <a href="mailto:esther@tressapp.co?Subject=Request for Developer Client Key" target="_top">Email for Client Authentication Key</a>
 
-includes:
-  - errors
+<!-- includes:
+  - errors -->
 
 search: true
 ---
