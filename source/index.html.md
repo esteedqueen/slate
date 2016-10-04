@@ -2060,3 +2060,1278 @@ tag_list | Optional. Always check if caption string has hashtags, if yes, add th
 Persist the Post JSON object on the client.
 </aside>
 
+## Get a Specific Post
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/posts/53")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/53")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 53,
+  "user_id": 40,
+  "fullname": "Bolanle  Lewis",
+  "username": "esther222",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911",
+  "salon_name": "Lolavitahair Salon",
+  "salon_location": "Apapa, Lagos, Nigeria",
+  "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/053/medium/image_name%22_.?1459115640",
+  "comments_count": 0,
+  "comments": [],
+  "category": {
+    "id": 1,
+    "name": "Braids",
+    "created_at": "2015-10-06T17:08:59.307Z",
+    "updated_at": "2015-10-06T17:08:59.307Z"
+  },
+  "price_range": {
+    "id": 1,
+    "price": "0 - 50",
+    "created_at": "2015-10-06T18:15:52.758Z",
+    "updated_at": "2016-02-09T11:21:37.935Z",
+    "price_gh": "0 - 50",
+    "price_ng": "0 - 1500"
+  },
+  "time_ago": "6 months",
+  "likes": 2,
+  "caption": "Fleeky fleeky!",
+  "stylename": null,
+  "price_range_id": 1,
+  "duration": null,
+  "products": "Kinky Twists",
+  "category_id": 1,
+  "salon": "Lolavitahair Salon, Apapa, Lagos, Nigeria",
+  "slug": "wxg53kdu-jdy7-itpwis_a",
+  "created_at": "2016-03-27T21:53:55Z",
+  "updated_at": "2016-06-06T15:09:22Z"
+}
+```
+
+This endpoint retrieves a specific post.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<id>`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | The ID of the post to retrieve
+
+
+## Feeds
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "posts": [
+    {
+      "id": 79,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/079/medium/ronkeraji.jpg.jpg?1475618387",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "1 hour",
+      "likes": 0,
+      "caption": "@CoCo check this out",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "KeraCare Natural Hair Range",
+      "category_id": 2,
+      "salon": ", ",
+      "slug": "suldwu5ohzd5dlqrpvtphq",
+      "created_at": "2016-10-04T21:59:45Z",
+      "updated_at": "2016-10-04T21:59:50Z"
+    },
+    {
+      "id": 78,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/078/medium/9109768995_f6c2675fd4_c.jpg.jpg?1473780658",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "21 days",
+      "likes": 0,
+      "caption": "@CoCo @gerald @obi check this out",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Mongolian Hair",
+      "category_id": 2,
+      "salon": ", ",
+      "slug": "mixes1yls6_0z_6ioo7lkg",
+      "created_at": "2016-09-13T15:30:51Z",
+      "updated_at": "2016-09-13T15:31:00Z"
+    },
+    {
+      "id": 77,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/077/medium/ronke.jpg.jpg?1472725902",
+      "comments_count": 10,
+      "comments": [
+        {
+          "id": 69,
+          "content": "@Obi @gerald check this out!",
+          "post_id": 77,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "21 days"
+        },
+        {
+          "id": 70,
+          "content": "@Obi @gerald check this out!",
+          "post_id": 77,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "21 days"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "1 month",
+      "likes": 1,
+      "caption": "@CoCo check this out",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Mongolian Hair",
+      "category_id": 2,
+      "salon": ", ",
+      "slug": "o1dp5sb4h5wtiyjlvnkefq",
+      "created_at": "2016-09-01T10:31:36Z",
+      "updated_at": "2016-09-01T10:33:29Z"
+    },
+    {
+      "id": 76,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Black Cotton Natural Hair Salon",
+      "salon_location": "Dzorwulu, Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/076/medium/image_name%22_.?1471345416",
+      "comments_count": 4,
+      "comments": [
+        {
+          "id": 58,
+          "content": "Looks great! #tressupnaturalista",
+          "post_id": 76,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        },
+        {
+          "id": 60,
+          "content": "Amazing .. Love this😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘👏👏👏👏👏👏👏",
+          "post_id": 76,
+          "user_id": 56,
+          "username": "Princess",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "2 months",
+      "likes": 1,
+      "caption": "Love my #hair #tressupnaturalista",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Shea Butter",
+      "category_id": 2,
+      "salon": "Black Cotton Natural Hair Salon, Dzorwulu, Accra, Greater Accra, Ghana",
+      "slug": "2wsjfzu8ykmzsmd4jtxira",
+      "created_at": "2016-08-16T11:03:29Z",
+      "updated_at": "2016-08-22T14:32:52Z"
+    },
+    {
+      "id": 75,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Native Touch",
+      "salon_location": "Leeds, United Kingdom",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/075/medium/image_name%22_.?1470901386",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "2 months",
+      "likes": 2,
+      "caption": "I love this @mseolatunde @Morenike",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "LOL cat",
+      "category_id": 2,
+      "salon": "Native Touch, Leeds, United Kingdom",
+      "slug": "ghd4jiqhzauapggh6gsnww",
+      "created_at": "2016-08-11T07:43:00Z",
+      "updated_at": "2016-08-22T14:32:32Z"
+    },
+    {
+      "id": 74,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Self",
+      "salon_location": "Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/074/medium/image_name%22_.?1470826829",
+      "comments_count": 5,
+      "comments": [
+        {
+          "id": 53,
+          "content": "@esther222 heyyyyyy",
+          "post_id": 74,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        },
+        {
+          "id": 54,
+          "content": "Hello @esther222",
+          "post_id": 74,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "2 months",
+      "likes": 1,
+      "caption": "#naturalhair @esther",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Shea Butter",
+      "category_id": 2,
+      "salon": "Self, Accra, Greater Accra, Ghana",
+      "slug": "faoo0bxoadnuulqc0ijyaw",
+      "created_at": "2016-08-10T11:00:24Z",
+      "updated_at": "2016-08-19T14:26:38Z"
+    },
+    {
+      "id": 73,
+      "user_id": 54,
+      "fullname": "Open Graph",
+      "username": "Fbuser",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/054/small/picture.?1466030510",
+      "salon_name": "Holla Salon",
+      "salon_location": "East Palo Alto, CA, United States",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/073/medium/image_name%22_.?1466030672",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 2,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Shea Butter",
+      "category_id": 2,
+      "salon": "Holla Salon, East Palo Alto, CA, United States",
+      "slug": "ac6zxeeu2amkt-tfeys2zg",
+      "created_at": "2016-06-15T22:44:28Z",
+      "updated_at": "2016-08-15T16:03:58Z"
+    },
+    {
+      "id": 71,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Black Cotton Salon",
+      "salon_location": "Surulere, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/071/medium/image_name%22_.?1466004158",
+      "comments_count": 1,
+      "comments": [
+        {
+          "id": 59,
+          "content": "I love what I'm seeing. This will be my next hair. Oooh and I think it will actually fit my face. Love this so much",
+          "post_id": 71,
+          "user_id": 56,
+          "username": "Princess",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 4,
+        "name": "Weaves",
+        "created_at": "2015-10-06T18:12:33.442Z",
+        "updated_at": "2015-10-06T18:12:33.442Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "Love my hair",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Shea Butter",
+      "category_id": 4,
+      "salon": "Black Cotton Salon, Surulere, Lagos, Nigeria",
+      "slug": "almog9fejygmpepuot3y7g",
+      "created_at": "2016-06-15T15:22:33Z",
+      "updated_at": "2016-08-22T14:32:21Z"
+    },
+    {
+      "id": 70,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Lagoon Villa Salon",
+      "salon_location": "Lekki Phase 1, Lekki, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/070/medium/image_name%22_.?1465989570",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Heat Protectant, Shea Butter",
+      "category_id": 2,
+      "salon": "Lagoon Villa Salon, Lekki Phase 1, Lekki, Lagos, Nigeria",
+      "slug": "b1y933xfj6lw3vdzbwji1g",
+      "created_at": "2016-06-15T11:19:27Z",
+      "updated_at": "2016-08-19T14:26:54Z"
+    },
+    {
+      "id": 69,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Solape Salon",
+      "salon_location": "Enugu, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/069/medium/image_name%22_.?1465988129",
+      "comments_count": 2,
+      "comments": [
+        {
+          "id": 45,
+          "content": "@bolanlemi",
+          "post_id": 69,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        },
+        {
+          "id": 49,
+          "content": "#hair",
+          "post_id": 69,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 4,
+        "name": "Weaves",
+        "created_at": "2015-10-06T18:12:33.442Z",
+        "updated_at": "2015-10-06T18:12:33.442Z"
+      },
+      "price_range": {
+        "id": 3,
+        "price": "110 - 200",
+        "created_at": "2015-10-06T18:16:43.027Z",
+        "updated_at": "2016-02-09T11:25:29.023Z",
+        "price_gh": "110 - 200",
+        "price_ng": "2600 - 5000"
+      },
+      "time_ago": "4 months",
+      "likes": 1,
+      "caption": "Love the hair",
+      "stylename": null,
+      "price_range_id": 3,
+      "duration": null,
+      "products": "Brazilian Weaves",
+      "category_id": 4,
+      "salon": "Solape Salon, Enugu, Nigeria",
+      "slug": "dt2g7zn5utin3wffm3vdrq",
+      "created_at": "2016-06-15T10:55:24Z",
+      "updated_at": "2016-08-15T13:45:13Z"
+    },
+    {
+      "id": 68,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Auntie Linda",
+      "salon_location": "Somolu, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/068/medium/image_name%22_.?1465970941",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 5,
+        "name": "Perm Cut",
+        "created_at": "2015-10-06T18:13:12.703Z",
+        "updated_at": "2015-10-06T18:13:12.703Z"
+      },
+      "price_range": {
+        "id": 2,
+        "price": "60 - 100",
+        "created_at": "2015-10-06T18:16:24.895Z",
+        "updated_at": "2016-02-09T11:25:29.008Z",
+        "price_gh": "60 - 100",
+        "price_ng": "1600 - 2500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 2,
+      "duration": null,
+      "products": "Bleh",
+      "category_id": 5,
+      "salon": "Auntie Linda, Somolu, Lagos, Nigeria",
+      "slug": "_gycx2q1k8ttzougmwmd5g",
+      "created_at": "2016-06-15T06:08:57Z",
+      "updated_at": "2016-06-15T06:09:03Z"
+    },
+    {
+      "id": 67,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Lola Salon",
+      "salon_location": "North Legon, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/067/medium/image_name%22_.?1465836144",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 5,
+        "name": "Perm Cut",
+        "created_at": "2015-10-06T18:13:12.703Z",
+        "updated_at": "2015-10-06T18:13:12.703Z"
+      },
+      "price_range": {
+        "id": 2,
+        "price": "60 - 100",
+        "created_at": "2015-10-06T18:16:24.895Z",
+        "updated_at": "2016-02-09T11:25:29.008Z",
+        "price_gh": "60 - 100",
+        "price_ng": "1600 - 2500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 2,
+      "duration": null,
+      "products": "Lolavitahair",
+      "category_id": 5,
+      "salon": "Lola Salon, North Legon, Greater Accra, Ghana",
+      "slug": "82nxemr7o8rrvj6umaegsg",
+      "created_at": "2016-06-13T16:42:19Z",
+      "updated_at": "2016-06-13T16:42:25Z"
+    },
+    {
+      "id": 66,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Bolanle Villa Salon",
+      "salon_location": "Oshodi-Isolo, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/066/medium/image_name%22_.?1465835389",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Holla Holla",
+      "category_id": 1,
+      "salon": "Bolanle Villa Salon, Oshodi-Isolo, Lagos, Nigeria",
+      "slug": "gaybf6b7cio6h37tgig-ng",
+      "created_at": "2016-06-13T16:29:47Z",
+      "updated_at": "2016-06-13T16:29:51Z"
+    },
+    {
+      "id": 65,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Auntie Mary",
+      "salon_location": "Gbagada, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/065/medium/image_name%22_.?1465834465",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "You would love this!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Kinky Twists",
+      "category_id": 1,
+      "salon": "Auntie Mary, Gbagada, Lagos, Nigeria",
+      "slug": "appedeijdktque51axdtua",
+      "created_at": "2016-06-13T16:14:23Z",
+      "updated_at": "2016-06-13T16:14:26Z"
+    },
+    {
+      "id": 64,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Bolanle Salon",
+      "salon_location": "Apapa, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/064/medium/image_name%22_.?1465832220",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "Bliss!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Kinky Twists",
+      "category_id": 1,
+      "salon": "Bolanle Salon, Apapa, Lagos, Nigeria",
+      "slug": "qgfmdxqulhy6fhsiufxt6w",
+      "created_at": "2016-06-13T15:36:57Z",
+      "updated_at": "2016-06-13T15:37:01Z"
+    },
+    {
+      "id": 63,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Auntie Shirley Salon",
+      "salon_location": "East Legon, Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/063/medium/image_name%22_.?1465831664",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "Love love love love this",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Kinky Twists",
+      "category_id": 1,
+      "salon": "Auntie Shirley Salon, East Legon, Accra, Greater Accra, Ghana",
+      "slug": "sm8x7bl21gx9_f5fqhhrow",
+      "created_at": "2016-06-13T15:27:42Z",
+      "updated_at": "2016-06-13T15:27:46Z"
+    },
+    {
+      "id": 62,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Black Cotton Salon",
+      "salon_location": "Dzorwulu, Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/062/medium/image_name%22_.?1465831091",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "#Throwback",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Heat Protectant, Shea Butter",
+      "category_id": 2,
+      "salon": "Black Cotton Salon, Dzorwulu, Accra, Greater Accra, Ghana",
+      "slug": "1eehofjj-4ztr5bnwsydaq",
+      "created_at": "2016-06-13T15:18:04Z",
+      "updated_at": "2016-06-13T15:18:17Z"
+    },
+    {
+      "id": 61,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "HairTalk",
+      "salon_location": "Dansoman, Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/061/medium/image_name%22_.?1465830636",
+      "comments_count": 1,
+      "comments": [
+        {
+          "id": 56,
+          "content": "I remember this @esther2",
+          "post_id": 61,
+          "user_id": 56,
+          "username": "Princess",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 2,
+        "price": "60 - 100",
+        "created_at": "2015-10-06T18:16:24.895Z",
+        "updated_at": "2016-02-09T11:25:29.008Z",
+        "price_gh": "60 - 100",
+        "price_ng": "1600 - 2500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "Yagazie shot this!",
+      "stylename": null,
+      "price_range_id": 2,
+      "duration": null,
+      "products": "Havana Mambo Twists",
+      "category_id": 1,
+      "salon": "HairTalk, Dansoman, Accra, Greater Accra, Ghana",
+      "slug": "uvorulizrma2jbfcaoed-q",
+      "created_at": "2016-06-13T15:10:29Z",
+      "updated_at": "2016-06-13T15:10:41Z"
+    },
+    {
+      "id": 60,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Auntie Agatha's Salon",
+      "salon_location": "East Legon, Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/060/medium/image_name%22_.?1465829410",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Kinky Bulk Twist",
+      "category_id": 1,
+      "salon": "Auntie Agatha's Salon, East Legon, Accra, Greater Accra, Ghana",
+      "slug": "yfizmdcj_m4gdcwtm7u3zq",
+      "created_at": "2016-06-13T14:50:05Z",
+      "updated_at": "2016-06-13T14:50:11Z"
+    },
+    {
+      "id": 59,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Solape Salon",
+      "salon_location": "East Legon, Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/059/medium/image_name%22_.?1465820518",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 7,
+        "name": "Corn Row",
+        "created_at": "2015-12-16T12:36:12.119Z",
+        "updated_at": "2015-12-16T12:36:12.119Z"
+      },
+      "price_range": {
+        "id": 3,
+        "price": "110 - 200",
+        "created_at": "2015-10-06T18:16:43.027Z",
+        "updated_at": "2016-02-09T11:25:29.023Z",
+        "price_gh": "110 - 200",
+        "price_ng": "2600 - 5000"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 3,
+      "duration": null,
+      "products": "Bleh blah",
+      "category_id": 7,
+      "salon": "Solape Salon, East Legon, Accra, Ghana",
+      "slug": "qvm3bpf79jq_ns9tkosvtg",
+      "created_at": "2016-06-13T12:21:55Z",
+      "updated_at": "2016-06-13T12:22:00Z"
+    },
+    {
+      "id": 58,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Good luck Salon",
+      "salon_location": "Accra, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/058/medium/image_name%22_.?1465819764",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 5,
+        "name": "Perm Cut",
+        "created_at": "2015-10-06T18:13:12.703Z",
+        "updated_at": "2015-10-06T18:13:12.703Z"
+      },
+      "price_range": {
+        "id": 3,
+        "price": "110 - 200",
+        "created_at": "2015-10-06T18:16:43.027Z",
+        "updated_at": "2016-02-09T11:25:29.023Z",
+        "price_gh": "110 - 200",
+        "price_ng": "2600 - 5000"
+      },
+      "time_ago": "4 months",
+      "likes": 0,
+      "caption": "",
+      "stylename": null,
+      "price_range_id": 3,
+      "duration": null,
+      "products": "Shea Butter",
+      "category_id": 5,
+      "salon": "Good luck Salon, Accra, Greater Accra, Ghana",
+      "slug": "ldu1czao2g8qpmmcijyrkg",
+      "created_at": "2016-06-13T12:09:18Z",
+      "updated_at": "2016-06-13T12:09:26Z"
+    },
+    {
+      "id": 56,
+      "user_id": 29,
+      "fullname": "Shola Lewis",
+      "username": "CoCo",
+      "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+      "salon_name": "Omoge Wuraola Salon",
+      "salon_location": "Ojuelegba Bus Stop, Surulere, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/056/medium/image_name%22_.?1460436368",
+      "comments_count": 1,
+      "comments": [
+        {
+          "id": 43,
+          "content": "Holla",
+          "post_id": 56,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "5 months"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "6 months",
+      "likes": 1,
+      "caption": "In love with my bun!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Obia Natural Hair Curl Butter",
+      "category_id": 2,
+      "salon": "Omoge Wuraola Salon, Ojuelegba Bus Stop, Surulere, Lagos, Nigeria",
+      "slug": "yu-hdnwphyfdhvvnajs5mg",
+      "created_at": "2016-04-12T04:46:06Z",
+      "updated_at": "2016-06-06T15:09:22Z"
+    },
+    {
+      "id": 55,
+      "user_id": 42,
+      "fullname": "Gerald Pharin",
+      "username": "bolanlemi",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/042/small/avatar_name\"_.?1460374996",
+      "salon_name": "Auntie Mary's Salon",
+      "salon_location": "Adenta Municipality, Greater Accra, Ghana",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/055/medium/image_name%22_.?1460383428",
+      "comments_count": 5,
+      "comments": [
+        {
+          "id": 47,
+          "content": "@mseolatunde",
+          "post_id": 55,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        },
+        {
+          "id": 48,
+          "content": "@CoCo",
+          "post_id": 55,
+          "user_id": 29,
+          "username": "CoCo",
+          "time_ago": "2 months"
+        }
+      ],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "6 months",
+      "likes": 2,
+      "caption": "Looks great for grad!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Twist Butter",
+      "category_id": 2,
+      "salon": "Auntie Mary's Salon, Adenta Municipality, Greater Accra, Ghana",
+      "slug": "lbrc1ms-kotyqbkwj72ykw",
+      "created_at": "2016-04-11T14:03:41Z",
+      "updated_at": "2016-06-06T15:09:22Z"
+    },
+    {
+      "id": 54,
+      "user_id": 40,
+      "fullname": "Bolanle  Lewis",
+      "username": "esther222",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/054/medium/image_name%22_.?1459182997",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-10-06T17:10:20.535Z",
+        "updated_at": "2015-10-06T17:10:20.535Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "6 months",
+      "likes": 2,
+      "caption": "Fluff",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Fluffy kitten",
+      "category_id": 2,
+      "salon": ", ",
+      "slug": "noz0ruhc286r3cgew2lo4w",
+      "created_at": "2016-03-28T16:36:35Z",
+      "updated_at": "2016-06-06T15:09:22Z"
+    },
+    {
+      "id": 53,
+      "user_id": 40,
+      "fullname": "Bolanle  Lewis",
+      "username": "esther222",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-staging/users/avatars/000/000/040/small/avatar_name\"_.?1459043911",
+      "salon_name": "Lolavitahair Salon",
+      "salon_location": "Apapa, Lagos, Nigeria",
+      "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/053/medium/image_name%22_.?1459115640",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-10-06T17:08:59.307Z",
+        "updated_at": "2015-10-06T17:08:59.307Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-10-06T18:15:52.758Z",
+        "updated_at": "2016-02-09T11:21:37.935Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "6 months",
+      "likes": 2,
+      "caption": "Fleeky fleeky!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "Kinky Twists",
+      "category_id": 1,
+      "salon": "Lolavitahair Salon, Apapa, Lagos, Nigeria",
+      "slug": "wxg53kdu-jdy7-itpwis_a",
+      "created_at": "2016-03-27T21:53:55Z",
+      "updated_at": "2016-06-06T15:09:22Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 2,
+      "total_objects": 47
+    }
+  }
+}
+```
+
+This section contains endpoints that retrieve several types of feeds on Tress.
+
+### All
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10,page=1`
+
+This endpoint retrieves all posts by pagination, 10 at a time.
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+### Following
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts?per_page=10,page=1`
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+
+##### Headers
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose feed you're requesting.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+
+### Trending
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/trending?per_page=10,page=1`
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+
+### Hashtagged Feed
+
+### Category Feed
+
+### Price Range Feed
+
+### Extensive Filter Feed
+
+
+
+
+
+
+
+
