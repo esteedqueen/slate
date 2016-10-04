@@ -6,7 +6,7 @@ language_tabs:
   - java
 
 toc_footers:
-  - <a href="mailto:esther@tressapp.co?Subject=Request for Developer Client Key" target="_top">Email for a Client Authentication</a>
+  - <a href="mailto:esther@tressapp.co?Subject=Request for Developer Client Key" target="_top">Email for Client Authentication Key</a>
 
 includes:
   - errors
@@ -725,40 +725,70 @@ Persist the User JSON object on the client including the authentication_token fo
 ## Reset Password
 
 ```swift
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "content-type": "application/json"
+]
+let parameters = ["user": ["email": "example@gmail.com"]]
+
+let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/password")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
 ```
 
 ```java
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\n    \"user\": {\n        \"email\": \"example@gmail.com\"\n    }\n}");
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/password")
+  .post(body)
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("content-type", "application/json")
+  .build();
+
+Response response = client.newCall(request).execute();
 ```
 
-> The above command returns JSON structured like this:
+> A successful reset password returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "success": true,
+  "status": 200,
+  "email": "ea.olatunde@gmail.com"
+}
+```
+
+> An unsuccessful reset password returns JSON structured like this:
+
+```json
+{
+  "success": false,
+  "status": 200,
+  "message": "Email not found"
 }
 ```
 
 This endpoint helps a user resets their password.
 
-<aside class="notice">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+#### HTTP Request
 
-### HTTP Request
+`POST https://tressapi-staging.herokuapp.com/api/v2/users/password`
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
+#### Body Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+email | The email of the user to reset the password
 
 
 ## Get Users
@@ -928,6 +958,10 @@ search |  | Username, Firstname or Lastname
 per_page | 25 | Numbers of users to return at a time
 page | 1 | Page number.
 
+<aside class="success">
+Remember — Same Users JSONArray Response as above
+</aside>
+
 ### Pagination + Search by Username Only 
 NB: Useful for @mentions users query
 
@@ -944,39 +978,710 @@ per_page | 25 | Numbers of users to return at a time
 page | 1 | Page number.
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — Same Users JSONArray Response as above
 </aside>
 
-## Get a Specific Kitten
+## Get a Specific User
 
-```http
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/18731")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/users/18731")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": 18731,
+  "username": "syl",
+  "firstname": "Sylvia",
+  "lastname": "Gyabaah",
+  "fullname": "Sylvia Gyabaah",
+  "bio": null,
+  "avatar": "http://gravatar.com/avatar/698fe0523825f063c4af68ded1ea7691?s=350&d=www.tressapp.co/images/esther.jpg",
+  "country_code": null,
+  "hair_type_id": null,
+  "phone_number": null,
+  "posts": [],
+  "most_popular_posts": [],
+  "followers": [
+    318,
+    313,
+    319
+  ],
+  "following": [
+    1479,
+    263,
+    12673,
+    10127,
+    12586,
+    319,
+    318,
+    313,
+    98
+  ],
+  "comments": [],
+  "posts_count": 0,
+  "comments_count": 0,
+  "followers_count": 3,
+  "following_count": 9,
+  "posts_total_likes": 0,
+  "posts_liked": [
+    2791,
+    2878,
+    2906,
+    2980,
+    2984,
+    3423,
+    3392
+  ],
+  "posts_bookmarked": [],
+  "posts_bookmarked_count": 0,
+  "verified": false,
+  "created_at": "2016-07-04T18:55:51Z",
+  "updated_at": "2016-08-17T07:54:42Z"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+This endpoint retrieves a specific user.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+### By ID
 
-### HTTP Request
+#### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id>`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+id | The ID of the user to retrieve
 
+### By Username
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<username>`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+username | The username of the user to retrieve
+
+
+
+## Get Recommended Users to Follow
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "top users": [
+    {
+      "id": 319,
+      "username": "Beauty",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/319/small/1454594435048.?1454662651",
+      "fullname": "Chique Laddo",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/484/medium/image_name%22_.?1466247733",
+          "id": 2484
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/001/973/medium/image_name%22_.?1464095649",
+          "id": 1973
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/000/375/medium/1455109251590.?1455110137",
+          "id": 375
+        }
+      ],
+      "popularity": 321.25
+    },
+    {
+      "id": 20659,
+      "username": "Onifaari",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/020/659/small/picture.?1468059388",
+      "fullname": "Shade Oni",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/588/medium/image_name%22_.?1469633825",
+          "id": 5588
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/190/medium/image_name%22_.?1470142303",
+          "id": 6190
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/779/medium/image_name%22_.?1468063142",
+          "id": 3779
+        }
+      ],
+      "popularity": 252.75
+    },
+    {
+      "id": 10930,
+      "username": "Olayinka11",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/010/930/small/avatar_name\"_.?1467280654",
+      "fullname": "Olayinka Hassan",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/364/medium/image_name%22_.?1468708239",
+          "id": 4364
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/363/medium/image_name%22_.?1468707950",
+          "id": 4363
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/737/medium/image_name%22_.?1466754293",
+          "id": 2737
+        }
+      ],
+      "popularity": 179.8125
+    },
+    {
+      "id": 15489,
+      "username": "_lhizzle",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/015/489/small/picture.?1467151688",
+      "fullname": " Oyinlola Makinde",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/564/medium/image_name%22_.?1468925456",
+          "id": 4564
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/322/medium/image_name%22_.?1468676422",
+          "id": 4322
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/321/medium/image_name%22_.?1468676420",
+          "id": 4321
+        }
+      ],
+      "popularity": 179.333333333333
+    },
+    {
+      "id": 34802,
+      "username": "MissMalaikaGh",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/034/802/small/avatar_name\"_.?1470424409",
+      "fullname": "Miss Malaika Gh",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/546/medium/image_name%22_.?1470414575",
+          "id": 6546
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/403/medium/image_name%22_.?1470334072",
+          "id": 6403
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/411/medium/image_name%22_.?1470337978",
+          "id": 6411
+        }
+      ],
+      "popularity": 141.741379310345
+    },
+    {
+      "id": 17510,
+      "username": "Prettyjeny",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/017/510/small/picture.?1467397047",
+      "fullname": "Jennifer Kelechi",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/392/medium/image_name%22_.?1467618101",
+          "id": 3392
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/245/medium/image_name%22_.?1467445786",
+          "id": 3245
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/172/medium/image_name%22_.?1468492708",
+          "id": 4172
+        }
+      ],
+      "popularity": 123.2
+    },
+    {
+      "id": 318,
+      "username": "Aina",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/318/small/avatar_name\"_.?1468355069",
+      "fullname": "Aina  Gray",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/000/950/medium/image_name%22_.?1458347695",
+          "id": 950
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/000/350/medium/1454588277094.?1454662301",
+          "id": 350
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/000/417/medium/image_name%22_.?1455541820",
+          "id": 417
+        }
+      ],
+      "popularity": 122.25
+    },
+    {
+      "id": 3691,
+      "username": "Hajia4real",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/003/691/small/avatar_name\"_.?1469193226",
+      "fullname": "Charity Yeboah",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/310/medium/image_name%22_.?1469436844",
+          "id": 5310
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/007/medium/image_name%22_.?1469193640",
+          "id": 5007
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/006/medium/image_name%22_.?1469192248",
+          "id": 5006
+        }
+      ],
+      "popularity": 119.727272727273
+    },
+    {
+      "id": 6391,
+      "username": "AnAfricanCityTv",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/006/391/small/avatar_name\"_.?1463655267",
+      "fullname": "An African City",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/650/medium/image_name%22_.?1467910027",
+          "id": 3650
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/803/medium/image_name%22_.?1469816783",
+          "id": 5803
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/300/medium/image_name%22_.?1465574437",
+          "id": 2300
+        }
+      ],
+      "popularity": 114.222222222222
+    },
+    {
+      "id": 42195,
+      "username": "Meritned",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/042/195/small/avatar_name\"_.?1472324382",
+      "fullname": "Merit Nwaneri",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/009/513/medium/image_name%22_.?1473084712",
+          "id": 9513
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/008/489/medium/image_name%22_.?1472325285",
+          "id": 8489
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/010/056/medium/image_name%22_.?1473883985",
+          "id": 10056
+        }
+      ],
+      "popularity": 107.714285714286
+    },
+    {
+      "id": 24379,
+      "username": "E.Bee",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/024/379/small/avatar_name\"_.?1468850976",
+      "fullname": "Reuelah Bee",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/525/medium/image_name%22_.?1468854833",
+          "id": 4525
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/514/medium/image_name%22_.?1468848824",
+          "id": 4514
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/010/515/medium/image_name%22_.?1474751136",
+          "id": 10515
+        }
+      ],
+      "popularity": 107.333333333333
+    },
+    {
+      "id": 10933,
+      "username": "Oyiwosa",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/010/933/small/avatar_name\"_.?1466706231",
+      "fullname": "Princess  Gift",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/564/medium/image_name%22_.?1467807827",
+          "id": 3564
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/452/medium/image_name%22_.?1467704406",
+          "id": 3452
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/187/medium/image_name%22_.?1468507651",
+          "id": 4187
+        }
+      ],
+      "popularity": 106.416666666667
+    },
+    {
+      "id": 8067,
+      "username": "Ezi",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/008/067/small/avatar_name\"_.?1473928772",
+      "fullname": "Ezi Ayesu",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/785/medium/image_name%22_.?1468071660",
+          "id": 3785
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/010/041/medium/image_name%22_.?1473879293",
+          "id": 10041
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/233/medium/image_name%22_.?1465373483",
+          "id": 2233
+        }
+      ],
+      "popularity": 103.666666666667
+    },
+    {
+      "id": 128,
+      "username": "Daaviyawa",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/128/small/1447875460237.?1454662589",
+      "fullname": "Ellen Tsetse",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/573/medium/image_name%22_.?1467820137",
+          "id": 3573
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/449/medium/image_name%22_.?1467702243",
+          "id": 3449
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/866/medium/image_name%22_.?1470651041",
+          "id": 6866
+        }
+      ],
+      "popularity": 94.4158415841584
+    },
+    {
+      "id": 7772,
+      "username": "Shola",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/007/772/small/avatar_name\"_.?1467896402",
+      "fullname": "Sholastica Jones",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/894/medium/image_name%22_.?1467028395",
+          "id": 2894
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/589/medium/image_name%22_.?1471295809",
+          "id": 7589
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/819/medium/image_name%22_.?1469819388",
+          "id": 5819
+        }
+      ],
+      "popularity": 89.0588235294118
+    },
+    {
+      "id": 26758,
+      "username": "Cicipearls",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/026/758/small/avatar_name\"_.?1469085890",
+      "fullname": "Cynthia Eires",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/941/medium/image_name%22_.?1469129684",
+          "id": 4941
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/865/medium/image_name%22_.?1469086793",
+          "id": 4865
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/353/medium/image_name%22_.?1469462537",
+          "id": 5353
+        }
+      ],
+      "popularity": 81.6666666666667
+    },
+    {
+      "id": 828,
+      "username": "Pat",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/000/828/small/avatar_name\"_.?1465929173",
+      "fullname": "Pat Ladyp",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/624/medium/image_name%22_.?1466597371",
+          "id": 2624
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/002/850/medium/image_name%22_.?1466949684",
+          "id": 2850
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/001/673/medium/image_name%22_.?1462221721",
+          "id": 1673
+        }
+      ],
+      "popularity": 78.9130434782609
+    },
+    {
+      "id": 37682,
+      "username": "Lissyswissy",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/037/682/small/avatar_name\"_.?1471083213",
+      "fullname": "Liss Okoh",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/328/medium/image_name%22_.?1471084194",
+          "id": 7328
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/705/medium/image_name%22_.?1471381577",
+          "id": 7705
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/327/medium/image_name%22_.?1471083404",
+          "id": 7327
+        }
+      ],
+      "popularity": 78.3333333333333
+    },
+    {
+      "id": 24174,
+      "username": "Ebony124",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/024/174/small/picture.?1468805394",
+      "fullname": "Princess Nkem",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/484/medium/image_name%22_.?1468824413",
+          "id": 4484
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/485/medium/image_name%22_.?1468824490",
+          "id": 4485
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/481/medium/image_name%22_.?1468805992",
+          "id": 4481
+        }
+      ],
+      "popularity": 72.3333333333333
+    },
+    {
+      "id": 25600,
+      "username": "Gg",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/025/600/small/avatar_name\"_.?1468936580",
+      "fullname": "Adeola Morenikeji",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/636/medium/image_name%22_.?1468938574",
+          "id": 4636
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/630/medium/image_name%22_.?1468938113",
+          "id": 4630
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/628/medium/image_name%22_.?1468937509",
+          "id": 4628
+        }
+      ],
+      "popularity": 70.75
+    },
+    {
+      "id": 31609,
+      "username": "Tekyiwaa",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/031/609/small/avatar_name\"_.?1469800631",
+      "fullname": "Sandra Mensah-Arthur ",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/005/944/medium/image_name%22_.?1469916111",
+          "id": 5944
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/409/medium/image_name%22_.?1470335860",
+          "id": 6409
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/008/022/medium/image_name%22_.?1471771145",
+          "id": 8022
+        }
+      ],
+      "popularity": 67.78125
+    },
+    {
+      "id": 21628,
+      "username": "Hothot",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/021/628/small/avatar_name\"_.?1469394491",
+      "fullname": "Millicent Saya",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/969/medium/image_name%22_.?1468293725",
+          "id": 3969
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/195/medium/image_name%22_.?1468520429",
+          "id": 4195
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/006/754/medium/image_name%22_.?1470544070",
+          "id": 6754
+        }
+      ],
+      "popularity": 62
+    },
+    {
+      "id": 36928,
+      "username": "womaninthejungle",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/036/928/small/avatar_name\"_.?1470912716",
+      "fullname": "Wunmi Akinlagun",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/120/medium/image_name%22_.?1470832428",
+          "id": 7120
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/179/medium/image_name%22_.?1470912429",
+          "id": 7179
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/007/178/medium/image_name%22_.?1470912297",
+          "id": 7178
+        }
+      ],
+      "popularity": 58.3333333333333
+    },
+    {
+      "id": 18967,
+      "username": "Mzz_EpHyA",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/018/967/small/avatar_name\"_.?1468404586",
+      "fullname": "Natalia Dassah",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/058/medium/image_name%22_.?1468403645",
+          "id": 4058
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/003/936/medium/image_name%22_.?1468247398",
+          "id": 3936
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/004/059/medium/image_name%22_.?1468404130",
+          "id": 4059
+        }
+      ],
+      "popularity": 57.5
+    },
+    {
+      "id": 39899,
+      "username": "Tee55",
+      "avatar": "https://s3.amazonaws.com/tress-api-production/users/avatars/000/039/899/small/avatar_name\"_.?1471630733",
+      "fullname": "Tina Paul",
+      "most_popular_posts": [
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/008/381/medium/image_name%22_.?1472212381",
+          "id": 8381
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/008/106/medium/image_name%22_.?1471877334",
+          "id": 8106
+        },
+        {
+          "image": "https://s3.amazonaws.com/tress-api-production/posts/images/000/008/025/medium/image_name%22_.?1471775085",
+          "id": 8025
+        }
+      ],
+      "popularity": 56.6923076923077
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 25,
+      "total_pages": 36,
+      "total_objects": 896
+    }
+  }
+}
+```
+
+This endpoint retrieves suggested/recommended top users and their top 3 posts for users to follow.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25,page=1`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+#### Query Parameters
+
+For pagination and endless scrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 25 | Numbers of objects to return at a time
+page | 1 | Page number.
