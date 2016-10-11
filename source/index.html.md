@@ -1143,7 +1143,7 @@ Parameter | Default | Description
 per_page | 25 | Numbers of users to return at a time
 page | 1 | Page number.
 
-### Pagination + Search by Username, Firstname or Lastname
+### Search by Username, Firstname or Lastname
 
 `GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1`
 
@@ -1161,7 +1161,7 @@ page | 1 | Page number.
 Remember — Same Users JSONArray Response as above
 </aside>
 
-### Pagination + Search by Username Only 
+### Search by Username Only 
 NB: Useful for @mentions users query
 
 `GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1`
@@ -1885,6 +1885,264 @@ Parameter | Default | Description
 per_page | 25 | Numbers of objects to return at a time
 page | 1 | Page number.
 
+## Follow a User
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following/70")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.allHTTPHeaderFields = headers
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker")
+  .post(null)
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful follow request returns:
+
+
+```http
+204 No Content
+```
+
+> An unsuccessful follow request (if the user is already being followed) returns:
+
+
+```http
+304 Not Modified
+```
+
+This endpoint creates a follow relationship between 2 users.
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v2/users/<followee_id_or_username>/links/following/<followed_id>`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user who is making the request
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+followee_id_or_username | Required. This is id or username of the user who is making the follow request
+followed_id | Required. This is id of the user who is being followed
+
+## UnFollow a User
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following/70")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "DELETE"
+request.allHTTPHeaderFields = headers
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker")
+  .delete(null)
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful unfollow request returns:
+
+
+```http
+204 No Content
+```
+
+This endpoint creates a follow relationship between 2 users.
+
+#### HTTP Request
+
+`DELETE https://tressapi-staging.herokuapp.com/api/v2/users/<followee_id_or_username>/links/following/<followed_id>`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user who is making the request
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+followee_id_or_username | Required. This is id or username of the user who is making the follow request
+followed_id | Required. This is id of the user who is being followed
+
+## Get List of Following (Users)
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/solapemi/links/following")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns the JSON structure below:
+
+
+```json
+{
+  "following": [
+    {
+      "id": 70,
+      "username": "RonkeTinker",
+      "avatar": "http://gravatar.com/avatar/291f32bb9dca7e5fee2ed32fa05877ea?s=350&d=www.tressapp.co/images/esther.jpg",
+      "fullname": " "
+    },
+    {
+      "id": 67,
+      "username": "ronke",
+      "avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "fullname": " "
+    }
+  ]
+}
+```
+
+This endpoint retrieves a list of users a user is following.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id_or_username>/links/following`
+
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+## Get List of Followers (Users)
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/followers")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/solapemi/links/followers")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns the JSON structure below:
+
+
+```json
+{
+  "followers": [
+    {
+      "id": 70,
+      "username": "RonkeTinker",
+      "avatar": "http://gravatar.com/avatar/291f32bb9dca7e5fee2ed32fa05877ea?s=350&d=www.tressapp.co/images/esther.jpg",
+      "fullname": " "
+    },
+    {
+      "id": 67,
+      "username": "ronke",
+      "avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "fullname": " "
+    }
+  ]
+}
+```
+
+This endpoint retrieves a list of followers a user has.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id_or_username>/links/followers`
+
+
+#### URL Parameters
+
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
 
 # Posts (Hairstyles)
 
@@ -2060,6 +2318,236 @@ tag_list | Optional. Always check if caption string has hashtags, if yes, add th
 Persist the Post JSON object on the client.
 </aside>
 
+## Edit a Post
+
+This endpoint updates a post.
+
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+let parameters = [
+  [
+    "name": "caption",
+    "value": "@ronketinker @solapemi Tress is in YCombinator W17!!!"
+  ],
+  [
+    "name": "products",
+    "value": "shea butter"
+  ],
+  [
+    "name": "category_id",
+    "value": "2"
+  ],
+  [
+    "name": "price_range_id",
+    "value": "1"
+  ],
+  [
+    "name": "salon_name",
+    "value": "God is Good Salon"
+  ],
+  [
+    "name": "tag_list",
+    "value": "#teamnatural, #TressUpNaturalista"
+  ]
+]
+
+let boundary = "---011000010111000001101001"
+
+var body = ""
+var error: NSError? = nil
+for param in parameters {
+  let paramName = param["name"]!
+  body += "--\(boundary)\r\n"
+  body += "Content-Disposition:form-data; name=\"\(paramName)\""
+  if let filename = param["fileName"] {
+    let contentType = param["content-type"]!
+    let fileContent = String(contentsOfFile: filename, encoding: NSUTF8StringEncoding, error: &error)
+    if (error != nil) {
+      println(error)
+    }
+    body += "; filename=\"\(filename)\"\r\n"
+    body += "Content-Type: \(contentType)\r\n\r\n"
+    body += fileContent!
+  } else if let paramValue = param["value"] {
+    body += "\r\n\r\n\(paramValue)"
+  }
+}
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/67/posts/83")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "PATCH"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+
+MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
+RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nshea butter\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"salon_name\"\r\n\r\nGod is Good Salon\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tag_list\"\r\n\r\n#teamnatural, #TressUpNaturalista\r\n-----011000010111000001101001--");
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/67/posts/83")
+  .patch(body)
+  .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", 
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful update post request returns JSON structured like this:
+
+```json
+{
+  "id": 79,
+  "user_id": 29,
+  "fullname": "Shola Lewis",
+  "username": "CoCo",
+  "user_avatar": "http://gravatar.com/avatar/66b9fef912a402988908283d30f80ae4?s=350&d=www.tressapp.co/images/esther.jpg",
+  "salon_name": null,
+  "salon_location": null,
+  "image": "https://s3.amazonaws.com/tress-api-staging/posts/images/000/000/079/medium/ronkeraji.jpg.jpg?1475618385",
+  "comments_count": 0,
+  "comments": [],
+  "category": {
+    "id": 2,
+    "name": "Natural Hair",
+    "created_at": "2015-10-06T17:10:20.535Z",
+    "updated_at": "2015-10-06T17:10:20.535Z"
+  },
+  "price_range": {
+    "id": 1,
+    "price": "0 - 50",
+    "created_at": "2015-10-06T18:15:52.758Z",
+    "updated_at": "2016-02-09T11:21:37.935Z",
+    "price_gh": "0 - 50",
+    "price_ng": "0 - 1500"
+  },
+  "time_ago": "a minute",
+  "likes": 0,
+  "caption": "@CoCo check this out",
+  "stylename": null,
+  "price_range_id": 1,
+  "duration": null,
+  "products": "KeraCare Natural Hair Range",
+  "category_id": 2,
+  "salon": ", ",
+  "slug": "suldwu5ohzd5dlqrpvtphq",
+  "created_at": "2016-10-04T21:59:45Z",
+  "updated_at": "2016-10-04T21:59:45Z"
+}
+```
+
+#### HTTP Request
+
+`PATCH https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+post_id | Required. ID of the post
+
+
+#### Request Body Parameters
+
+Parameter | Description
+--------- | -----------
+image | Required. File image
+products | Required. Products used on hairstyle
+price_range_id | Required. Must choose one from dropdown
+category_id | Required. Must choose one from dropdown
+new_salon_name | Required. Name of Salon
+new_salon_location | Required. Salon Location Text of chosen Location (From Google Maps API Autocompleter)
+new_salon_latitude | Required. Salon Latitude of chosen Location  (From Google Maps API Autocompleter)
+new_salon_longitude | Required. Name of Salon
+caption | Optional. Free style text on User's feeling
+tag_list | Optional. Always check if caption string has hashtags, if yes, add the strings of the hashtags seperated by commas as tag_list. E.g if caption has `Rocking my hairstyle #throwbackthursday #blessed`. `tag_list` will be: `throwbackthursday, blessed`
+
+## Delete a Post
+
+This endpoint creates a post.
+
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/67/posts/83")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "DELETE"
+request.allHTTPHeaderFields = headers
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/67/posts/83")
+  .delete(null)
+  .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", 
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful delete post request returns:
+
+```http
+204 No Content
+
+```
+
+#### HTTP Request
+
+`DELETE https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+post_id | Required. ID of the post
+
 ## Get a Specific Post
 
 ```swift
@@ -2143,6 +2631,421 @@ Parameter | Description
 --------- | -----------
 id | The ID of the post to retrieve
 
+## Like a Post
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/like")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/28/posts/62/like")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+```
+
+This endpoint likes a specific post by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/like`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user that is carrying out the action
+post_id | The ID of the post
+
+## Unlike a Post
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/unlike")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/28/posts/62/unlike")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 0
+}
+```
+
+This endpoint unlikes a specific post by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/unlike`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user that is carrying out the action
+post_id | The ID of the post
+
+## Bookmark a Post
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/bookmark")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/28/posts/62/bookmark")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+```
+
+This endpoint bookmarks a specific post by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/bookmark`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user that is carrying out the action
+post_id | The ID of the post
+
+## UnBookmark a Post
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/unbookmark")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/28/posts/62/unbookmark")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 0
+}
+```
+
+This endpoint unbookmark a specific post by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/unbookmark`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user that is carrying out the action
+post_id | The ID of the post
+
+## List of Users who have Liked a Post
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/likers")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/posts/68/likers")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "likers": [
+    {
+      "id": 29,
+      "username": "olame",
+      "avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/029/small/_IGP3572.jpg.jpg?1454659780",
+      "fullname": "OlaEsther Tunde"
+    },
+    {
+      "id": 26,
+      "username": "xxolaxxxxx",
+      "avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/026/small/B8Vo-6yIEAER-_C.jpg.jpg?1454659779",
+      "fullname": " "
+    },
+    {
+      "id": 67,
+      "username": "ronke",
+      "avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "fullname": " "
+    }
+  ]
+}
+```
+
+This endpoint retrieves a list of users who have liked a post.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/likers`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+post_id | The ID of the post
+
+
+## List of a User's Bookmarked Posts
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+  "authorization": ""
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/bookmarked_posts")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/solapemi/bookmarked_posts")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "bookmarked posts": [
+    {
+      "id": 62,
+      "user_id": 29,
+      "fullname": "OlaEsther Tunde",
+      "username": "olame",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/029/small/_IGP3572.jpg.jpg?1454659780",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/062/medium/_IGP3962.jpg.jpg?1454659830",
+      "comments_count": 0,
+      "comments": [],
+      "category": {
+        "id": 1,
+        "name": "Braids",
+        "created_at": "2015-08-28T11:17:56.555Z",
+        "updated_at": "2015-08-28T11:17:56.555Z"
+      },
+      "price_range": {
+        "id": 2,
+        "price": "60 - 100",
+        "created_at": "2015-09-18T14:13:42.274Z",
+        "updated_at": "2016-02-09T10:53:43.549Z",
+        "price_gh": "60 - 100",
+        "price_ng": "1600 - 2500"
+      },
+      "time_ago": "11 months",
+      "likes": 0,
+      "caption": "ats",
+      "stylename": "ats",
+      "price_range_id": 2,
+      "duration": "ats",
+      "products": null,
+      "category_id": 1,
+      "salon": ", ",
+      "slug": "rpw1fyi3apup4zcd_hshuw",
+      "created_at": "2015-11-08T23:48:21Z",
+      "updated_at": "2016-10-11T16:31:06Z"
+    }
+  ]
+}
+```
+
+This endpoint retrieves a list of posts bookmarked by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/bookmarked_posts`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user who is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | The ID of the user that is carrying out the action
 
 ## Feeds
 
@@ -2157,7 +3060,6 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.h
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
 request.allHTTPHeaderFields = headers
-request.HTTPBody = postData
 ```
 
 ```java
@@ -3322,11 +4224,787 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 ### Hashtagged Feed
 
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/tags/<hashtag_param>?per_page=10,page=1`
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+hashtag_param | | The string value after the sign `#`. Please note, DO NOT include the `#` sign to the request endpoint, only include the value after it.
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
 ### Category Feed
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/categories/<category_id>?per_page=10,page=1`
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+category_id | | id of category selected
+per_page | 25 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
 
 ### Price Range Feed
 
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/price_ranges/<price_range_id>?per_page=10,page=1`
+
+#### Query Parameters
+
+Pagination for endless acrolling
+
+Parameter | Default | Description
+--------- | ------- | -----------
+price_range_id | | id of price_range selected
+per_page | 25 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
 ### Extensive Filter Feed
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/filter?salon=<salon_name_or_location_string>,price_range_ids=<price_range_id,price_range_id>&category_ids=<category_id>&page=2&per_page=25`
+
+#### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+salon_name_or_location_string | | salon name or salon location string
+category_id | | id of category selected. Multiple selections are seperated by `,`
+price_range_id | | id of price_range selected. Multiple selections are seperated by `,`
+per_page | 25 | Numbers of users to return at a time
+page | 1 | Page number.
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the main feed top category
+</aside>
+
+# Comments
+
+## Create a Comment
+This endpoint creates a comment on a post.
+
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": ""
+]
+
+let parameters = [
+  [
+    "name": "content",
+    "value": "@ronketinker @solapemi Tress is in YCombinator W17!!!"
+  ]
+]
+
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/comments")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
+RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001--");
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/posts/68/comments")
+  .post(body)
+  .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", 
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful create comment request returns JSON structured like this:
+
+```json
+{
+  "id": 47,
+  "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+  "full_name": " ",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+  "time_ago": "a minute",
+  "user_id": 67
+}
+
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/comments`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+post_id | Required. ID of the post
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+content | Required. Content of the comment
+
+## Get Comments
+
+This endpoint retrieves all comments on a post.
+
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=---011000010111000001101001",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/comments")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/posts/68/comments")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful create comment request returns JSON structured like this:
+
+```json
+{
+  "comments": [
+    {
+      "id": 12,
+      "content": "hair looks great!",
+      "full_name": " ",
+      "username": "xxolaxxxxx",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/026/small/B8Vo-6yIEAER-_C.jpg.jpg?1454659779",
+      "time_ago": "10 months",
+      "user_id": 26
+    },
+    {
+      "id": 13,
+      "content": "hair looks great!",
+      "full_name": " ",
+      "username": "xxolaxxxxx",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/026/small/B8Vo-6yIEAER-_C.jpg.jpg?1454659779",
+      "time_ago": "10 months",
+      "user_id": 26
+    },
+    {
+      "id": 16,
+      "content": "hair looks great!",
+      "full_name": "OlaEsther Tunde",
+      "username": "olame",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/029/small/_IGP3572.jpg.jpg?1454659780",
+      "time_ago": "8 months",
+      "user_id": 29
+    },
+    {
+      "id": 30,
+      "content": "Tress on Blavity! Tress is in YCombinator!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 31,
+      "content": "@ronke @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 32,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 33,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 34,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 35,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 36,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 37,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 38,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 39,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 40,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 41,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 42,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 43,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 44,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "2 months",
+      "user_id": 67
+    },
+    {
+      "id": 45,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "28 days",
+      "user_id": 67
+    },
+    {
+      "id": 46,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "9 days",
+      "user_id": 67
+    },
+    {
+      "id": 47,
+      "content": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "full_name": " ",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/Screenshot_20160503-130140.png.png?1468909319",
+      "time_ago": "3 minutes",
+      "user_id": 67
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 1,
+      "total_objects": 21
+    }
+  }
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/comments`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+post_id | Required. ID of the post
+
+
+# Salons
+
+## Get Salons
+
+This endpoint retrieves all salons.
+
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/salons")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/salons")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful get salons request returns JSON structured like this:
+
+```json
+{
+  "salons": [
+    {
+      "id": 39,
+      "name": null,
+      "location": null,
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": 38,
+      "name": "twists & locs",
+      "location": "East Legon, Accra, Ghana",
+      "latitude": 5.6378865,
+      "longitude": -0.1612029
+    },
+    {
+      "id": 36,
+      "name": null,
+      "location": "East Legon, Accra, Ghana",
+      "latitude": null,
+      "longitude": null
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/salons`
+
+# Categories
+
+## Get Categories
+
+This endpoint retrieves all categories.
+
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/categories")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/categories")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful get categories request returns JSON structured like this:
+
+```json
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Braids"
+    },
+    {
+      "id": 2,
+      "name": "Natural Hair"
+    },
+    {
+      "id": 4,
+      "name": "Relaxed Hair"
+    },
+    {
+      "id": 3,
+      "name": "Weaves"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/categories`
+
+# Price Ranges
+
+## Get Price Ranges
+
+This endpoint retrieves all price_ranges.
+
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/price_ranges")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/price_ranges")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful get price ranges request returns JSON structured like this:
+
+```json
+{
+  "price_ranges": [
+    {
+      "id": 1,
+      "price": "0 - 50",
+      "price_gh": "0 - 50",
+      "price_ng": "0 - 1500"
+    },
+    {
+      "id": 2,
+      "price": "60 - 100",
+      "price_gh": "60 - 100",
+      "price_ng": "1600 - 2500"
+    },
+    {
+      "id": 3,
+      "price": "110 - 200",
+      "price_gh": "110 - 200",
+      "price_ng": "2500 - 5000"
+    },
+    {
+      "id": 4,
+      "price": "200 - 400",
+      "price_gh": "300 - 600",
+      "price_ng": "5100 - 10,000"
+    },
+    {
+      "id": 5,
+      "price": "400+",
+      "price_gh": "600+",
+      "price_ng": "10,000+"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/price_ranges`
+
+# Hair Types
+
+## Get Hair Types
+
+This endpoint retrieves all hair types.
+
+
+```swift
+let headers = [
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
+]
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/hair_types")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.HTTPBody = postData
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/hair_types")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful get hair_types request returns JSON structured like this:
+
+```json
+{
+  "hair_types": [
+    {
+      "id": 1,
+      "name": "Locs / Dreadlocs"
+    },
+    {
+      "id": 2,
+      "name": "Natural / Kinky Curls"
+    },
+    {
+      "id": 3,
+      "name": "Relaxed / Permed Hair"
+    },
+    {
+      "id": 4,
+      "name": "Texlaxed Hair"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v2/hair_types`
+
+# Questions
+
+## Create Question 
+api/v2/users/29/questions POST 
+    - post params{title, description, category_id}
+    
+## Get all Questions by Category 
+- api/v2/questions/categories/2?per_page=20,page=1 GET 
+    - 2 is dynamic for category_id
+    - Paginated for endless scroll
+    
+## Get Question 
+- api/v2/questions/1 GET 
+    - 1 is question id - dynamic
+    
+## Like Question 
+- /api/v2/users/29/questions/1/like GET
+    - 29 is user_id
+    - 1 is question_id
+    - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
+    
+## Unlike Question 
+- /api/v2/users/29/questions/1/unlike GET
+    - 29 is user_id
+    - 1 is question_id
+    - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
+
+# Answers
+
+## Create Answer
+api/v2/questions/1/answers POST 
+    - post params{content}
+    - 1 is the id of the question
+    - Required: Pass authentication_token of the user answering as Authorization in Request Headers
+
+## Get Answers to a Question 
+api/v2/questions/1/answers?per_page=20,page=1 GET 
+    - 1 is the id of the question dynamic
+    - add pagination params dynamic for endless scroll
+
+## Get one Answer 
+/api/v2/questions/1/answers/1 GET
+    - 1 is the id of the question dynamic
+    - 1 is the id of the answer dynamic
+
+## Upvote Answer 
+/api/v2/questions/1/answers/1/upvote GET
+    - 1 is the id of the question dynamic
+    - 1 is the id of the answer dynamic
+    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+
+## UndoUpvote Answer 
+/api/v2/questions/1/answers/1/undoupvote GET
+    - 1 is the id of the question dynamic
+    - 1 is the id of the answer dynamic
+    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+
+## Downvote Answer 
+/api/v2/questions/1/answers/1/downvote GET
+    - 1 is the id of the question dynamic
+    - 1 is the id of the answer dynamic
+    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+
+## Undo Downvote Answer 
+/api/v2/questions/1/answers/1/undodownvote GET
+    - 1 is the id of the question dynamic
+    - 1 is the id of the answer dynamic
+    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+
+# Hair Tips
+
+## Filter HairTips by Type & HairType
+-api/v2/hair_tips/types/filter?hair_tips_type=article&hair_type_id=2&page=1&per_page=10
+1, article & 2 are dynamic
+1 - integer
+article - string
+2 - integer
+
+## GET HairTip
+- api/v2/hair_tips/1
+
+
+
+
 
 
 
