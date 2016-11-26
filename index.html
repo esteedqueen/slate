@@ -123,7 +123,7 @@
 
 <p>The base url for the staging server is:</p>
 
-<p><code class="prettyprint">https://tressapi-staging.herokuapp.com/api/v2</code></p>
+<p><code class="prettyprint">https://tressapi-staging.herokuapp.com/api/v3</code></p>
 
 <p>This doc contains all the HTTP Requests for the endpoints.</p>
 
@@ -192,7 +192,7 @@ You must replace <code>meowmeowmeow</code> with the Client key Id and secret pro
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n\t\"user\": {\n\t\t\"email\": \"ea.olatunde@gmail.com\",\n\t\t\"username\": \"monalisa\",\n\t\t\"password\": \"1234567890\"\n\t}\n}"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">"irr0283-1=8573028"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">"123jr59kled85903"</span><span class="o">)</span>
@@ -247,7 +247,7 @@ You must replace <code>meowmeowmeow</code> with the Client key Id and secret pro
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users</code></p>
 
 <h4 id="request-body-parameters">Request Body Parameters</h4>
 
@@ -321,7 +321,7 @@ Please contact <a href="esther@tressapp.co">our developer team</a> for Facebook 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/auth/facebook/callback</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/auth/facebook/callback</code></p>
 
 <h4 id="request-query-parameter">Request Query Parameter</h4>
 
@@ -456,7 +456,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <ul>
 <li><p>(1) Verify Digits User on Server</p>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2verify_digits_account</code> </p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/verify_digits_account</code> </p>
 
 <h4 id="request-headers">Request Headers</h4>
 
@@ -518,7 +518,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <pre class="highlight java"><code>
 </code></pre>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2digits_user</code>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/digits_user</code>
     #### Request Body Parameters</p>
 
 <table><thead>
@@ -580,7 +580,7 @@ The above returns User JSON object response.
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"user\": {\n        \"email\": \"oliverakol@gmail.com\",\n        \"password\": \"oliverakol009\"\n    }\n}"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://www.tressapp.co/api/v2/users/sign_in"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://www.tressapp.co/api/v3/users/sign_in"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -635,7 +635,7 @@ The above returns User JSON object response.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/sign_in</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/sign_in</code></p>
 
 <h4 id="request-body-parameters">Request Body Parameters</h4>
 
@@ -666,7 +666,7 @@ Persist the User JSON object on the client including the authentication_token fo
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/sign_out"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/sign_out"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"DELETE"</span>
@@ -676,7 +676,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/sign_out"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/sign_out"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -704,7 +704,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">DELTE https://tressapi-staging.herokuapp.com/api/v2/users/sign_out</code></p>
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/users/sign_out</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -768,7 +768,7 @@ Delete all persisted records on client
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/29/update_password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"PATCH"</span>
@@ -781,7 +781,7 @@ Delete all persisted records on client
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"current_password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/29/update_password"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -838,7 +838,7 @@ Delete all persisted records on client
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;/update_password</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id&gt;/update_password</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -924,7 +924,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"hair_type_id\"\r\n\r\n1\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://stage.tressapp.co/api/v2/users/95"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://stage.tressapp.co/api/v3/users/95"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -973,7 +973,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id&gt;</code></p>
 
 <h4 id="request-parameters">Request Parameters</h4>
 
@@ -1071,7 +1071,7 @@ Persist the User JSON object on the client including the authentication_token fo
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"PATCH"</span>
@@ -1084,7 +1084,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"user[avatar]\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/53"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/53"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -1133,7 +1133,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id&gt;</code></p>
 
 <h4 id="request-parameters">Request Parameters</h4>
 
@@ -1213,7 +1213,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <span class="k">let</span> <span class="nv">postData</span> <span class="o">=</span> <span class="kt">NSJSONSerialization</span><span class="o">.</span><span class="nf">dataWithJSONObject</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">error</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/password"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
@@ -1225,7 +1225,7 @@ Persist the User JSON object on the client including the authentication_token fo
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"application/json"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"{\n    \"user\": {\n        \"email\": \"example@gmail.com\"\n    }\n}"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/password"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/password"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -1259,7 +1259,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/password</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/password</code></p>
 
 <h4 id="body-parameters">Body Parameters</h4>
 
@@ -1282,7 +1282,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -1412,7 +1412,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h3 id="by-pagination">By Pagination</h3>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?per_page=25,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users?per_page=25,page=1</code></p>
 
 <p>This endpoint retrieves all users by pagination, 25 at a time.</p>
 
@@ -1439,7 +1439,7 @@ Persist the User JSON object on the client including the authentication_token fo
 
 <h3 id="search-by-username-firstname-or-lastname">Search by Username, Firstname or Lastname</h3>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users?search=bola,per_page=25,page=1</code></p>
 
 <p>This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.</p>
 
@@ -1477,7 +1477,7 @@ Remember — Same Users JSONArray Response as above
 
 <p>NB: Useful for @mentions users query</p>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users?search=bola,per_page=25,page=1</code></p>
 
 <p>This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.</p>
 
@@ -1517,7 +1517,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/18731"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/18731"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -1526,7 +1526,7 @@ Remember — Same Users JSONArray Response as above
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/18731"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/18731"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -1596,7 +1596,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id&gt;</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id&gt;</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -1616,7 +1616,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;username&gt;</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;username&gt;</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -1639,7 +1639,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -1648,7 +1648,7 @@ Remember — Same Users JSONArray Response as above
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25%2Cpage%3D1"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2203,7 +2203,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25,page=1</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -2251,7 +2251,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following/70"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following/70"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
@@ -2261,7 +2261,7 @@ Remember — Same Users JSONArray Response as above
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following/ronketinker"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2288,7 +2288,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/&lt;followee_id_or_username&gt;/links/following/&lt;followed_id&gt;</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/&lt;followee_id_or_username&gt;/links/following/&lt;followed_id&gt;</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -2334,7 +2334,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following/70"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following/70"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"DELETE"</span>
@@ -2344,7 +2344,7 @@ Remember — Same Users JSONArray Response as above
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following/ronketinker"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2365,7 +2365,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v2/users/&lt;followee_id_or_username&gt;/links/following/&lt;followed_id&gt;</code></p>
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/users/&lt;followee_id_or_username&gt;/links/following/&lt;followed_id&gt;</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -2410,7 +2410,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -2421,7 +2421,7 @@ Remember — Same Users JSONArray Response as above
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/solapemi/links/following"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/solapemi/links/following"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2455,7 +2455,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id_or_username&gt;/links/following</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id_or_username&gt;/links/following</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -2479,7 +2479,7 @@ Remember — Same Users JSONArray Response as above
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/solapemi/links/followers"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/solapemi/links/followers"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -2490,7 +2490,7 @@ Remember — Same Users JSONArray Response as above
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/solapemi/links/followers"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/solapemi/links/followers"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2524,7 +2524,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;id_or_username&gt;/links/followers</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id_or_username&gt;/links/followers</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -2614,7 +2614,7 @@ Remember — Same Users JSONArray Response as above
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/posts"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/29/posts"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
@@ -2626,7 +2626,7 @@ Remember — Same Users JSONArray Response as above
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@CoCo check this out\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"image\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nKeraCare Natural Hair Range\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_name\"\r\n\r\nLa Villa Hair Shop\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_location\"\r\n\r\nEast Legon, Accra\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/29/posts"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/29/posts"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2682,7 +2682,7 @@ Remember — Same Users JSONArray Response as above
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/users/29/posts</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/29/posts</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -2813,7 +2813,7 @@ Persist the Post JSON object on the client.
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/67/posts/83"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/67/posts/83"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"PATCH"</span>
@@ -2828,7 +2828,7 @@ Persist the Post JSON object on the client.
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nshea butter\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"salon_name\"\r\n\r\nGod is Good Salon\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tag_list\"\r\n\r\n#teamnatural, #TressUpNaturalista\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/67/posts/83"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/67/posts/83"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">patch</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -2884,7 +2884,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;</code></p>
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -2980,7 +2980,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/67/posts/83"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/67/posts/83"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"DELETE"</span>
@@ -2990,7 +2990,7 @@ Persist the Post JSON object on the client.
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/67/posts/83"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/67/posts/83"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="kc">null</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3010,7 +3010,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;</code></p>
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3052,7 +3052,7 @@ Persist the Post JSON object on the client.
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/posts/53"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3061,7 +3061,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/users/53"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users/53"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3117,7 +3117,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/&lt;id&gt;</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;id&gt;</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -3140,7 +3140,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/28/posts/62/like"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/28/posts/62/like"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3150,7 +3150,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/28/posts/62/like"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/28/posts/62/like"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3173,7 +3173,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/like</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/like</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3216,7 +3216,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/28/posts/62/unlike"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/28/posts/62/unlike"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3226,7 +3226,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/28/posts/62/unlike"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/28/posts/62/unlike"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3249,7 +3249,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/unlike</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/unlike</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3292,7 +3292,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/28/posts/62/bookmark"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/28/posts/62/bookmark"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3302,7 +3302,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/28/posts/62/bookmark"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/28/posts/62/bookmark"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3325,7 +3325,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/bookmark</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/bookmark</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3368,7 +3368,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/28/posts/62/unbookmark"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/28/posts/62/unbookmark"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3378,7 +3378,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/28/posts/62/unbookmark"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/28/posts/62/unbookmark"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3401,7 +3401,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/unbookmark</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/posts/&lt;post_id&gt;/unbookmark</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3443,7 +3443,7 @@ Persist the Post JSON object on the client.
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/posts/68/likers"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/posts/68/likers"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3453,7 +3453,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/posts/68/likers"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/posts/68/likers"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3493,7 +3493,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/&lt;post_id&gt;/likers</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;post_id&gt;/likers</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -3516,7 +3516,7 @@ Persist the Post JSON object on the client.
   <span class="s">"authorization"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/solapemi/bookmarked_posts"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/users/solapemi/bookmarked_posts"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3526,7 +3526,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/solapemi/bookmarked_posts"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/users/solapemi/bookmarked_posts"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -3587,7 +3587,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/users/&lt;user_id&gt;/bookmarked_posts</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/bookmarked_posts</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -3625,7 +3625,7 @@ Persist the Post JSON object on the client.
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -3634,7 +3634,7 @@ Persist the Post JSON object on the client.
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10%2Cpage%3D1"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -4727,7 +4727,7 @@ Persist the Post JSON object on the client.
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10,page=1</code></p>
 
 <p>This endpoint retrieves all posts by pagination, 10 at a time.</p>
 
@@ -4762,7 +4762,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts?per_page=10,page=1</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -4809,7 +4809,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/trending?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/trending?per_page=10,page=1</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -4842,7 +4842,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/tags/&lt;hashtag_param&gt;?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/tags/&lt;hashtag_param&gt;?per_page=10,page=1</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -4891,7 +4891,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/categories/&lt;category_id&gt;?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/categories/&lt;category_id&gt;?per_page=10,page=1</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -4929,7 +4929,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/price_ranges/&lt;price_range_id&gt;?per_page=10,page=1</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/price_ranges/&lt;price_range_id&gt;?per_page=10,page=1</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -4967,7 +4967,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/filter?salon=&lt;salon_name_or_location_string&gt;,price_range_ids=&lt;price_range_id,price_range_id&gt;&amp;category_ids=&lt;category_id&gt;&amp;page=2&amp;per_page=25</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/filter?salon=&lt;salon_name_or_location_string&gt;,price_range_ids=&lt;price_range_id,price_range_id&gt;&amp;category_ids=&lt;category_id&gt;&amp;page=2&amp;per_page=25</code></p>
 
 <h4 id="query-parameters">Query Parameters</h4>
 
@@ -5028,7 +5028,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="p">]</span>
 <span class="p">]</span>
 
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/posts/68/comments"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/posts/68/comments"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
@@ -5041,7 +5041,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <span class="n">MediaType</span> <span class="n">mediaType</span> <span class="o">=</span> <span class="n">MediaType</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">);</span>
 <span class="n">RequestBody</span> <span class="n">body</span> <span class="o">=</span> <span class="n">RequestBody</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">mediaType</span><span class="o">,</span> <span class="s">"-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001--"</span><span class="o">);</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/posts/68/comments"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/posts/68/comments"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5069,7 +5069,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v2/posts/&lt;post_id&gt;/comments</code></p>
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;post_id&gt;/comments</code></p>
 
 <h5 id="headers">Headers</h5>
 
@@ -5123,7 +5123,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/posts/68/comments"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/posts/68/comments"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -5134,7 +5134,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/posts/68/comments"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/posts/68/comments"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5351,7 +5351,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/posts/&lt;post_id&gt;/comments</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;post_id&gt;/comments</code></p>
 
 <h4 id="url-parameters">URL Parameters</h4>
 
@@ -5376,7 +5376,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/salons"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/salons"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -5387,7 +5387,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/salons"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/salons"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5429,7 +5429,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/salons</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/salons</code></p>
 
 <h1 id="categories">Categories</h1>
 
@@ -5440,7 +5440,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/categories"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/categories"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -5451,7 +5451,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/categories"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/categories"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5488,7 +5488,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/categories</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/categories</code></p>
 
 <h1 id="price-ranges">Price Ranges</h1>
 
@@ -5499,7 +5499,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/price_ranges"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/price_ranges"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -5510,7 +5510,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/price_ranges"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/price_ranges"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5561,7 +5561,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/price_ranges</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/price_ranges</code></p>
 
 <h1 id="hair-types">Hair Types</h1>
 
@@ -5572,7 +5572,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
-<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/hair_types"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+<span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="kt">URL</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/hair_types"</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
                                         <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="kt">UseProtocolCachePolicy</span><span class="p">,</span>
                                     <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
 <span class="n">request</span><span class="o">.</span><span class="kt">HTTPMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
@@ -5583,7 +5583,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </code></pre>
 <pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/hair_types"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/hair_types"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">get</span><span class="o">()</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
@@ -5620,19 +5620,19 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h4 id="http-request">HTTP Request</h4>
 
-<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v2/hair_types</code></p>
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_types</code></p>
 
 <h1 id="questions">Questions</h1>
 
 <h2 id="create-question">Create Question</h2>
 
-<p>api/v2/users/29/questions POST 
+<p>api/v3/users/29/questions POST 
     - post params{title, description, category_id}</p>
 
 <h2 id="get-all-questions-by-category">Get all Questions by Category</h2>
 
 <ul>
-<li>api/v2/questions/categories/2?per_page=20,page=1 GET 
+<li>api/v3/questions/categories/2?per_page=20,page=1 GET 
 
 <ul>
 <li>2 is dynamic for category_id</li>
@@ -5643,7 +5643,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <h2 id="get-question">Get Question</h2>
 
 <ul>
-<li>api/v2/questions/1 GET 
+<li>api/v3/questions/1 GET 
 
 <ul>
 <li>1 is question id - dynamic</li>
@@ -5653,7 +5653,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <h2 id="like-question">Like Question</h2>
 
 <ul>
-<li>/api/v2/users/29/questions/1/like GET
+<li>/api/v3/users/29/questions/1/like GET
 
 <ul>
 <li>29 is user_id</li>
@@ -5665,7 +5665,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <h2 id="unlike-question">Unlike Question</h2>
 
 <ul>
-<li>/api/v2/users/29/questions/1/unlike GET
+<li>/api/v3/users/29/questions/1/unlike GET
 
 <ul>
 <li>29 is user_id</li>
@@ -5678,47 +5678,47 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h2 id="create-answer">Create Answer</h2>
 
-<p>api/v2/questions/1/answers POST 
+<p>api/v3/questions/1/answers POST 
     - post params{content}
     - 1 is the id of the question
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers</p>
 
 <h2 id="get-answers-to-a-question">Get Answers to a Question</h2>
 
-<p>api/v2/questions/1/answers?per_page=20,page=1 GET 
+<p>api/v3/questions/1/answers?per_page=20,page=1 GET 
     - 1 is the id of the question dynamic
     - add pagination params dynamic for endless scroll</p>
 
 <h2 id="get-one-answer">Get one Answer</h2>
 
-<p>/api/v2/questions/1/answers/1 GET
+<p>/api/v3/questions/1/answers/1 GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic</p>
 
 <h2 id="upvote-answer">Upvote Answer</h2>
 
-<p>/api/v2/questions/1/answers/1/upvote GET
+<p>/api/v3/questions/1/answers/1/upvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
 
 <h2 id="undoupvote-answer">UndoUpvote Answer</h2>
 
-<p>/api/v2/questions/1/answers/1/undoupvote GET
+<p>/api/v3/questions/1/answers/1/undoupvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
 
 <h2 id="downvote-answer">Downvote Answer</h2>
 
-<p>/api/v2/questions/1/answers/1/downvote GET
+<p>/api/v3/questions/1/answers/1/downvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
 
 <h2 id="undo-downvote-answer">Undo Downvote Answer</h2>
 
-<p>/api/v2/questions/1/answers/1/undodownvote GET
+<p>/api/v3/questions/1/answers/1/undodownvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
@@ -5727,7 +5727,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h2 id="filter-hairtips-by-type-amp-hairtype">Filter HairTips by Type &amp; HairType</h2>
 
-<p>-api/v2/hair_tips/types/filter?hair_tips_type=article&amp;hair_type_id=2&amp;page=1&amp;per_page=10
+<p>-api/v3/hair_tips/types/filter?hair_tips_type=article&amp;hair_type_id=2&amp;page=1&amp;per_page=10
 1, article &amp; 2 are dynamic
 1 - integer
 article - string
@@ -5736,7 +5736,7 @@ article - string
 <h2 id="get-hairtip">GET HairTip</h2>
 
 <ul>
-<li>api/v2/hair_tips/1</li>
+<li>api/v3/hair_tips/1</li>
 </ul>
 
       </div>
