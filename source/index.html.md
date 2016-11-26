@@ -20,7 +20,7 @@ Welcome to the Tress API! You can use our API to access Tress API endpoints.
 
 The base url for the staging server is:
 
-`https://tressapi-staging.herokuapp.com/api/v2`
+`https://tressapi-staging.herokuapp.com/api/v3`
 
 This doc contains all the HTTP Requests for the endpoints.
 
@@ -97,7 +97,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\n\t\"user\": {\n\t\t\"email\": \"ea.olatunde@gmail.com\",\n\t\t\"username\": \"monalisa\",\n\t\t\"password\": \"1234567890\"\n\t}\n}");
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users")
   .post(body)
   .addHeader("x-tress-client-key-id", "irr0283-1=8573028")
   .addHeader("x-tress-client-key-secret", "123jr59kled85903")
@@ -151,7 +151,7 @@ Request request = new Request.Builder()
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users`
 
 #### Request Body Parameters
 
@@ -215,7 +215,7 @@ Please contact [our developer team](esther@tressapp.co) for Facebook API Key and
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/auth/facebook/callback`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/auth/facebook/callback`
 
 #### Request Query Parameter
 
@@ -314,7 +314,7 @@ Request request = new Request.Builder()
 #### HTTP Requests
  - (1) Verify Digits User on Server
 
-    `POST https://tressapi-staging.herokuapp.com/api/v2verify_digits_account` 
+    `POST https://tressapi-staging.herokuapp.com/api/v3/verify_digits_account` 
 
     #### Request Headers
     Hashmap of Auth Headers | (contains different params shown below) Obtained from Digits SDK authenticated response
@@ -358,7 +358,7 @@ If the digits server verification is successful, there are two possible response
 
 ```
 
-    `POST https://tressapi-staging.herokuapp.com/api/v2digits_user`
+    `POST https://tressapi-staging.herokuapp.com/api/v3/digits_user`
     #### Request Body Parameters
 
     Parameter | Description
@@ -398,7 +398,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\n    \"user\": {\n        \"email\": \"oliverakol@gmail.com\",\n        \"password\": \"oliverakol009\"\n    }\n}");
 Request request = new Request.Builder()
-  .url("https://www.tressapp.co/api/v2/users/sign_in")
+  .url("https://www.tressapp.co/api/v3/users/sign_in")
   .post(body)
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -452,7 +452,7 @@ Request request = new Request.Builder()
 ```
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/sign_in`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/sign_in`
 
 #### Request Body Parameters
 
@@ -474,7 +474,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/sign_out")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/users/sign_out")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "DELETE"
@@ -486,7 +486,7 @@ request.allHTTPHeaderFields = headers
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/sign_out")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/sign_out")
   .delete(null)
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -513,7 +513,7 @@ Response response = client.newCall(request).execute();
 ```
 #### HTTP Request
 
-`DELTE https://tressapi-staging.herokuapp.com/api/v2/users/sign_out`
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/users/sign_out`
 
 ##### Headers
 
@@ -571,7 +571,7 @@ for param in parameters {
   }
 }
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/users/29/update_password")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "PATCH"
@@ -586,7 +586,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"current_password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password\"\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"password_confirmation\"\r\n\r\n\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/29/update_password")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/29/update_password")
   .patch(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -642,7 +642,7 @@ Response response = client.newCall(request).execute();
 ```
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/<id>/update_password`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/<id>/update_password`
 
 ##### Headers
 
@@ -711,7 +711,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"hair_type_id\"\r\n\r\n1\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("https://stage.tressapp.co/api/v2/users/95")
+  .url("https://stage.tressapp.co/api/v3/users/95")
   .patch(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -759,7 +759,7 @@ Response response = client.newCall(request).execute();
 ```
 #### HTTP Request
 
-`PATCH https://tressapi-staging.herokuapp.com/api/v2/users/<id>`
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<id>`
 
 #### Request Parameters
 
@@ -826,7 +826,7 @@ for param in parameters {
   }
 }
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/53")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/53")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "PATCH"
@@ -841,7 +841,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"user[avatar]\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/53")
+  .url("http://localhost:5000/api/v3/users/53")
   .patch(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -889,7 +889,7 @@ Response response = client.newCall(request).execute();
 ```
 #### HTTP Request
 
-`PATCH https://tressapi-staging.herokuapp.com/api/v2/users/<id>`
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<id>`
 
 #### Request Parameters
 
@@ -933,7 +933,7 @@ let parameters = ["user": ["email": "example@gmail.com"]]
 
 let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/password")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/users/password")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "POST"
@@ -947,7 +947,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("application/json");
 RequestBody body = RequestBody.create(mediaType, "{\n    \"user\": {\n        \"email\": \"example@gmail.com\"\n    }\n}");
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/password")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/password")
   .post(body)
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -981,7 +981,7 @@ This endpoint helps a user resets their password.
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/password`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/password`
 
 #### Body Parameters
 
@@ -1002,7 +1002,7 @@ OkHttpClient client = new OkHttpClient();
 
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -1132,7 +1132,7 @@ This shows the various ways you can retrieve users from the server.
 
 ### By Pagination
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users?per_page=25,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users?per_page=25,page=1`
 
 This endpoint retrieves all users by pagination, 25 at a time.
 
@@ -1145,7 +1145,7 @@ page | 1 | Page number.
 
 ### Search by Username, Firstname or Lastname
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users?search=bola,per_page=25,page=1`
 
 This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.
 
@@ -1164,7 +1164,7 @@ Remember — Same Users JSONArray Response as above
 ### Search by Username Only 
 NB: Useful for @mentions users query
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users?search=bola,per_page=25,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users?search=bola,per_page=25,page=1`
 
 This endpoint retrieves all users whose username, firstname or lastname match the search query param by pagination, 25 at a time.
 
@@ -1188,7 +1188,7 @@ let headers = [
   "x-tress-client-key-secret": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/18731")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/users/18731")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -1199,7 +1199,7 @@ request.allHTTPHeaderFields = headers
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/18731")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/18731")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -1269,7 +1269,7 @@ This endpoint retrieves a specific user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id>`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id>`
 
 #### URL Parameters
 
@@ -1281,7 +1281,7 @@ id | The ID of the user to retrieve
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<username>`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<username>`
 
 #### URL Parameters
 
@@ -1300,7 +1300,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25%2Cpage%3D1")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -1311,7 +1311,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25%2Cpage%3D1")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25%2Cpage%3D1")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -1866,7 +1866,7 @@ This endpoint retrieves suggested/recommended top users and their top 3 posts fo
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/suggestions?per_page=25,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/suggestions?per_page=25,page=1`
 
 ##### Headers
 
@@ -1894,7 +1894,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following/70")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/solapemi/links/following/70")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "POST"
@@ -1906,7 +1906,7 @@ request.allHTTPHeaderFields = headers
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker")
+  .url("http://localhost:5000/api/v3/users/solapemi/links/following/ronketinker")
   .post(null)
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -1935,7 +1935,7 @@ This endpoint creates a follow relationship between 2 users.
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/<followee_id_or_username>/links/following/<followed_id>`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/<followee_id_or_username>/links/following/<followed_id>`
 
 ##### Headers
 
@@ -1961,7 +1961,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following/70")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/solapemi/links/following/70")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "DELETE"
@@ -1973,7 +1973,7 @@ request.allHTTPHeaderFields = headers
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/solapemi/links/following/ronketinker")
+  .url("http://localhost:5000/api/v3/users/solapemi/links/following/ronketinker")
   .delete(null)
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -1995,7 +1995,7 @@ This endpoint creates a follow relationship between 2 users.
 
 #### HTTP Request
 
-`DELETE https://tressapi-staging.herokuapp.com/api/v2/users/<followee_id_or_username>/links/following/<followed_id>`
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/users/<followee_id_or_username>/links/following/<followed_id>`
 
 ##### Headers
 
@@ -2020,7 +2020,7 @@ let headers = [
   "x-tress-client-key-secret": "",
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/following")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/solapemi/links/following")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2033,7 +2033,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/solapemi/links/following")
+  .url("http://localhost:5000/api/v3/users/solapemi/links/following")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2068,7 +2068,7 @@ This endpoint retrieves a list of users a user is following.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id_or_username>/links/following`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/links/following`
 
 
 #### URL Parameters
@@ -2085,7 +2085,7 @@ let headers = [
   "x-tress-client-key-secret": "",
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/links/followers")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/solapemi/links/followers")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2098,7 +2098,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/solapemi/links/followers")
+  .url("http://localhost:5000/api/v3/users/solapemi/links/followers")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2133,7 +2133,7 @@ This endpoint retrieves a list of followers a user has.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<id_or_username>/links/followers`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/links/followers`
 
 
 #### URL Parameters
@@ -2218,7 +2218,7 @@ for param in parameters {
   }
 }
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/users/29/posts")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/users/29/posts")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "POST"
@@ -2232,7 +2232,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@CoCo check this out\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"image\"; filename=\"[object Object]\"\r\nContent-Type: false\r\n\r\n\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nKeraCare Natural Hair Range\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_name\"\r\n\r\nLa Villa Hair Shop\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"new_salon_location\"\r\n\r\nEast Legon, Accra\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/29/posts")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/29/posts")
   .post(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -2288,7 +2288,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/users/29/posts`
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/29/posts`
 
 ##### Headers
 
@@ -2380,7 +2380,7 @@ for param in parameters {
   }
 }
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/67/posts/83")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/67/posts/83")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "PATCH"
@@ -2397,7 +2397,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"products\"\r\n\r\nshea butter\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"category_id\"\r\n\r\n2\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"price_range_id\"\r\n\r\n1\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"salon_name\"\r\n\r\nGod is Good Salon\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"tag_list\"\r\n\r\n#teamnatural, #TressUpNaturalista\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/67/posts/83")
+  .url("http://localhost:5000/api/v3/users/67/posts/83")
   .patch(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -2453,7 +2453,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`PATCH https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>`
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>`
 
 ##### Headers
 
@@ -2499,7 +2499,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/67/posts/83")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/67/posts/83")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "DELETE"
@@ -2511,7 +2511,7 @@ request.allHTTPHeaderFields = headers
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/67/posts/83")
+  .url("http://localhost:5000/api/v3/users/67/posts/83")
   .delete(null)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -2531,7 +2531,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`DELETE https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>`
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>`
 
 ##### Headers
 
@@ -2556,7 +2556,7 @@ let headers = [
   "x-tress-client-key-secret": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/posts/53")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/posts/53")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2567,7 +2567,7 @@ request.allHTTPHeaderFields = headers
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/users/53")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/users/53")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2623,7 +2623,7 @@ This endpoint retrieves a specific post.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<id>`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/<id>`
 
 #### URL Parameters
 
@@ -2640,7 +2640,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/like")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/28/posts/62/like")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2652,7 +2652,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/28/posts/62/like")
+  .url("http://localhost:5000/api/v3/users/28/posts/62/like")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2675,7 +2675,7 @@ This endpoint likes a specific post by a user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/like`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>/like`
 
 ##### Headers
 
@@ -2702,7 +2702,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/unlike")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/28/posts/62/unlike")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2714,7 +2714,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/28/posts/62/unlike")
+  .url("http://localhost:5000/api/v3/users/28/posts/62/unlike")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2737,7 +2737,7 @@ This endpoint unlikes a specific post by a user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/unlike`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>/unlike`
 
 ##### Headers
 
@@ -2764,7 +2764,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/bookmark")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/28/posts/62/bookmark")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2776,7 +2776,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/28/posts/62/bookmark")
+  .url("http://localhost:5000/api/v3/users/28/posts/62/bookmark")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2799,7 +2799,7 @@ This endpoint bookmarks a specific post by a user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/bookmark`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>/bookmark`
 
 ##### Headers
 
@@ -2826,7 +2826,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/28/posts/62/unbookmark")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/28/posts/62/unbookmark")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2838,7 +2838,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/28/posts/62/unbookmark")
+  .url("http://localhost:5000/api/v3/users/28/posts/62/unbookmark")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2861,7 +2861,7 @@ This endpoint unbookmark a specific post by a user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/posts/<post_id>/unbookmark`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/posts/<post_id>/unbookmark`
 
 ##### Headers
 
@@ -2886,7 +2886,7 @@ let headers = [
   "x-tress-client-key-secret": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/likers")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/posts/68/likers")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2898,7 +2898,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/posts/68/likers")
+  .url("http://localhost:5000/api/v3/posts/68/likers")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -2938,7 +2938,7 @@ This endpoint retrieves a list of users who have liked a post.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/likers`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/<post_id>/likers`
 
 
 #### URL Parameters
@@ -2957,7 +2957,7 @@ let headers = [
   "authorization": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/users/solapemi/bookmarked_posts")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/users/solapemi/bookmarked_posts")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -2969,7 +2969,7 @@ request.HTTPBody = postData
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/solapemi/bookmarked_posts")
+  .url("http://localhost:5000/api/v3/users/solapemi/bookmarked_posts")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -3030,7 +3030,7 @@ This endpoint retrieves a list of posts bookmarked by a user.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/users/<user_id>/bookmarked_posts`
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/bookmarked_posts`
 
 ##### Headers
 
@@ -3055,7 +3055,7 @@ let headers = [
   "x-tress-client-key-secret": ""
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10%2Cpage%3D1")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -3066,7 +3066,7 @@ request.allHTTPHeaderFields = headers
 OkHttpClient client = new OkHttpClient();
 
 Request request = new Request.Builder()
-  .url("https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10%2Cpage%3D1")
+  .url("https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10%2Cpage%3D1")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4159,7 +4159,7 @@ This section contains endpoints that retrieve several types of feeds on Tress.
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/all?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/all?per_page=10,page=1`
 
 This endpoint retrieves all posts by pagination, 10 at a time.
 
@@ -4180,7 +4180,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts?per_page=10,page=1`
 
 #### Query Parameters
 
@@ -4206,7 +4206,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/trending?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/trending?per_page=10,page=1`
 
 #### Query Parameters
 
@@ -4226,7 +4226,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/tags/<hashtag_param>?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/tags/<hashtag_param>?per_page=10,page=1`
 
 #### URL Parameters
 
@@ -4251,7 +4251,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/categories/<category_id>?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/categories/<category_id>?per_page=10,page=1`
 
 #### Query Parameters
 
@@ -4272,7 +4272,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/price_ranges/<price_range_id>?per_page=10,page=1`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/price_ranges/<price_range_id>?per_page=10,page=1`
 
 #### Query Parameters
 
@@ -4292,7 +4292,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/discover/filter?salon=<salon_name_or_location_string>,price_range_ids=<price_range_id,price_range_id>&category_ids=<category_id>&page=2&per_page=25`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/discover/filter?salon=<salon_name_or_location_string>,price_range_ids=<price_range_id,price_range_id>&category_ids=<category_id>&page=2&per_page=25`
 
 #### Query Parameters
 
@@ -4329,7 +4329,7 @@ let parameters = [
   ]
 ]
 
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/comments")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/posts/68/comments")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "POST"
@@ -4344,7 +4344,7 @@ OkHttpClient client = new OkHttpClient();
 MediaType mediaType = MediaType.parse("multipart/form-data; boundary=---011000010111000001101001");
 RequestBody body = RequestBody.create(mediaType, "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n@ronketinker @solapemi Tress is in YCombinator W17!!!\r\n-----011000010111000001101001--");
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/posts/68/comments")
+  .url("http://localhost:5000/api/v3/posts/68/comments")
   .post(body)
   .addHeader("content-type", "multipart/form-data; boundary=---011000010111000001101001")
   .addHeader("x-tress-client-key-id", "")
@@ -4372,7 +4372,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`POST https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/comments`
+`POST https://tressapi-staging.herokuapp.com/api/v3/posts/<post_id>/comments`
 
 ##### Headers
 
@@ -4406,7 +4406,7 @@ let headers = [
   "x-tress-client-key-id": "",
   "x-tress-client-key-secret": ""
 ]
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/posts/68/comments")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/posts/68/comments")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -4419,7 +4419,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/posts/68/comments")
+  .url("http://localhost:5000/api/v3/posts/68/comments")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4636,7 +4636,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/posts/<post_id>/comments`
+`GET https://tressapi-staging.herokuapp.com/api/v3/posts/<post_id>/comments`
 
 
 #### URL Parameters
@@ -4658,7 +4658,7 @@ let headers = [
   "x-tress-client-key-id": "",
   "x-tress-client-key-secret": ""
 ]
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/salons")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/salons")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -4671,7 +4671,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/salons")
+  .url("http://localhost:5000/api/v3/salons")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4713,7 +4713,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/salons`
+`GET https://tressapi-staging.herokuapp.com/api/v3/salons`
 
 # Categories
 
@@ -4727,7 +4727,7 @@ let headers = [
   "x-tress-client-key-id": "",
   "x-tress-client-key-secret": ""
 ]
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/categories")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/categories")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -4740,7 +4740,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/categories")
+  .url("http://localhost:5000/api/v3/categories")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4777,7 +4777,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/categories`
+`GET https://tressapi-staging.herokuapp.com/api/v3/categories`
 
 # Price Ranges
 
@@ -4791,7 +4791,7 @@ let headers = [
   "x-tress-client-key-id": "",
   "x-tress-client-key-secret": ""
 ]
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/price_ranges")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/price_ranges")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -4804,7 +4804,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/price_ranges")
+  .url("http://localhost:5000/api/v3/price_ranges")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4855,7 +4855,7 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/price_ranges`
+`GET https://tressapi-staging.herokuapp.com/api/v3/price_ranges`
 
 # Hair Types
 
@@ -4869,7 +4869,7 @@ let headers = [
   "x-tress-client-key-id": "",
   "x-tress-client-key-secret": ""
 ]
-var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v2/hair_types")!,
+var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/api/v3/hair_types")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
@@ -4882,7 +4882,7 @@ request.HTTPBody = postData
 ```java
 OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/hair_types")
+  .url("http://localhost:5000/api/v3/hair_types")
   .get()
   .addHeader("x-tress-client-key-id", "")
   .addHeader("x-tress-client-key-secret", "")
@@ -4919,31 +4919,31 @@ Response response = client.newCall(request).execute();
 
 #### HTTP Request
 
-`GET https://tressapi-staging.herokuapp.com/api/v2/hair_types`
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_types`
 
 # Questions
 
 ## Create Question 
-api/v2/users/29/questions POST 
+api/v3/users/29/questions POST 
     - post params{title, description, category_id}
     
 ## Get all Questions by Category 
-- api/v2/questions/categories/2?per_page=20,page=1 GET 
+- api/v3/questions/categories/2?per_page=20,page=1 GET 
     - 2 is dynamic for category_id
     - Paginated for endless scroll
     
 ## Get Question 
-- api/v2/questions/1 GET 
+- api/v3/questions/1 GET 
     - 1 is question id - dynamic
     
 ## Like Question 
-- /api/v2/users/29/questions/1/like GET
+- /api/v3/users/29/questions/1/like GET
     - 29 is user_id
     - 1 is question_id
     - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
     
 ## Unlike Question 
-- /api/v2/users/29/questions/1/unlike GET
+- /api/v3/users/29/questions/1/unlike GET
     - 29 is user_id
     - 1 is question_id
     - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
@@ -4951,41 +4951,41 @@ api/v2/users/29/questions POST
 # Answers
 
 ## Create Answer
-api/v2/questions/1/answers POST 
+api/v3/questions/1/answers POST 
     - post params{content}
     - 1 is the id of the question
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers
 
 ## Get Answers to a Question 
-api/v2/questions/1/answers?per_page=20,page=1 GET 
+api/v3/questions/1/answers?per_page=20,page=1 GET 
     - 1 is the id of the question dynamic
     - add pagination params dynamic for endless scroll
 
 ## Get one Answer 
-/api/v2/questions/1/answers/1 GET
+/api/v3/questions/1/answers/1 GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
 
 ## Upvote Answer 
-/api/v2/questions/1/answers/1/upvote GET
+/api/v3/questions/1/answers/1/upvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
 
 ## UndoUpvote Answer 
-/api/v2/questions/1/answers/1/undoupvote GET
+/api/v3/questions/1/answers/1/undoupvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
 
 ## Downvote Answer 
-/api/v2/questions/1/answers/1/downvote GET
+/api/v3/questions/1/answers/1/downvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
 
 ## Undo Downvote Answer 
-/api/v2/questions/1/answers/1/undodownvote GET
+/api/v3/questions/1/answers/1/undodownvote GET
     - 1 is the id of the question dynamic
     - 1 is the id of the answer dynamic
     - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
@@ -4993,14 +4993,14 @@ api/v2/questions/1/answers?per_page=20,page=1 GET
 # Hair Tips
 
 ## Filter HairTips by Type & HairType
--api/v2/hair_tips/types/filter?hair_tips_type=article&hair_type_id=2&page=1&per_page=10
+-api/v3/hair_tips/types/filter?hair_tips_type=article&hair_type_id=2&page=1&per_page=10
 1, article & 2 are dynamic
 1 - integer
 article - string
 2 - integer
 
 ## GET HairTip
-- api/v2/hair_tips/1
+- api/v3/hair_tips/1
 
 
 
