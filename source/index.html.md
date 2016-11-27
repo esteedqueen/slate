@@ -358,7 +358,7 @@ If the digits server verification is successful, there are two possible response
 
 ```
 
-    `POST https://tressapi-staging.herokuapp.com/api/v3/digits_user`
+    `POST https://tressapi-staging.herokuapp.com/api/v3/digits_users`
     #### Request Body Parameters
 
     Parameter | Description
