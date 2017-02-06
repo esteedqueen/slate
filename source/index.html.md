@@ -242,6 +242,83 @@ hair_type_id | Required. You must require the user to choose from a dropdown of 
 Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
 </aside>
 
+### Via Instagram
+
+No official SDK for Instagram. I implemented the webviews myself on the Android Client. See Instagram [official docs](https://www.instagram.com/developer/authentication/). See Instagram Tress Client for App ID and Secret Key.
+
+```swift
+
+```
+
+```java
+
+```
+> The request returns JSON structured like this:
+
+```json
+{
+  "id": 58,
+  "email": "example@gmail.com",
+  "digits_id": null,
+  "username": "monalisa",
+  "country_code": null,
+  "firstname": "example",
+  "lastname": "here",
+  "fullname": "example here ",
+  "hair_type_id": 1,
+  "phone_number": null,
+  "bio": null,
+  "avatar": "http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&d=www.tressapp.co/images/esther.jpg",
+  "authentication_token": "meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298",
+  "posts": [],
+  "most_popular_posts": [],
+  "followers": [],
+  "following": [],
+  "comments": [],
+  "posts_count": 0,
+  "comments_count": 0,
+  "followers_count": 0,
+  "following_count": 0,
+  "posts_total_likes": 0,
+  "posts_liked": [],
+  "posts_bookmarked": [],
+  "posts_bookmarked_count": 0,
+  "social_access_tokens": {
+    "instagram": "blahdie30422i4459"
+  },
+  "created_at": "2016-10-04T10:46:39Z",
+  "updated_at": "2016-10-04T10:46:39Z"
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/auth/instagram/callback`
+
+#### Request Query Parameter
+
+Parameter | Description
+--------- | -----------
+code | Required. Obtained from Facebook SDK authenticated response
+
+#### Request Body Parameters
+
+Parameter | Description
+--------- | -----------
+email | Required. 
+avatar | Required. 
+username | Required.
+firstname | Required. 
+lastname | Required.
+hair_type_id | Required. You must require the user to choose from a dropdown of hair type options
+
+
+<aside class="notice">
+Persist the User JSON object on the client including the authentication_token for future user authenticated requests
+Also, please note the social_access_token json object nested in the user object, persist the Instagram access token for future request to Instagram API to retrieve the user's images.
+</aside>
+
+
 ### Via Phone Number
 Authenticate via the [iOS](https://docs.fabric.io/apple/digits/sign-in-with-phone-number.html) or [Android](https://docs.fabric.io/android/digits/sign-in-with-phone-number.html) [Fabric Digits SDK](https://docs.fabric.io/ios/fabric/overview.html) on the client and make a request with the authenticated response containing the user's Auth Headers Hashmap and phone number to the endpoint below to verify on the server.
 
@@ -425,17 +502,9 @@ Request request = new Request.Builder()
   "avatar": "http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&d=www.tressapp.co/images/esther.jpg",
   "authentication_token": "meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298",
   "posts": [],
-  "most_popular_posts": [],
-  "followers": [],
-  "following": [],
-  "comments": [],
-  "posts_count": 0,
-  "comments_count": 0,
   "followers_count": 0,
   "following_count": 0,
   "posts_total_likes": 0,
-  "posts_liked": [],
-  "posts_bookmarked": [],
   "posts_bookmarked_count": 0,
   "created_at": "2016-10-04T10:46:39Z",
   "updated_at": "2016-10-04T10:46:39Z"
@@ -615,12 +684,6 @@ Response response = client.newCall(request).execute();
   "avatar": "http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&d=www.tressapp.co/images/esther.jpg",
   "authentication_token": "meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298",
   "posts": [],
-  "most_popular_posts": [],
-  "followers": [],
-  "following": [],
-  "comments": [],
-  "posts_count": 0,
-  "comments_count": 0,
   "followers_count": 0,
   "following_count": 0,
   "posts_total_likes": 0,
@@ -4165,7 +4228,7 @@ This endpoint retrieves all posts by pagination, 10 at a time.
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -4184,7 +4247,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -4210,7 +4273,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -4236,7 +4299,7 @@ hashtag_param | | The string value after the sign `#`. Please note, DO NOT inclu
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -4255,7 +4318,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -4276,7 +4339,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 #### Query Parameters
 
-Pagination for endless acrolling
+Pagination for endless scrolling
 
 Parameter | Default | Description
 --------- | ------- | -----------
@@ -5003,6 +5066,153 @@ article - string
 - api/v3/hair_tips/1
 
 
+# Unauthenticated User Access
+
+## Register Temp Session for with Temp ID
+
+Register temporary session of unauthenticated user
+
+```swift
+
+```
+
+```java
+
+```
+> The request returns JSON structured like this:
+
+```json
+{
+  "temp_id": 58
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/temporary_session`
+
+#### Request Body Parameters
+
+Parameter | Description
+--------- | -----------
+temp_id | Required. Randomly generatedd on the Client
+device_id | Required.
+device_type | Required. 
+
+
+<aside class="notice">
+Persist temp_id on the client for future unauthenticated requests.
+</aside>
+
+## Fetch Home Feed with Temp ID for Unauthenticated User
+
+Get Feed Post for unauthenticated users
+
+```swift
+
+```
+
+```java
+
+```
+> The request returns Post Feed JSON structured like this:
+
+```json
+{
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/posts/discover/temporary_session?per_page=10,page=1`
+
+#### Query Parameters
+
+
+Parameter | Default | Description
+--------- | ------- | -----------
+temp_id | temporary id
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+(Pagination for endless scrolling)
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the home feed for authenticated users
+</aside>
+
+
+## Fetch Explore Feed with Temp ID for Unauthenticated User
+
+Get Explore Feed Post for unauthenticated users
+
+```swift
+
+```
+
+```java
+
+```
+> The request returns Post Feed JSON structured like this:
+
+```json
+{
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/posts/discover/temporary_session?temp_id=845904,per_page=10,page=1`
+
+#### Query Parameters
+
+
+Parameter | Default | Description
+--------- | ------- | -----------
+temp_id | temporary id
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+(Pagination for endless scrolling)
+
+<aside class="notice">
+The Posts JSONArray response structure is the same as returned in the explore feed for authenticated users
+</aside>
+
+
+## Fetch User Suggestions with Temp ID for Unauthenticated User
+
+Get User Suggestions for unauthenticated users
+
+```swift
+
+```
+
+```java
+
+```
+> The request returns User JSONArray structured like this:
+
+```json
+{
+}
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/suggestions/discover/temporary_session?temp_id=845904,per_page=10,page=1`
+
+#### Query Parameters
+
+
+Parameter | Default | Description
+--------- | ------- | -----------
+temp_id | temporary id
+per_page | 10 | Numbers of users to return at a time
+page | 1 | Page number.
+(Pagination for endless scrolling)
+
+<aside class="notice">
+The Users JSONArray response structure is the same as returned in the recommended user suggestions for authenticated users
+</aside>
 
 
 
