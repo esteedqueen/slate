@@ -453,6 +453,8 @@ If the digits server verification is successful, there are two possible response
 The above returns User JSON object response.
 </aside>
 
+
+
 ## User Sign In
 
 ### Via email
@@ -495,6 +497,7 @@ Request request = new Request.Builder()
   "country_code": null,
   "firstname": null,
   "lastname": null,
+  "is_salon": false,
   "fullname": " ",
   "hair_type_id": null,
   "phone_number": null,
@@ -982,6 +985,215 @@ username | Username
 
 <aside class="notice">
 Persist the User JSON object on the client including the authentication_token for future user authenticated requests.
+</aside>
+
+## Create Salon user account/Update user if is_salon is true
+A salon profile is essentially a User Account with a salon object relationship. The process to create a salon account is the same as higlighted above in all these steps. The distinction is in the additional workflow of adding an `is_salon` boolean param to the user object. If the `is_salon` is `true`. Then there will be additional parameters to be filled when updating the user's profile as follows:
+
+```swift
+let headers = [
+  "content-type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": "",
+  "authorization": "",
+]
+let parameters = [
+  [
+    "name": "is_salon",
+    "value": "true"
+  ],
+  [
+    "name": "salon_name",
+    "value": "CoCo HairTalk Salon"
+  ],
+  [
+    "name": "salon_location",
+    "value": "Dzorwulu, Accra, Greater Accra Region, Ghana"
+  ],
+  [
+    "name": "salon_longitude",
+    "value": "-0.203367"
+  ],
+  [
+    "name": "salon_latitude",
+    "value": "5.611593199999999"
+  ],
+  [
+    "name": "salon_cover_image",
+    "fileName": "576A5648.jpg"
+  ],
+  [
+    "name": "salon_website_link",
+    "value": "www.cocohairtalk.gh"
+  ],
+  [
+    "name": "avatar",
+    "fileName": "IMG-20161219-WA0000.jpg"
+  ],
+  [
+    "name": "bio",
+    "value": "I'm a hair doctor and specialist"
+  ],
+  [
+    "name": "phone_number",
+    "value": "+233231873639"
+  ],
+  [
+    "name": "hair_type_id",
+    "value": "2"
+  ]
+]
+
+let boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
+
+var body = ""
+var error: NSError? = nil
+for param in parameters {
+  let paramName = param["name"]!
+  body += "--\(boundary)\r\n"
+  body += "Content-Disposition:form-data; name=\"\(paramName)\""
+  if let filename = param["fileName"] {
+    let contentType = param["content-type"]!
+    let fileContent = String(contentsOfFile: filename, encoding: String.Encoding.utf8)
+    if (error != nil) {
+      print(error)
+    }
+    body += "; filename=\"\(filename)\"\r\n"
+    body += "Content-Type: \(contentType)\r\n\r\n"
+    body += fileContent
+  } else if let paramValue = param["value"] {
+    body += "\r\n\r\n\(paramValue)"
+  }
+}
+
+let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:5000/api/v3/users/67")! as URL,
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.httpMethod = "PATCH"
+request.allHTTPHeaderFields = headers
+request.httpBody = postData as Data
+
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
+})
+
+dataTask.resume()
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
+RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"is_salon\"\r\n\r\ntrue\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_name\"\r\n\r\nCoCo HairTalk Salon\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_location\"\r\n\r\nDzorwulu, Accra, Greater Accra Region, Ghana\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_longitude\"\r\n\r\n-0.203367\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_latitude\"\r\n\r\n5.611593199999999\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_cover_image\"; filename=\"576A5648.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"salon_website_link\"\r\n\r\nwww.cocohairtalk.gh\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"avatar\"; filename=\"IMG-20161219-WA0000.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"bio\"\r\n\r\nI'm a hair doctor and specialist\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"phone_number\"\r\n\r\n+233231873639\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"hair_type_id\"\r\n\r\n2\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v3/users/67")
+  .patch(body)
+  .addHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+> A successful salon user update request returns JSON structured like this:
+
+```json
+{
+  "id": 58,
+  "email": "example@gmail.com",
+  "digits_id": null,
+  "username": "monalisa",
+  "country_code": null,
+  "firstname": null,
+  "lastname": null,
+  "fullname": " ",
+  "hair_type_id": null,
+  "phone_number": null,
+  "is_salon": true,
+  "salon_data": {
+    "id": 11315,
+    "name": "Anowas Parlour",
+    "location": "East Legon, Accra, Greater Accra Region, Ghana",
+    "latitude": 5.6378865,
+    "longitude": -0.1612029,
+    "website_link": "",
+    "user_id": 2,
+    "cover_image_url": "/cover_images/medium/missing.png",
+    "email": "priscahazel@gmail.com"
+  },  
+  "bio": "best stylist",
+  "avatar": "http://gravatar.com/avatar/6163882cbdd07b65079f41cf50e95c52?s=350&d=www.tressapp.co/images/esther.jpg",
+  "authentication_token": "meowmeowmeowmeowmeowmeowmeowmeowmeowdf2196d42cb12cabae7b43298",
+  "posts": [],
+  "most_popular_posts": [],
+  "followers": [],
+  "following": [],
+  "comments": [],
+  "posts_count": 0,
+  "comments_count": 0,
+  "followers_count": 0,
+  "following_count": 0,
+  "posts_total_likes": 0,
+  "posts_liked": [],
+  "posts_bookmarked": [],
+  "posts_bookmarked_count": 0,
+  "created_at": "2016-10-04T10:46:39Z",
+  "updated_at": "2016-10-04T10:46:39Z"
+}
+```
+#### HTTP Request
+
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<id>`
+
+#### Request Parameters
+
+##### Path
+
+Parameter | Description
+--------- | -----------
+id | Required. This is the id of the user
+
+
+##### Headers
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose id is on the request path
+
+##### Body
+
+Parameter (all required) | Description
+--------- | -----------
+is_salon | is_salon params
+avatar | uploaded image filename
+hair_type_id | Hair Type id
+email | Email address
+firstname | Firstname
+lastname | Lastname
+username | Username
+salon_website_link | Username
+salon_name | Salon Name
+salon_location | Salon Location (Google Place Autocomplete)
+salon_longitude | Salon Longitude (Google Place Autocomplete)
+salon_latitude | Salon Latitude (Google Place Autocomplete)
+phone_number | Phone Number
+salon_cover_image | Salon cover image
+bio | Salon's bio
+
+
+<aside class="notice">
+Please note that, going all user object now has an `is_salon` boolean attribute that is false by default. It is the process of switching or creating a salon profile that changes it to true.
 </aside>
 
 ## Reset Password
@@ -5883,6 +6095,8 @@ Here's Branch's [doc](https://dev.branch.io/getting-started/deep-link-routing/gu
 ## Handling Post Mobile Web Url 
 A typical mobile web shared url looks like this `https://www.tressapp.com/p/_-eukhdy5o1a9l1699o0gq`, when the url is visited, the Branch Web SDK passes some parameters that when implemented and handled on the android & ios clients, will open the app and redirect to the post detailed view based on the post attributes passed.
 
+You need to retrieve these params and route to the appropriate post's detail view.
+
 #### Mobile Web Post Url Parameters
 
 Parameter | Description
@@ -5893,7 +6107,7 @@ user_id | User ID
 username | Username
 
 <aside class="notice">
-This leads to the Post Detail Screen
+This leads to the Post Detail Screen. Please take note of the action_header values with sub parameters as they are used to make a request to an endpoint or fill the screen in the destination screens
 </aside>
 
 ## Other Branch Deeplinks with Parameters
@@ -5920,7 +6134,7 @@ action_header | isTipFeed | Tips Feed Screen - has sub parameters of `category_i
 action_header | isAskQuestion | Ask Question Screen
 
 <aside class="notice">
-Please take note of the action_header values with sub parameters.
+Please take note of the action_header values with sub parameters as they are used to make a request to an endpoint or fill the screen in the destination screens
 </aside>
 
 # Handling One Signal Notifications Received on Tress
@@ -5934,15 +6148,33 @@ All notifications received have action_header, the screen a notification leads t
 Parameters | Value | Screens They Lead To
 --------- |----------- |-----------
 action_header | isTrending | Trending Screen
-action_header | isSuggestion |Search / Suggestion Screen
+action_header | isSuggestion |People Suggestion Screen
 action_header | isAddPostInstagram | Instagram Add Post Screen
 action_header | isStylistOptIn | Stylist OptIn Screen to choose if you're a stylist or not
 action_header | isQuestionFeed | Question Feed Screen - has sub parameter of `category_id` to determine the category of the question feed to lead to. By default `category_id: 3`
-action_header | isTipFeed | Tips Feed Screen - has sub parameters of `category_id` and `hair_tips_type` to determine the category of the question feed to lead to. By default `category_id: 3` and `hair_tips_type: "article"`
+action_header | isHairTipFeed | Tips Feed Screen - has sub parameters of `category_id` and `hair_tips_type` to determine the category of the question feed to lead to. By default `category_id: 3` and `hair_tips_type: "article"`
 action_header | isAskQuestion | Ask Question Screen
+action_header | isLike | Post Detail Screen (sub params are: `model_id`, `post_image`, `user_id`, `username`, `post_username`)
+action_header | isHairTipDetail | HairTip Detail Screen (sub params are: `model_id` and `tip_url`)
+action_header | isAddPost | Add Post Screen
+action_header | isComment | Comments Screen (sub params are: `model_id` - this is the post's id to retrieve its comments)
+action_header | isFollowing | User Profile Screen (sub params are: `user_id` and `username`)
+action_header | isAddAvatar | Edit Profile Screen
+action_header | isInviteFriends | Invite Friends Screen
+action_header | isChooseTrendsetter | Home Feed Screen
+action_header | isHashTag | HashTag Feed Screen (sub param is: `tagged_name` - e.g #naturalhair this is the param sent to posts hashtag feed endpoint )
+action_header | isHairCategory | Category Feed Screen Screen (sub param are: `user_id`, `category_id`, `category_name` )
+action_header | isHairPriceRange | Price Range Feed Screen (sub param are: `user_id`, `price_range_id`, `price_range_name` )
+action_header | isFilter | Filter Screen
+action_header | isHairstyleSuggestion | Hairstyle Suggestion Screen
+action_header | isLaunchUrl | Launch the Url in the sub param in a webview (sub param is: `launch_url`)
+action_header | isUpvoteAnswer | Question Detail Screen (sub params are: `model_id`, `user_avatar`, `fullname`, `username`, `title`, `description`, `time`, `responses_count`, `likes_count, `user_id` )
+action_header | isLikeQuestion | Question Detail Screen ( same as above)
+action_header | isQuestion | Question Detail Screen ( same as above)
+action_header | isAnswer | Question Detail Screen ( same as above)
 
 <aside class="notice">
-Please take note of the action_header values with sub parameters.
+Please take note of the action_header values with sub parameters as they are used to make a request to an endpoint or fill the screen in the destination screens
 </aside>
 
 
