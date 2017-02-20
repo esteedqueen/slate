@@ -4986,84 +4986,744 @@ Response response = client.newCall(request).execute();
 
 # Questions
 
-## Create Question 
-api/v3/users/29/questions POST 
-    - post params{title, description, category_id}
-    
-## Get all Questions by Category 
-- api/v3/questions/categories/2?per_page=20,page=1 GET 
-    - 2 is dynamic for category_id
-    - Paginated for endless scroll
-    
-## Get Question 
-- api/v3/questions/1 GET 
-    - 1 is question id - dynamic
-    
+## Create Question
+This endpoint creates a new question.
+
+
+```swift
+
+let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:5000/api/v2/users/67/questions")! as URL,
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.httpMethod = "POST"
+request.allHTTPHeaderFields = headers
+request.httpBody = postData as Data
+
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
+})
+
+
+```
+
+```java
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v2/users/67/questions")
+  .post(body)
+  .addHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful question creation request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "title": "How to achieve healthy natural hair growth?",
+  "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+  "category_id": 1,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "answers_count": 0,
+  "time_ago": "a minute",
+  "likes_count": 0,
+  "created_at": "2017-02-20T18:08:41Z",
+  "updated_at": "2017-02-20T18:08:41Z"
+}
+
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+title | Required. title of the question
+description | Required. question description
+category | Required. category ID of the question
+
+## Get all Questions by Category
+This endpoint retrieves a feed of questions by category.
+
+
+```swift
+
+let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1")! as URL,
+                                        cachePolicy: .useProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.httpMethod = "GET"
+request.allHTTPHeaderFields = headers
+request.httpBody = postData as Data
+
+let session = URLSession.shared
+let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+  if (error != nil) {
+    print(error)
+  } else {
+    let httpResponse = response as? HTTPURLResponse
+    print(httpResponse)
+  }
+})
+
+dataTask.resume()
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .addHeader("authorization", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+```
+
+> A successful questions feed request returns JSON structured like this:
+
+```json
+{
+  "questions": [
+    {
+      "id": 7,
+      "title": "How to achieve healthy natural hair growth?",
+      "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+      "category_id": 1,
+      "user_id": 67,
+      "fullname": "Kemi CoolBraids",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "user_is_salon": true,
+      "answers_count": 0,
+      "time_ago": "6 minutes",
+      "likes_count": 0,
+      "created_at": "2017-02-20T18:08:41Z",
+      "updated_at": "2017-02-20T18:08:41Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/categories/<category_id>,<category_id>?per_page=20,page=1`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+category_id | Required. CategoryID. Can be more than 1, seperated by commas
+per_page | Required. Pagination param for endless scroll
+page | Required. Pagination param for endless scroll
+
+## Get Question
+This endpoint retrieves a question by it's ID.
+
+
+```swift
+
+
+```
+
+```java
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("http://localhost:5000/api/v3/questions/7")
+  .get()
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
+  .build();
+
+Response response = client.newCall(request).execute();
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "title": "How to achieve healthy natural hair growth?",
+  "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+  "category_id": 1,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "answers_count": 0,
+  "time_ago": "a minute",
+  "likes_count": 0,
+  "created_at": "2017-02-20T18:08:41Z",
+  "updated_at": "2017-02-20T18:08:41Z"
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<id>`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | Required. ID of the question
+
 ## Like Question 
-- /api/v3/users/29/questions/1/like GET
-    - 29 is user_id
-    - 1 is question_id
-    - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
-    
+This is the endpoint to like a question.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<id>/like`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication token of the user liking the question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user liking the question
+id | Required. ID of the question
+
 ## Unlike Question 
-- /api/v3/users/29/questions/1/unlike GET
-    - 29 is user_id
-    - 1 is question_id
-    - Require: Pass authentication_token that matches the user_id as Authorization in Request Headers
+This is the endpoint to unlike a question.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<id>/unlike`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication token of the user unliking the question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user liking the question
+id | Required. ID of the question
 
 # Answers
 
 ## Create Answer
-api/v3/questions/1/answers POST 
-    - post params{content}
-    - 1 is the id of the question
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers
+This endpoint creates an answer to a question.
 
-## Get Answers to a Question 
-api/v3/questions/1/answers?per_page=20,page=1 GET 
-    - 1 is the id of the question dynamic
-    - add pagination params dynamic for endless scroll
 
-## Get one Answer 
-/api/v3/questions/1/answers/1 GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
+```swift
 
-## Upvote Answer 
-/api/v3/questions/1/answers/1/upvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+```
 
-## UndoUpvote Answer 
-/api/v3/questions/1/answers/1/undoupvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+```java
+
+```
+
+> A successful answer creation request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "content": "@ronketinker @solapemi Protective style it, less heat and easy detangle",
+  "question_id": 7,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "time_ago": "a minute",
+  "upvote_count": 0,
+  "downvote_count": 0,
+  "created_at": "2017-02-20T18:46:08Z",
+  "updated_at": "2017-02-20T18:46:08Z"
+}
+
+
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user answering the question   
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+content | Required. content of the answer
+
+## Get Answers to a Question
+This endpoint retreives all the answers to a question.
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "answers": [
+    {
+      "id": 7,
+      "content": "@ronketinker @solapemi Protective style it, less heat and easy detangle",
+      "question_id": 7,
+      "user_id": 67,
+      "fullname": "Kemi CoolBraids",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "user_is_salon": true,
+      "time_ago": "32 minutes",
+      "upvote_count": 0,
+      "downvote_count": 0,
+      "created_at": "2017-02-20T18:46:08Z",
+      "updated_at": "2017-02-20T18:46:08Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 20,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers?per_page=20,page=1`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+per_page | Required. pagination params for endless scroll
+page | Required. pagination params for endless scroll
+
+## Get one Answer
+This endpoint retreives an answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "content": "@ronketinker @solapemi Protective style it, less heat and easy detangle",
+  "question_id": 7,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "time_ago": "37 minutes",
+  "upvote_count": 0,
+  "downvote_count": 0,
+  "created_at": "2017-02-20T18:46:08Z",
+  "updated_at": "2017-02-20T18:46:08Z"
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
+
+## Upvote Answer
+This is the endpoint to upvote an answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>/upvote`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user upvoting
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
+
+## UndoUpvote Answer
+This is the endpoint to undo an upvoted answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>/undoupvote`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user undoing the upvote
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
 
 ## Downvote Answer 
-/api/v3/questions/1/answers/1/downvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+This is the endpoint to undo a downvoted answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>/downvote`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user downvoting
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
 
 ## Undo Downvote Answer 
-/api/v3/questions/1/answers/1/undodownvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers 
+This is the endpoint to undo a downvoted answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>/undodownvote`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user undoing the downvote
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
 
 # Hair Tips
 
-## Filter HairTips by Type & HairType
--api/v3/hair_tips/types/filter?hair_tips_type=article&hair_type_id=2&page=1&per_page=10
-1, article & 2 are dynamic
-1 - integer
-article - string
-2 - integer
+## Filter HairTips by Type & Category
+
+This is the endpoint to retrieve a feed of hair tips by type and category
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "hair_tips": [
+    {
+      "id": 1,
+      "title": "4C Natural Hairstyles: Finger Coils!",
+      "cover_image": "https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227",
+      "url": "http://www.thekinkandi.com/finger-coils/",
+      "brief_intro": "Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?",
+      "hair_tips_type": "article",
+      "category": "Natural Hair",
+      "author": "AfrikanButterfly on thekinkandi.com",
+      "views_count": 2,
+      "time_ago": "5 months",
+      "comments_count": 1,
+      "created_at": "2016-09-15T12:46:10Z",
+      "updated_at": "2017-02-20T19:47:18Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 10,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/types/filter?hair_tips_type=<type>&category_id=<catId>,<catId>&page=1&per_page=10`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+type | Required. It's either "article" or "video"
+catId | Required. Category ID, can be more than one, seperated by commas
+per_page | Required. Pagination param
+page | Required. Pagination param
 
 ## GET HairTip
-- api/v3/hair_tips/1
+This is the endpoint to retrieve a feed of hair tips by type and category
+
+Once retrieve, the tip url is loaded in a webview on the client.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "id": 1,
+  "title": "4C Natural Hairstyles: Finger Coils!",
+  "cover_image": "https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227",
+  "url": "http://www.thekinkandi.com/finger-coils/",
+  "brief_intro": "Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?",
+  "hair_tips_type": "article",
+  "category": "Natural Hair",
+  "author": "AfrikanButterfly on thekinkandi.com",
+  "views_count": 2,
+  "time_ago": "5 months",
+  "comments_count": 1,
+  "created_at": "2016-09-15T12:46:10Z",
+  "updated_at": "2017-02-20T19:47:18Z"
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/<id>`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+id | Required. ID of the hair tip
 
 
 # Unauthenticated User Access
@@ -5214,6 +5874,76 @@ page | 1 | Page number.
 The Users JSONArray response structure is the same as returned in the recommended user suggestions for authenticated users
 </aside>
 
+
+
+# Handling Branch Deeplinking on Tress
+Here's Branch's [doc](https://dev.branch.io/getting-started/deep-link-routing/guide/android/) on how to retrieve the deeplink parameters and route to the appropriate screen on the client. 
+
+
+## Handling Post Mobile Web Url 
+A typical mobile web shared url looks like this `https://www.tressapp.com/p/_-eukhdy5o1a9l1699o0gq`, when the url is visited, the Branch Web SDK passes some parameters that when implemented and handled on the android & ios clients, will open the app and redirect to the post detailed view based on the post attributes passed.
+
+#### Mobile Web Post Url Parameters
+
+Parameter | Description
+--------- | -----------
+post_id | Post ID
+post_image_url | Post Image
+user_id | User ID 
+username | Username
+
+<aside class="notice">
+This leads to the Post Detail Screen
+</aside>
+
+## Other Branch Deeplinks with Parameters
+There are several other links we've created with attributes that need to handled and sent to their appropriate views on the client/app.
+
+#### Deeplinks Parameters
+
+Parameters | Screens They Link to
+--------- | -----------
+upload_profile | Edit Profile Screen
+upload_photo | Add Post Screen
+
+#### Deeplinks Parameters Depending action_header Values
+If a deeplink parameter has action_header, the screen it leads to depends on the value of the action_header
+
+Parameters | Value | Screens They Lead To
+--------- |----------- |-----------
+action_header | isTrending | Trending Screen
+action_header | isSuggestion |Search / Suggestion Screen
+action_header | isAddPostInstagram | Instagram Add Post Screen
+action_header | isStylistOptIn | Stylist OptIn Screen to choose if you're a stylist or not
+action_header | isQuestionFeed | Question Feed Screen - has sub parameter of `category_id` to determine the category of the question feed to lead to. By default `category_id: 3`
+action_header | isTipFeed | Tips Feed Screen - has sub parameters of `category_id` and `hair_tips_type` to determine the category of the question feed to lead to. By default `category_id: 3` and `hair_tips_type: "article"`
+action_header | isAskQuestion | Ask Question Screen
+
+<aside class="notice">
+Please take note of the action_header values with sub parameters.
+</aside>
+
+# Handling One Signal Notifications Received on Tress
+
+Check out One Signal's [doc](https://documentation.onesignal.com/docs/android-native-sdk) to see how to access the additional data payload received for each notifications.
+
+All notifications received have action_header, the screen a notification leads to depends on the value of the action_header
+
+## Handling Notifications Depending on the action_header and parameters
+
+Parameters | Value | Screens They Lead To
+--------- |----------- |-----------
+action_header | isTrending | Trending Screen
+action_header | isSuggestion |Search / Suggestion Screen
+action_header | isAddPostInstagram | Instagram Add Post Screen
+action_header | isStylistOptIn | Stylist OptIn Screen to choose if you're a stylist or not
+action_header | isQuestionFeed | Question Feed Screen - has sub parameter of `category_id` to determine the category of the question feed to lead to. By default `category_id: 3`
+action_header | isTipFeed | Tips Feed Screen - has sub parameters of `category_id` and `hair_tips_type` to determine the category of the question feed to lead to. By default `category_id: 3` and `hair_tips_type: "article"`
+action_header | isAskQuestion | Ask Question Screen
+
+<aside class="notice">
+Please take note of the action_header values with sub parameters.
+</aside>
 
 
 
