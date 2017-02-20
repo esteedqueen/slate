@@ -5715,118 +5715,920 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h2 id="create-question">Create Question</h2>
 
-<p>api/v3/users/29/questions POST 
-    - post params{title, description, category_id}</p>
+<p>This endpoint creates a new question.</p>
+<pre class="highlight swift"><code>
+<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v2/users/67/questions"</span><span class="p">)</span><span class="o">!</span> <span class="k">as</span> <span class="kt">URL</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="n">postData</span> <span class="k">as</span> <span class="kt">Data</span>
+
+<span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span>
+<span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span> <span class="k">as</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v2/users/67/questions"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>A successful question creation request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How to achieve healthy natural hair growth?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"answers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a minute"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>Required. title of the question</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Required. question description</td>
+</tr>
+<tr>
+<td>category</td>
+<td>Required. category ID of the question</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-all-questions-by-category">Get all Questions by Category</h2>
 
-<ul>
-<li>api/v3/questions/categories/2?per_page=20,page=1 GET 
+<p>This endpoint retrieves a feed of questions by category.</p>
+<pre class="highlight swift"><code>
+<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span> <span class="k">as</span> <span class="kt">URL</span><span class="p">,</span>
+                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
+                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
+<span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
+<span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="n">postData</span> <span class="k">as</span> <span class="kt">Data</span>
 
-<ul>
-<li>2 is dynamic for category_id</li>
-<li>Paginated for endless scroll</li>
-</ul></li>
-</ul>
+<span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span>
+<span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span> <span class="k">as</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="n">dataTask</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+
+
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+</code></pre>
+
+<blockquote>
+<p>A successful questions feed request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How to achieve healthy natural hair growth?"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"answers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6 minutes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/categories/&lt;category_id&gt;,&lt;category_id&gt;?per_page=20,page=1</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>category_id</td>
+<td>Required. CategoryID. Can be more than 1, seperated by commas</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>Required. Pagination param for endless scroll</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Required. Pagination param for endless scroll</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-question">Get Question</h2>
 
-<ul>
-<li>api/v3/questions/1 GET 
+<p>This endpoint retrieves a question by it&rsquo;s ID.</p>
+<pre class="highlight swift"><code>
 
-<ul>
-<li>1 is question id - dynamic</li>
-</ul></li>
-</ul>
+</code></pre>
+<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/questions/7"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+
+<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How to achieve healthy natural hair growth?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"answers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a minute"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;id&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
 
 <h2 id="like-question">Like Question</h2>
 
-<ul>
-<li>/api/v3/users/29/questions/1/like GET
+<p>This is the endpoint to like a question.</p>
+<pre class="highlight swift"><code>
 
-<ul>
-<li>29 is user_id</li>
-<li>1 is question_id</li>
-<li>Require: Pass authentication_token that matches the user_id as Authorization in Request Headers</li>
-</ul></li>
-</ul>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;id&gt;/like</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication token of the user liking the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user liking the question</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
 
 <h2 id="unlike-question">Unlike Question</h2>
 
-<ul>
-<li>/api/v3/users/29/questions/1/unlike GET
+<p>This is the endpoint to unlike a question.</p>
+<pre class="highlight swift"><code>
 
-<ul>
-<li>29 is user_id</li>
-<li>1 is question_id</li>
-<li>Require: Pass authentication_token that matches the user_id as Authorization in Request Headers</li>
-</ul></li>
-</ul>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;id&gt;/unlike</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication token of the user unliking the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user liking the question</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
 
 <h1 id="answers">Answers</h1>
 
 <h2 id="create-answer">Create Answer</h2>
 
-<p>api/v3/questions/1/answers POST 
-    - post params{content}
-    - 1 is the id of the question
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers</p>
+<p>This endpoint creates an answer to a question.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful answer creation request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Protective style it, less heat and easy detangle"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a minute"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"upvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"downvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user answering the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>content</td>
+<td>Required. content of the answer</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-answers-to-a-question">Get Answers to a Question</h2>
 
-<p>api/v3/questions/1/answers?per_page=20,page=1 GET 
-    - 1 is the id of the question dynamic
-    - add pagination params dynamic for endless scroll</p>
+<p>This endpoint retreives all the answers to a question.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"answers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Protective style it, less heat and easy detangle"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"32 minutes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"upvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"downvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers?per_page=20,page=1</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>Required. pagination params for endless scroll</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Required. pagination params for endless scroll</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-one-answer">Get one Answer</h2>
 
-<p>/api/v3/questions/1/answers/1 GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic</p>
+<p>This endpoint retreives an answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Protective style it, less heat and easy detangle"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37 minutes"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"upvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"downvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
 
 <h2 id="upvote-answer">Upvote Answer</h2>
 
-<p>/api/v3/questions/1/answers/1/upvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
+<p>This is the endpoint to upvote an answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;/upvote</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user upvoting</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
 
 <h2 id="undoupvote-answer">UndoUpvote Answer</h2>
 
-<p>/api/v3/questions/1/answers/1/undoupvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
+<p>This is the endpoint to undo an upvoted answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;/undoupvote</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user undoing the upvote</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
 
 <h2 id="downvote-answer">Downvote Answer</h2>
 
-<p>/api/v3/questions/1/answers/1/downvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
+<p>This is the endpoint to undo a downvoted answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;/downvote</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user downvoting</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
 
 <h2 id="undo-downvote-answer">Undo Downvote Answer</h2>
 
-<p>/api/v3/questions/1/answers/1/undodownvote GET
-    - 1 is the id of the question dynamic
-    - 1 is the id of the answer dynamic
-    - Required: Pass authentication_token of the user answering as Authorization in Request Headers </p>
+<p>This is the endpoint to undo a downvoted answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;/undodownvote</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user undoing the downvote</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
 
 <h1 id="hair-tips">Hair Tips</h1>
 
-<h2 id="filter-hairtips-by-type-amp-hairtype">Filter HairTips by Type &amp; HairType</h2>
+<h2 id="filter-hairtips-by-type-amp-category">Filter HairTips by Type &amp; Category</h2>
 
-<p>-api/v3/hair_tips/types/filter?hair_tips_type=article&amp;hair_type_id=2&amp;page=1&amp;per_page=10
-1, article &amp; 2 are dynamic
-1 - integer
-article - string
-2 - integer</p>
+<p>This is the endpoint to retrieve a feed of hair tips by type and category</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"hair_tips"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4C Natural Hairstyles: Finger Coils!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"cover_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.thekinkandi.com/finger-coils/"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brief_intro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"hair_tips_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"article"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AfrikanButterfly on thekinkandi.com"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"views_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-15T12:46:10Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T19:47:18Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/types/filter?hair_tips_type=&lt;type&gt;&amp;category_id=&lt;catId&gt;,&lt;catId&gt;&amp;page=1&amp;per_page=10</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>Required. It&rsquo;s either &ldquo;article&rdquo; or &ldquo;video&rdquo;</td>
+</tr>
+<tr>
+<td>catId</td>
+<td>Required. Category ID, can be more than one, seperated by commas</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>Required. Pagination param</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Required. Pagination param</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-hairtip">GET HairTip</h2>
 
-<ul>
-<li>api/v3/hair_tips/1</li>
-</ul>
+<p>This is the endpoint to retrieve a feed of hair tips by type and category</p>
+
+<p>Once retrieve, the tip url is loaded in a webview on the client.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4C Natural Hairstyles: Finger Coils!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cover_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://www.thekinkandi.com/finger-coils/"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"brief_intro"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"hair_tips_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"article"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AfrikanButterfly on thekinkandi.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"views_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5 months"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-09-15T12:46:10Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T19:47:18Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/&lt;id&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Required. ID of the hair tip</td>
+</tr>
+</tbody></table>
 
 <h1 id="unauthenticated-user-access">Unauthenticated User Access</h1>
 
@@ -6027,6 +6829,174 @@ The Posts JSONArray response structure is the same as returned in the explore fe
 
 <aside class="notice">
 The Users JSONArray response structure is the same as returned in the recommended user suggestions for authenticated users
+</aside>
+
+<h1 id="handling-branch-deeplinking-on-tress">Handling Branch Deeplinking on Tress</h1>
+
+<p>Here&rsquo;s Branch&rsquo;s <a href="https://dev.branch.io/getting-started/deep-link-routing/guide/android/">doc</a> on how to retrieve the deeplink parameters and route to the appropriate screen on the client. </p>
+
+<h2 id="handling-post-mobile-web-url">Handling Post Mobile Web Url</h2>
+
+<p>A typical mobile web shared url looks like this <code class="prettyprint">https://www.tressapp.com/p/_-eukhdy5o1a9l1699o0gq</code>, when the url is visited, the Branch Web SDK passes some parameters that when implemented and handled on the android &amp; ios clients, will open the app and redirect to the post detailed view based on the post attributes passed.</p>
+
+<h4 id="mobile-web-post-url-parameters">Mobile Web Post Url Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>post_id</td>
+<td>Post ID</td>
+</tr>
+<tr>
+<td>post_image_url</td>
+<td>Post Image</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>User ID</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Username</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+This leads to the Post Detail Screen
+</aside>
+
+<h2 id="other-branch-deeplinks-with-parameters">Other Branch Deeplinks with Parameters</h2>
+
+<p>There are several other links we&rsquo;ve created with attributes that need to handled and sent to their appropriate views on the client/app.</p>
+
+<h4 id="deeplinks-parameters">Deeplinks Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Screens They Link to</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>upload_profile</td>
+<td>Edit Profile Screen</td>
+</tr>
+<tr>
+<td>upload_photo</td>
+<td>Add Post Screen</td>
+</tr>
+</tbody></table>
+
+<h4 id="deeplinks-parameters-depending-action_header-values">Deeplinks Parameters Depending action_header Values</h4>
+
+<p>If a deeplink parameter has action_header, the screen it leads to depends on the value of the action_header</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Value</th>
+<th>Screens They Lead To</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action_header</td>
+<td>isTrending</td>
+<td>Trending Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isSuggestion</td>
+<td>Search / Suggestion Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isAddPostInstagram</td>
+<td>Instagram Add Post Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isStylistOptIn</td>
+<td>Stylist OptIn Screen to choose if you&rsquo;re a stylist or not</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isQuestionFeed</td>
+<td>Question Feed Screen - has sub parameter of <code class="prettyprint">category_id</code> to determine the category of the question feed to lead to. By default <code class="prettyprint">category_id: 3</code></td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isTipFeed</td>
+<td>Tips Feed Screen - has sub parameters of <code class="prettyprint">category_id</code> and <code class="prettyprint">hair_tips_type</code> to determine the category of the question feed to lead to. By default <code class="prettyprint">category_id: 3</code> and <code class="prettyprint">hair_tips_type: &quot;article&quot;</code></td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isAskQuestion</td>
+<td>Ask Question Screen</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Please take note of the action_header values with sub parameters.
+</aside>
+
+<h1 id="handling-one-signal-notifications-received-on-tress">Handling One Signal Notifications Received on Tress</h1>
+
+<p>Check out One Signal&rsquo;s <a href="https://documentation.onesignal.com/docs/android-native-sdk">doc</a> to see how to access the additional data payload received for each notifications.</p>
+
+<p>All notifications received have action_header, the screen a notification leads to depends on the value of the action_header</p>
+
+<h2 id="handling-notifications-depending-on-the-action_header-and-parameters">Handling Notifications Depending on the action_header and parameters</h2>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Value</th>
+<th>Screens They Lead To</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action_header</td>
+<td>isTrending</td>
+<td>Trending Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isSuggestion</td>
+<td>Search / Suggestion Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isAddPostInstagram</td>
+<td>Instagram Add Post Screen</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isStylistOptIn</td>
+<td>Stylist OptIn Screen to choose if you&rsquo;re a stylist or not</td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isQuestionFeed</td>
+<td>Question Feed Screen - has sub parameter of <code class="prettyprint">category_id</code> to determine the category of the question feed to lead to. By default <code class="prettyprint">category_id: 3</code></td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isTipFeed</td>
+<td>Tips Feed Screen - has sub parameters of <code class="prettyprint">category_id</code> and <code class="prettyprint">hair_tips_type</code> to determine the category of the question feed to lead to. By default <code class="prettyprint">category_id: 3</code> and <code class="prettyprint">hair_tips_type: &quot;article&quot;</code></td>
+</tr>
+<tr>
+<td>action_header</td>
+<td>isAskQuestion</td>
+<td>Ask Question Screen</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Please take note of the action_header values with sub parameters.
 </aside>
 
       </div>
