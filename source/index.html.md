@@ -2419,11 +2419,263 @@ Parameter | Default | Description
 id_or_username | Required. This is id or username of the user
 
 
+## User's IDs Lists
+Endpoints in this section retreived IDs in JSONArray format
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> The above commands returns JSONArray of IDs structure below:
+
+
+```json
+[
+  67,
+  72,
+  70
+]
+
+```
+### User's Post Bookmarked IDs
+
+This endpoint retrieves IDs of posts a user has bookmarked.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/bookmarked_posts_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Following IDs
+
+This endpoint retrieves IDs of users a user has followed.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/following_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Post Liked IDs
+
+This endpoint retrieves IDs of posts a user has liked.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/liked_posts_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Question Liked IDs
+
+This endpoint retrieves IDs of questions a user has liked.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/liked_questions_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Answer's Upvoted IDs
+
+This endpoint retrieves IDs of answers a user has upvoted.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/upvoted_answers_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Answer's Downvoted IDs
+
+This endpoint retrieves IDs of answers a user has downvoted.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/downvoted_answers_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's HairTips Bookmarked IDs
+
+This endpoint retrieves IDs of hair tips a user has bookmarked.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/bookmarked_hair_tips/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+## User's Social Media Friends
+
+The endpoints in this section retrieves a list of users on Tress that have matched with a user's Facebook, Digits & Instagram friends.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> The above command returns the JSON structure below:
+
+
+```json
+{
+  "users": [],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 0,
+      "total_objects": 0
+    }
+  }
+}
+
+```
+
+### Facebook Friends
+This endpoint retrieves a list of users on Tress that have matched with a user's Facebook friends.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/v3/users/<id_or_username>/friends?facebook_ids=<fbId>,<fbId>`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+fbId| Required. Facebook Id, can be more than one, seperated by commas
+
+### Instagram Friends
+This endpoint retrieves a list of users on Tress that have matched with a user's Instagram friends.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/v3/users/<id_or_username>/friends?instagram_ids=<instagram_id>,<instagram_id>`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+instagram_id| Required. instagram_id, can be more than one, seperated by commas
+
+### Digits (Phone Contact) Friends
+This endpoint retrieves a list of users on Tress that have matched with a user's Digits (Phone Contact) friends.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/v3/users/<id_or_username>/friends?digits_ids=<digits_id>,<digits_id>`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+digits_id| Required. digits_id, can be more than one, seperated by commas
+
 # Posts (Hairstyles)
 
 ## Create a Post
 This endpoint creates a post.
-
 
 ```swift
 let headers = [
@@ -6012,42 +6264,6 @@ page | 1 | Page number.
 The Posts JSONArray response structure is the same as returned in the home feed for authenticated users
 </aside>
 
-
-## Fetch Explore Feed with Temp ID for Unauthenticated User
-
-Get Explore Feed Post for unauthenticated users
-
-```swift
-
-```
-
-```java
-
-```
-> The request returns Post Feed JSON structured like this:
-
-```json
-{
-}
-```
-
-#### HTTP Request
-
-`POST https://tressapi-staging.herokuapp.com/api/v3/posts/discover/temporary_session?temp_id=845904,per_page=10,page=1`
-
-#### Query Parameters
-
-
-Parameter | Default | Description
---------- | ------- | -----------
-temp_id | temporary id
-per_page | 10 | Numbers of users to return at a time
-page | 1 | Page number.
-(Pagination for endless scrolling)
-
-<aside class="notice">
-The Posts JSONArray response structure is the same as returned in the explore feed for authenticated users
-</aside>
 
 
 ## Fetch User Suggestions with Temp ID for Unauthenticated User
