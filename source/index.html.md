@@ -77,11 +77,8 @@ The endpoints in this section creates a new user account via several options.
 
 ```swift
 let headers = [
-  "x-tress-client-key-id": "fjsdkfas4904952",
-  "x-tress-client-key-secret": "ri04r0-8r5-34089-52589",
-  "content-type": "application/json",
-  "cache-control": "no-cache",
-  "postman-token": "10ae502f-a306-5529-0a83-dddbbffd03b9"
+  "x-tress-client-key-id": "",
+  "x-tress-client-key-secret": ""
 ]
 let parameters = ["user": [
     "email": "ea.olatunde@gmail.com",
@@ -99,8 +96,8 @@ RequestBody body = RequestBody.create(mediaType, "{\n\t\"user\": {\n\t\t\"email\
 Request request = new Request.Builder()
   .url("https://tressapi-staging.herokuapp.com/api/v3/users")
   .post(body)
-  .addHeader("x-tress-client-key-id", "irr0283-1=8573028")
-  .addHeader("x-tress-client-key-secret", "123jr59kled85903")
+  .addHeader("x-tress-client-key-id", "")
+  .addHeader("x-tress-client-key-secret", "")
   .addHeader("content-type", "application/json")
   .build();
 
@@ -6393,10 +6390,435 @@ action_header | isAnswer | Question Detail Screen ( same as above)
 Please take note of the action_header values with sub parameters as they are used to make a request to an endpoint or fill the screen in the destination screens
 </aside>
 
+# Collections
+
+## Get Collections
+This endpoint retrieves a user's collections.
 
 
+```swift
 
 
+```
+
+```java
+
+```
+
+> A successful collections request returns JSON structured like this:
+
+```json
+{
+  "collections": [
+    {
+      "id": 3,
+      "title": "playful",
+      "description": "playful",
+      "user_id": 29,
+      "posts": [
+        {
+          "id": 84,
+          "user_id": 67,
+          "username": "ronke",
+          "fullname": "Kemi CoolBraids",
+          "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+          "salon_name": null,
+          "salon_location": null,
+          "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126",
+          "comments": [],
+          "comments_count": 0,
+          "category": {
+            "id": 2,
+            "name": "Natural Hair",
+            "created_at": "2015-08-28T11:18:28.904Z",
+            "updated_at": "2015-08-28T11:18:28.904Z"
+          },
+          "price_range": {
+            "id": 1,
+            "price": "0 - 50",
+            "created_at": "2015-09-18T14:13:29.759Z",
+            "updated_at": "2016-02-09T10:52:40.942Z",
+            "price_gh": "0 - 50",
+            "price_ng": "0 - 1500"
+          },
+          "time_ago": "8 months",
+          "likes": 0,
+          "caption": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+          "stylename": null,
+          "price_range_id": 1,
+          "duration": null,
+          "products": "shea butter",
+          "category_id": 2,
+          "salon": "",
+          "user_is_salon": true,
+          "slug": "m0xilzepmopmsdyh3yzgja",
+          "created_at": "2016-08-16T07:05:19Z",
+          "updated_at": "2016-08-16T07:05:28Z"
+        },
+        {
+          "id": 101,
+          "user_id": 67,
+          "username": "ronke",
+          "fullname": "Kemi CoolBraids",
+          "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+          "salon_name": null,
+          "salon_location": null,
+          "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/101/medium/IMG_20150507_091654_edit.jpg.jpg?1472570378",
+          "comments": [],
+          "comments_count": 0,
+          "category": {
+            "id": 2,
+            "name": "Natural Hair",
+            "created_at": "2015-08-28T11:18:28.904Z",
+            "updated_at": "2015-08-28T11:18:28.904Z"
+          },
+          "price_range": {
+            "id": 1,
+            "price": "0 - 50",
+            "created_at": "2015-09-18T14:13:29.759Z",
+            "updated_at": "2016-02-09T10:52:40.942Z",
+            "price_gh": "0 - 50",
+            "price_ng": "0 - 1500"
+          },
+          "time_ago": "7 months",
+          "likes": 0,
+          "caption": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+          "stylename": null,
+          "price_range_id": 1,
+          "duration": null,
+          "products": "shea butter",
+          "category_id": 2,
+          "salon": "",
+          "user_is_salon": true,
+          "slug": "baa7luhewgu-t3noaggttg",
+          "created_at": "2016-08-30T15:19:18Z",
+          "updated_at": "2017-02-23T22:21:37Z"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/collections?per_page=10,page=1`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+per_page | Required. Number of items per page for pagination
+page | Required. Page number for pagination
+
+
+## Get Collection
+This endpoint retrieves a user's collections.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful collection creation request returns JSON structured like this:
+
+```json
+{
+  "id": 4,
+  "title": "Corporate Hairstyles",
+  "description": "suitable for office looks blah",
+  "user_id": 67,
+  "posts": [
+    {
+      "id": 84,
+      "user_id": 67,
+      "username": "ronke",
+      "fullname": "Kemi CoolBraids",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126",
+      "comments": [],
+      "comments_count": 0,
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-08-28T11:18:28.904Z",
+        "updated_at": "2015-08-28T11:18:28.904Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-09-18T14:13:29.759Z",
+        "updated_at": "2016-02-09T10:52:40.942Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "8 months",
+      "likes": 0,
+      "caption": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "shea butter",
+      "category_id": 2,
+      "salon": "",
+      "user_is_salon": true,
+      "slug": "m0xilzepmopmsdyh3yzgja",
+      "created_at": "2016-08-16T07:05:19Z",
+      "updated_at": "2016-08-16T07:05:28Z"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/collections/<collection_id>`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+collection_id | Required. ID of the collection
+
+
+## Create Collection
+This endpoint creates a new collection.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful collection creation request returns JSON structured like this:
+
+```json
+{
+  "id": 4,
+  "title": "Corporate Hairstyles",
+  "description": "suitable for office looks blah",
+  "user_id": 67,
+  "posts": [
+    {
+      "id": 84,
+      "user_id": 67,
+      "username": "ronke",
+      "fullname": "Kemi CoolBraids",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126",
+      "comments": [],
+      "comments_count": 0,
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-08-28T11:18:28.904Z",
+        "updated_at": "2015-08-28T11:18:28.904Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-09-18T14:13:29.759Z",
+        "updated_at": "2016-02-09T10:52:40.942Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "8 months",
+      "likes": 0,
+      "caption": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "shea butter",
+      "category_id": 2,
+      "salon": "",
+      "user_is_salon": true,
+      "slug": "m0xilzepmopmsdyh3yzgja",
+      "created_at": "2016-08-16T07:05:19Z",
+      "updated_at": "2016-08-16T07:05:28Z"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/collections/`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+title | Required. title of the question
+description | Required. question description
+tag_list | add tags to a collection, seperated by commas
+post_id | Required. ID of the post you're adding to the collection
+
+## Update Collection
+This endpoint updates an existing collection. It's specifically for removing a post from a collection or editing the title and description of a collection
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful collection update request returns JSON structured like this:
+
+```json
+{
+  "id": 4,
+  "title": "Corporate Hairstyles",
+  "description": "suitable for office looks blah",
+  "user_id": 67,
+  "posts": [
+    {
+      "id": 84,
+      "user_id": 67,
+      "username": "ronke",
+      "fullname": "Kemi CoolBraids",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "salon_name": null,
+      "salon_location": null,
+      "image": "https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126",
+      "comments": [],
+      "comments_count": 0,
+      "category": {
+        "id": 2,
+        "name": "Natural Hair",
+        "created_at": "2015-08-28T11:18:28.904Z",
+        "updated_at": "2015-08-28T11:18:28.904Z"
+      },
+      "price_range": {
+        "id": 1,
+        "price": "0 - 50",
+        "created_at": "2015-09-18T14:13:29.759Z",
+        "updated_at": "2016-02-09T10:52:40.942Z",
+        "price_gh": "0 - 50",
+        "price_ng": "0 - 1500"
+      },
+      "time_ago": "8 months",
+      "likes": 0,
+      "caption": "@ronketinker @solapemi Tress is in YCombinator W17!!!",
+      "stylename": null,
+      "price_range_id": 1,
+      "duration": null,
+      "products": "shea butter",
+      "category_id": 2,
+      "salon": "",
+      "user_is_salon": true,
+      "slug": "m0xilzepmopmsdyh3yzgja",
+      "created_at": "2016-08-16T07:05:19Z",
+      "updated_at": "2016-08-16T07:05:28Z"
+    }
+  ]
+}
+
+```
+
+#### HTTP Request
+
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/collections/<collection_id>`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+collection_id | Required. ID of the collection that is being edited
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+title| Title
+description| Description
+tag_list| Tags, seperated by commas
+post_ids | IDs seperated by commas, of all the posts in the collection, including or excluding the ID(s) you're adding or removing
+
+
+## Delete Collection
+This endpoint deletes a user's existing collection
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful collection update request returns JSON structured like this:
+
+```json
+STATUS: 204
+
+```
+
+#### HTTP Request
+
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/collections/<collection_id>`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+collection_id | Required. ID of the collection that is being edited
 
 
 
