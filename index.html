@@ -174,11 +174,8 @@ You must replace <code>meowmeowmeow</code> with the Client key Id and secret pro
 
 <h3 id="via-email">Via email</h3>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">"fjsdkfas4904952"</span><span class="p">,</span>
-  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">"ri04r0-8r5-34089-52589"</span><span class="p">,</span>
-  <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span>
-  <span class="s">"cache-control"</span><span class="p">:</span> <span class="s">"no-cache"</span><span class="p">,</span>
-  <span class="s">"postman-token"</span><span class="p">:</span> <span class="s">"10ae502f-a306-5529-0a83-dddbbffd03b9"</span>
+  <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
+  <span class="s">"x-tress-client-key-secret"</span><span class="p">:</span> <span class="s">""</span>
 <span class="p">]</span>
 <span class="k">let</span> <span class="nv">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="s">"user"</span><span class="p">:</span> <span class="p">[</span>
     <span class="s">"email"</span><span class="p">:</span> <span class="s">"ea.olatunde@gmail.com"</span><span class="p">,</span>
@@ -194,8 +191,8 @@ You must replace <code>meowmeowmeow</code> with the Client key Id and secret pro
 <span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
   <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"https://tressapi-staging.herokuapp.com/api/v3/users"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="n">body</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">"irr0283-1=8573028"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">"123jr59kled85903"</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
+  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
   <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"content-type"</span><span class="o">,</span> <span class="s">"application/json"</span><span class="o">)</span>
   <span class="o">.</span><span class="na">build</span><span class="o">();</span>
 
@@ -7769,6 +7766,526 @@ Please take note of the action_header values with sub parameters as they are use
 <aside class="notice">
 Please take note of the action_header values with sub parameters as they are used to make a request to an endpoint or fill the screen in the destination screens
 </aside>
+
+<h1 id="collections">Collections</h1>
+
+<h2 id="get-collections">Get Collections</h2>
+
+<p>This endpoint retrieves a user&rsquo;s collections.</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful collections request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"collections"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"playful"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"playful"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T14:13:29.759Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T10:52:40.942Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8 months"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Tress is in YCombinator W17!!!"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shea butter"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m0xilzepmopmsdyh3yzgja"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:19Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:28Z"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/posts/images/000/000/101/medium/IMG_20150507_091654_edit.jpg.jpg?1472570378"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+          </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T14:13:29.759Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T10:52:40.942Z"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7 months"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Tress is in YCombinator W17!!!"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shea butter"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baa7luhewgu-t3noaggttg"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-30T15:19:18Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-23T22:21:37Z"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"per_page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_pages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total_objects"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/collections?per_page=10,page=1</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>per_page</td>
+<td>Required. Number of items per page for pagination</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Required. Page number for pagination</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-collection">Get Collection</h2>
+
+<p>This endpoint retrieves a user&rsquo;s collections.</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful collection creation request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corporate Hairstyles"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suitable for office looks blah"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T14:13:29.759Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T10:52:40.942Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Tress is in YCombinator W17!!!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shea butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m0xilzepmopmsdyh3yzgja"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:19Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:28Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/collections/&lt;collection_id&gt;</code></p>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>collection_id</td>
+<td>Required. ID of the collection</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-collection">Create Collection</h2>
+
+<p>This endpoint creates a new collection.</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful collection creation request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corporate Hairstyles"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suitable for office looks blah"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T14:13:29.759Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T10:52:40.942Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Tress is in YCombinator W17!!!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shea butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m0xilzepmopmsdyh3yzgja"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:19Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:28Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/collections/</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>Required. title of the question</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Required. question description</td>
+</tr>
+<tr>
+<td>tag_list</td>
+<td>add tags to a collection, seperated by commas</td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>Required. ID of the post you&rsquo;re adding to the collection</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-collection">Update Collection</h2>
+
+<p>This endpoint updates an existing collection. It&rsquo;s specifically for removing a post from a collection or editing the title and description of a collection</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful collection update request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corporate Hairstyles"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"suitable for office looks blah"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon_location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/posts/images/000/000/084/medium/hair2.jpg.jpg.jpg?1471331126"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"comments"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"comments_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Natural Hair"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-28T11:18:28.904Z"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"price_range"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18T14:13:29.759Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-09T10:52:40.942Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_gh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 50"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price_ng"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0 - 1500"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8 months"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"likes"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"caption"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Tress is in YCombinator W17!!!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"stylename"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price_range_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shea butter"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"salon"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"m0xilzepmopmsdyh3yzgja"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:19Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-08-16T07:05:28Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/collections/&lt;collection_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>collection_id</td>
+<td>Required. ID of the collection that is being edited</td>
+</tr>
+</tbody></table>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>Title</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>tag_list</td>
+<td>Tags, seperated by commas</td>
+</tr>
+<tr>
+<td>post_ids</td>
+<td>IDs seperated by commas, of all the posts in the collection, including or excluding the ID(s) you&rsquo;re adding or removing</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete-collection">Delete Collection</h2>
+
+<p>This endpoint deletes a user&rsquo;s existing collection</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful collection update request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="err">STATUS:</span><span class="w"> </span><span class="mi">204</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/collections/&lt;collection_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>collection_id</td>
+<td>Required. ID of the collection that is being edited</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
