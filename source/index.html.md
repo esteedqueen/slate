@@ -5532,46 +5532,112 @@ title | Required. title of the question
 description | Required. question description
 category | Required. category ID of the question
 
+## Edit Question
+This endpoint updates an existing question.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful question update request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "title": "How to achieve healthy natural hair growth?",
+  "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+  "category_id": 1,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "answers_count": 0,
+  "time_ago": "a minute",
+  "likes_count": 0,
+  "created_at": "2017-02-20T18:08:41Z",
+  "updated_at": "2017-02-20T18:08:41Z"
+}
+
+```
+
+#### HTTP Request
+
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<question_id>`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+question_id | Required. ID of the question
+
+#### Body Parameters
+
+Parameter | Description
+--------- | -----------
+title | title of the question
+description | question description
+category | category ID of the question
+
+## Delete Question
+This endpoint deletes an existing question.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful question delete returns HTTP STATUS: 204
+
+```json
+
+
+```
+
+#### HTTP Request
+
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<question_id>`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user    
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user
+question_id | Required. ID of the question
+
+
 ## Get all Questions by Category
 This endpoint retrieves a feed of questions by category.
 
 
 ```swift
 
-let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
-request.httpMethod = "GET"
-request.allHTTPHeaderFields = headers
-request.httpBody = postData as Data
-
-let session = URLSession.shared
-let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
-})
-
-dataTask.resume()
-
-
 ```
 
 ```java
-OkHttpClient client = new OkHttpClient();
 
-Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1")
-  .get()
-  .addHeader("x-tress-client-key-id", "")
-  .addHeader("x-tress-client-key-secret", "")
-  .addHeader("authorization", "")
-  .build();
-
-Response response = client.newCall(request).execute();
 ```
 
 > A successful questions feed request returns JSON structured like this:
@@ -5629,16 +5695,6 @@ This endpoint retrieves a question by it's ID.
 ```
 
 ```java
-OkHttpClient client = new OkHttpClient();
-
-Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v3/questions/7")
-  .get()
-  .addHeader("x-tress-client-key-id", "")
-  .addHeader("x-tress-client-key-secret", "")
-  .build();
-
-Response response = client.newCall(request).execute();
 
 ```
 
@@ -6685,8 +6741,8 @@ user_id | Required. ID of the user
 
 Parameter | Description
 --------- | -----------
-title | Required. title of the question
-description | Required. question description
+title | Required. title of the collection
+description | collection description
 tag_list | add tags to a collection, seperated by commas
 post_id | Required. ID of the post you're adding to the collection
 
@@ -6796,10 +6852,10 @@ This endpoint deletes a user's existing collection
 
 ```
 
-> A successful collection update request returns JSON structured like this:
+> A successful collection delete request returns STATUS: 204
 
 ```json
-STATUS: 204
+
 
 ```
 
