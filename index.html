@@ -6551,42 +6551,151 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </tr>
 </tbody></table>
 
+<h2 id="edit-question">Edit Question</h2>
+
+<p>This endpoint updates an existing question.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful question update request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"How to achieve healthy natural hair growth?"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci."</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"answers_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a minute"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"likes_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:08:41Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;question_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="body-parameters">Body Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>title of the question</td>
+</tr>
+<tr>
+<td>description</td>
+<td>question description</td>
+</tr>
+<tr>
+<td>category</td>
+<td>category ID of the question</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete-question">Delete Question</h2>
+
+<p>This endpoint deletes an existing question.</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful question delete returns HTTP STATUS: 204</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;question_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user</td>
+</tr>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-all-questions-by-category">Get all Questions by Category</h2>
 
 <p>This endpoint retrieves a feed of questions by category.</p>
 <pre class="highlight swift"><code>
-<span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">NSMutableURLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">NSURL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1"</span><span class="p">)</span><span class="o">!</span> <span class="k">as</span> <span class="kt">URL</span><span class="p">,</span>
-                                        <span class="nv">cachePolicy</span><span class="p">:</span> <span class="o">.</span><span class="n">useProtocolCachePolicy</span><span class="p">,</span>
-                                    <span class="nv">timeoutInterval</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">)</span>
-<span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
-<span class="n">request</span><span class="o">.</span><span class="n">allHTTPHeaderFields</span> <span class="o">=</span> <span class="n">headers</span>
-<span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="n">postData</span> <span class="k">as</span> <span class="kt">Data</span>
-
-<span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="o">.</span><span class="n">shared</span>
-<span class="k">let</span> <span class="nv">dataTask</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span> <span class="k">as</span> <span class="kt">URLRequest</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">let</span> <span class="nv">httpResponse</span> <span class="o">=</span> <span class="n">response</span> <span class="k">as?</span> <span class="kt">HTTPURLResponse</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">httpResponse</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">})</span>
-
-<span class="n">dataTask</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
-
-
 </code></pre>
-<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
-
-<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/questions/discover/filter?category_ids=2%2C1%3Fper_page%3D10%2Cpage%3D1"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"authorization"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-
-<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
+<pre class="highlight java"><code>
 </code></pre>
 
 <blockquote>
@@ -6654,17 +6763,7 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <pre class="highlight swift"><code>
 
 </code></pre>
-<pre class="highlight java"><code><span class="n">OkHttpClient</span> <span class="n">client</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
-
-<span class="n">Request</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Request</span><span class="o">.</span><span class="na">Builder</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">url</span><span class="o">(</span><span class="s">"http://localhost:5000/api/v3/questions/7"</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">get</span><span class="o">()</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-id"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">addHeader</span><span class="o">(</span><span class="s">"x-tress-client-key-secret"</span><span class="o">,</span> <span class="s">""</span><span class="o">)</span>
-  <span class="o">.</span><span class="na">build</span><span class="o">();</span>
-
-<span class="n">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="na">newCall</span><span class="o">(</span><span class="n">request</span><span class="o">).</span><span class="na">execute</span><span class="o">();</span>
-
+<pre class="highlight java"><code>
 </code></pre>
 
 <blockquote>
@@ -8095,11 +8194,11 @@ Please take note of the action_header values with sub parameters as they are use
 </thead><tbody>
 <tr>
 <td>title</td>
-<td>Required. title of the question</td>
+<td>Required. title of the collection</td>
 </tr>
 <tr>
 <td>description</td>
-<td>Required. question description</td>
+<td>collection description</td>
 </tr>
 <tr>
 <td>tag_list</td>
@@ -8245,9 +8344,9 @@ Please take note of the action_header values with sub parameters as they are use
 </code></pre>
 
 <blockquote>
-<p>A successful collection update request returns JSON structured like this:</p>
+<p>A successful collection delete request returns STATUS: 204</p>
 </blockquote>
-<pre class="highlight json"><code><span class="err">STATUS:</span><span class="w"> </span><span class="mi">204</span><span class="w">
+<pre class="highlight json"><code><span class="w">
 
 </span></code></pre>
 
