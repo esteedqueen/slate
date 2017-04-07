@@ -5453,37 +5453,10 @@ This endpoint creates a new question.
 
 ```swift
 
-let request = NSMutableURLRequest(url: NSURL(string: "http://localhost:5000/api/v2/users/67/questions")! as URL,
-                                        cachePolicy: .useProtocolCachePolicy,
-                                    timeoutInterval: 10.0)
-request.httpMethod = "POST"
-request.allHTTPHeaderFields = headers
-request.httpBody = postData as Data
-
-let session = URLSession.shared
-let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-  if (error != nil) {
-    print(error)
-  } else {
-    let httpResponse = response as? HTTPURLResponse
-    print(httpResponse)
-  }
-})
-
-
 ```
 
 ```java
-Request request = new Request.Builder()
-  .url("http://localhost:5000/api/v2/users/67/questions")
-  .post(body)
-  .addHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
-  .addHeader("x-tress-client-key-id", "")
-  .addHeader("x-tress-client-key-secret", "")
-  .addHeader("authorization", "")
-  .build();
 
-Response response = client.newCall(request).execute();
 ```
 
 > A successful question creation request returns JSON structured like this:
@@ -5682,6 +5655,120 @@ This endpoint retrieves a feed of questions by category.
 Parameter | Description
 --------- | -----------
 category_id | Required. CategoryID. Can be more than 1, seperated by commas
+per_page | Required. Pagination param for endless scroll
+page | Required. Pagination param for endless scroll
+
+
+## Get Trending Questions
+This endpoint retrieves a feed of trending questions in a week.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful questions feed request returns JSON structured like this:
+
+```json
+{
+  "questions": [
+    {
+      "id": 7,
+      "title": "How to achieve healthy natural hair growth?",
+      "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+      "category_id": 1,
+      "user_id": 67,
+      "fullname": "Kemi CoolBraids",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "user_is_salon": true,
+      "answers_count": 0,
+      "time_ago": "6 minutes",
+      "likes_count": 0,
+      "created_at": "2017-02-20T18:08:41Z",
+      "updated_at": "2017-02-20T18:08:41Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions/discover/trending?per_page=20,page=1`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+per_page | Required. Pagination param for endless scroll
+page | Required. Pagination param for endless scroll
+
+## Search Questions
+This endpoint retrieves a feed of questions based on search queries.
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful questions feed request returns JSON structured like this:
+
+```json
+{
+  "questions": [
+    {
+      "id": 7,
+      "title": "How to achieve healthy natural hair growth?",
+      "description": "@ronketinker @solapemi Why do I have hard time growing Nigerian natural hair? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque venenatis lacinia facilisis. Sed non enim hendrerit, gravida magna eu, pharetra orci.",
+      "category_id": 1,
+      "user_id": 67,
+      "fullname": "Kemi CoolBraids",
+      "username": "ronke",
+      "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+      "user_is_salon": true,
+      "answers_count": 0,
+      "time_ago": "6 minutes",
+      "likes_count": 0,
+      "created_at": "2017-02-20T18:08:41Z",
+      "updated_at": "2017-02-20T18:08:41Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 0,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/questions?search=<search_queries>,per_page=20,page=1`
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+search_queries | Required. Search terms. Can be more than 1, seperated by commas
 per_page | Required. Pagination param for endless scroll
 page | Required. Pagination param for endless scroll
 
@@ -6192,6 +6279,123 @@ Parameter | Description
 --------- | -----------
 type | Required. It's either "article" or "video"
 catId | Required. Category ID, can be more than one, seperated by commas
+per_page | Required. Pagination param
+page | Required. Pagination param
+
+## Get Trending HairTips
+
+This is the endpoint to retrieve a feed of trending hair tips for the week
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "hair_tips": [
+    {
+      "id": 1,
+      "title": "4C Natural Hairstyles: Finger Coils!",
+      "cover_image": "https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227",
+      "url": "http://www.thekinkandi.com/finger-coils/",
+      "brief_intro": "Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?",
+      "hair_tips_type": "article",
+      "category": "Natural Hair",
+      "author": "AfrikanButterfly on thekinkandi.com",
+      "views_count": 2,
+      "time_ago": "5 months",
+      "comments_count": 1,
+      "created_at": "2016-09-15T12:46:10Z",
+      "updated_at": "2017-02-20T19:47:18Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 10,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/discover/trending?page=1&per_page=10`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+per_page | Required. Pagination param
+page | Required. Pagination param
+
+## Search HairTips
+
+This is the endpoint to retrieve a feed of hair tips based on search queries
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "hair_tips": [
+    {
+      "id": 1,
+      "title": "4C Natural Hairstyles: Finger Coils!",
+      "cover_image": "https://s3.amazonaws.com/tress-api-development/hair_tips/cover_images/000/000/001/medium/fingercoil.png.png?1473944227",
+      "url": "http://www.thekinkandi.com/finger-coils/",
+      "brief_intro": "Simply put, a Finger coil is achieved by twirling and twirling a section of hair with, and round your finger.\r\n\r\n‘Finger Coils’ are pretty much the same as ‘Comb coils’ except that here, you use your fingers to coil, instead of a rat tail comb. Stay with me, okay?",
+      "hair_tips_type": "article",
+      "category": "Natural Hair",
+      "author": "AfrikanButterfly on thekinkandi.com",
+      "views_count": 2,
+      "time_ago": "5 months",
+      "comments_count": 1,
+      "created_at": "2016-09-15T12:46:10Z",
+      "updated_at": "2017-02-20T19:47:18Z"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 10,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
+}
+
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips?search=<search_queries>&page=1&per_page=10`
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+search_queries | Required. Search term, can be more than one, seperated by commas
 per_page | Required. Pagination param
 page | Required. Pagination param
 
