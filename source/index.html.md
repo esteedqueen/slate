@@ -5897,6 +5897,86 @@ Parameter | Description
 user_id | Required. ID of the user liking the question
 id | Required. ID of the question
 
+## Subscribe/Follow To Question 
+This is the endpoint to like a question.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<id>/subscribe`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication token of the user subscribing to the question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user liking the question
+id | Required. ID of the question
+
+## UnSubscribe/UnFollow A Question 
+This is the endpoint to like a question.
+
+
+```swift
+
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+
+```
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<user_id>/questions/<id>/unsubscribe`
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication token of the user unsubscribing from a question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+user_id | Required. ID of the user liking the question
+id | Required. ID of the question
+
 # Answers
 
 ## Create Answer
