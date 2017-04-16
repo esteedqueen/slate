@@ -7019,6 +7019,116 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </tr>
 </tbody></table>
 
+<h2 id="subscribe-follow-to-question">Subscribe/Follow To Question</h2>
+
+<p>This is the endpoint to like a question.</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;id&gt;/subscribe</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication token of the user subscribing to the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user liking the question</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
+
+<h2 id="unsubscribe-unfollow-a-question">UnSubscribe/UnFollow A Question</h2>
+
+<p>This is the endpoint to like a question.</p>
+<pre class="highlight swift"><code>
+
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;user_id&gt;/questions/&lt;id&gt;/unsubscribe</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication token of the user unsubscribing from a question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>Required. ID of the user liking the question</td>
+</tr>
+<tr>
+<td>id</td>
+<td>Required. ID of the question</td>
+</tr>
+</tbody></table>
+
 <h1 id="answers">Answers</h1>
 
 <h2 id="create-answer">Create Answer</h2>
