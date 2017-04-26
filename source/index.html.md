@@ -2519,7 +2519,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 id_or_username | Required. This is id or username of the user
 
-### User's Answer's Upvoted IDs
+### User's Answers Upvoted IDs
 
 This endpoint retrieves IDs of answers a user has upvoted.
 
@@ -2539,13 +2539,33 @@ Parameter | Default | Description
 --------- | ------- | -----------
 id_or_username | Required. This is id or username of the user
 
-### User's Answer's Downvoted IDs
+### User's Answers Downvoted IDs
 
 This endpoint retrieves IDs of answers a user has downvoted.
 
 #### HTTP Request
 
 `GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/downvoted_answers_ids/`
+
+#### Header Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+Authorization | Required. authentication_token of the user
+
+#### URL Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+id_or_username | Required. This is id or username of the user
+
+### User's Questions Subscribed IDs
+
+This endpoint retrieves IDs of questions a user has subscribed to.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/users/<id_or_username>/subscribed_questions_ids/`
 
 #### Header Parameters
 
