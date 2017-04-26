@@ -3079,7 +3079,7 @@ Remember — Same Users JSONArray Response as above
 </tr>
 </tbody></table>
 
-<h3 id="user-39-s-answer-39-s-upvoted-ids">User&rsquo;s Answer&rsquo;s Upvoted IDs</h3>
+<h3 id="user-39-s-answers-upvoted-ids">User&rsquo;s Answers Upvoted IDs</h3>
 
 <p>This endpoint retrieves IDs of answers a user has upvoted.</p>
 
@@ -3119,13 +3119,53 @@ Remember — Same Users JSONArray Response as above
 </tr>
 </tbody></table>
 
-<h3 id="user-39-s-answer-39-s-downvoted-ids">User&rsquo;s Answer&rsquo;s Downvoted IDs</h3>
+<h3 id="user-39-s-answers-downvoted-ids">User&rsquo;s Answers Downvoted IDs</h3>
 
 <p>This endpoint retrieves IDs of answers a user has downvoted.</p>
 
 <h4 id="http-request">HTTP Request</h4>
 
 <p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id_or_username&gt;/downvoted_answers_ids/</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id_or_username</td>
+<td>Required. This is id or username of the user</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="user-39-s-questions-subscribed-ids">User&rsquo;s Questions Subscribed IDs</h3>
+
+<p>This endpoint retrieves IDs of questions a user has subscribed to.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/users/&lt;id_or_username&gt;/subscribed_questions_ids/</code></p>
 
 <h4 id="header-parameters">Header Parameters</h4>
 
