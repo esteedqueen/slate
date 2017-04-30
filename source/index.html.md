@@ -4854,8 +4854,8 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 # Comments
 
-## Create a Comment
-This endpoint creates a comment on a post.
+## Create a Comment on a Post or on a HairTip
+This endpoint creates a comment on a post or on a hair tip.
 
 
 ```swift
@@ -4918,6 +4918,10 @@ Response response = client.newCall(request).execute();
 
 `POST https://tressapi-staging.herokuapp.com/api/v3/posts/<post_id>/comments`
 
+OR
+
+`POST https://tressapi-staging.herokuapp.com/api/v3/hair_tips/<hair_tip_id>/comments`
+
 ##### Headers
 
 `Authorization: xxxxxxxxxxxxxxxxxx8790730598790`
@@ -4933,15 +4937,21 @@ Parameter | Description
 --------- | -----------
 post_id | Required. ID of the post
 
+OR
+
+Parameter | Description
+--------- | -----------
+hair_tip_id | Required. ID of the hair_tip
+
 #### Body Parameters
 
 Parameter | Description
 --------- | -----------
 content | Required. Content of the comment
 
-## Get Comments
+## Get Comments on a Post or on a HairTip
 
-This endpoint retrieves all comments on a post.
+This endpoint retrieves all comments on a post or a hair tip.
 
 
 ```swift
@@ -5182,12 +5192,22 @@ Response response = client.newCall(request).execute();
 
 `GET https://tressapi-staging.herokuapp.com/api/v3/posts/<post_id>/comments`
 
+OR
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/<hair_tip_id>/comments`
+
 
 #### URL Parameters
 
 Parameter | Description
 --------- | -----------
 post_id | Required. ID of the post
+
+OR
+
+Parameter | Description
+--------- | -----------
+hair_tip_id | Required. ID of the hair tip
 
 
 # Salons
@@ -6320,6 +6340,96 @@ Parameter | Description
 question_id | Required. ID of the question
 answer_id | Required. ID of the answer
 
+
+## Edit Answer 
+This is the endpoint to edit an answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful request returns JSON structured like this:
+
+```json
+{
+  "id": 7,
+  "content": "@ronketinker @solapemi Protective style it, less heat and easy detangle",
+  "question_id": 7,
+  "user_id": 67,
+  "fullname": "Kemi CoolBraids",
+  "username": "ronke",
+  "user_avatar": "https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895",
+  "user_is_salon": true,
+  "time_ago": "37 minutes",
+  "upvote_count": 0,
+  "downvote_count": 0,
+  "created_at": "2017-02-20T18:46:08Z",
+  "updated_at": "2017-02-20T18:46:08Z"
+}
+
+
+```
+
+#### HTTP Request
+
+`PATCH https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user answering the question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
+
+
+## Delete Answer 
+This is the endpoint to delete an answer
+
+
+```swift
+
+```
+
+```java
+
+```
+
+> A successful answer delete returns HTTP STATUS: 204
+
+```json
+
+```
+
+#### HTTP Request
+
+`DELETE https://tressapi-staging.herokuapp.com/api/v3/questions/<question_id>/answers/<answer_id>`
+
+
+#### Header Parameters
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. authentication_token of the user answering the question
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+question_id | Required. ID of the question
+answer_id | Required. ID of the answer
+
 # Hair Tips
 
 ## Filter HairTips by Type & Category
@@ -6545,6 +6655,89 @@ Once retrieve, the tip url is loaded in a webview on the client.
 Parameter | Description
 --------- | -----------
 id | Required. ID of the hair tip
+
+
+
+## Bookmark a hair tip
+
+```swift
+
+```
+
+```java
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 1
+}
+```
+
+This endpoint bookmarks a specific hair tip by a user.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/<hair_tip_id>/bookmark`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+hair_tip_id | The ID of the hair tip
+
+## UnBookmark a Post
+
+```swift
+
+```
+
+```java
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "count": 0
+}
+```
+
+This endpoint unbookmark a specific hair tip.
+
+#### HTTP Request
+
+`GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/<hair_tip_id>/undobookmark`
+
+##### Headers
+
+`Authorization: xxxxxxxxxxxxxxxxxx`
+
+Parameter | Description
+--------- | -----------
+Authorization | Required. This is the authentication_token of the user whose is making the request
+
+
+#### URL Parameters
+
+Parameter | Description
+--------- | -----------
+hair_tip_id | The ID of the hair tip
+
 
 
 # Unauthenticated User Access
