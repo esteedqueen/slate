@@ -6698,7 +6698,7 @@ Parameter | Description
 --------- | -----------
 hair_tip_id | The ID of the hair tip
 
-## UnBookmark a Post
+## UnBookmark a Hair Tip
 
 ```swift
 
