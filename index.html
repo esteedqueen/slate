@@ -5867,9 +5867,9 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <h1 id="comments">Comments</h1>
 
-<h2 id="create-a-comment">Create a Comment</h2>
+<h2 id="create-a-comment-on-a-post-or-on-a-hairtip">Create a Comment on a Post or on a HairTip</h2>
 
-<p>This endpoint creates a comment on a post.</p>
+<p>This endpoint creates a comment on a post or on a hair tip.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
   <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
@@ -5927,6 +5927,10 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;post_id&gt;/comments</code></p>
 
+<p>OR</p>
+
+<p><code class="prettyprint">POST https://tressapi-staging.herokuapp.com/api/v3/hair_tips/&lt;hair_tip_id&gt;/comments</code></p>
+
 <h5 id="headers">Headers</h5>
 
 <p><code class="prettyprint">Authorization: xxxxxxxxxxxxxxxxxx8790730598790</code></p>
@@ -5957,6 +5961,20 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </tr>
 </tbody></table>
 
+<p>OR</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hair_tip_id</td>
+<td>Required. ID of the hair_tip</td>
+</tr>
+</tbody></table>
+
 <h4 id="body-parameters">Body Parameters</h4>
 
 <table><thead>
@@ -5971,9 +5989,9 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </tr>
 </tbody></table>
 
-<h2 id="get-comments">Get Comments</h2>
+<h2 id="get-comments-on-a-post-or-on-a-hairtip">Get Comments on a Post or on a HairTip</h2>
 
-<p>This endpoint retrieves all comments on a post.</p>
+<p>This endpoint retrieves all comments on a post or a hair tip.</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">headers</span> <span class="o">=</span> <span class="p">[</span>
   <span class="s">"content-type"</span><span class="p">:</span> <span class="s">"multipart/form-data; boundary=---011000010111000001101001"</span><span class="p">,</span>
   <span class="s">"x-tress-client-key-id"</span><span class="p">:</span> <span class="s">""</span><span class="p">,</span>
@@ -6209,6 +6227,10 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 
 <p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/posts/&lt;post_id&gt;/comments</code></p>
 
+<p>OR</p>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/&lt;hair_tip_id&gt;/comments</code></p>
+
 <h4 id="url-parameters">URL Parameters</h4>
 
 <table><thead>
@@ -6220,6 +6242,20 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <tr>
 <td>post_id</td>
 <td>Required. ID of the post</td>
+</tr>
+</tbody></table>
+
+<p>OR</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hair_tip_id</td>
+<td>Required. ID of the hair tip</td>
 </tr>
 </tbody></table>
 
@@ -7586,6 +7622,122 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 </tr>
 </tbody></table>
 
+<h2 id="edit-answer">Edit Answer</h2>
+
+<p>This is the endpoint to edit an answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful request returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"@ronketinker @solapemi Protective style it, less heat and easy detangle"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"question_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kemi CoolBraids"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronke"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/tress-api-development/users/avatars/000/000/067/small/IMG-20161219-WA0000.jpg.jpg?1484079895"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"user_is_salon"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"time_ago"</span><span class="p">:</span><span class="w"> </span><span class="s2">"37 minutes"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"upvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"downvote_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-02-20T18:46:08Z"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">PATCH https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user answering the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete-answer">Delete Answer</h2>
+
+<p>This is the endpoint to delete an answer</p>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>A successful answer delete returns HTTP STATUS: 204</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span></code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">DELETE https://tressapi-staging.herokuapp.com/api/v3/questions/&lt;question_id&gt;/answers/&lt;answer_id&gt;</code></p>
+
+<h4 id="header-parameters">Header Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. authentication_token of the user answering the question</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>question_id</td>
+<td>Required. ID of the question</td>
+</tr>
+<tr>
+<td>answer_id</td>
+<td>Required. ID of the answer</td>
+</tr>
+</tbody></table>
+
 <h1 id="hair-tips">Hair Tips</h1>
 
 <h2 id="filter-hairtips-by-type-amp-category">Filter HairTips by Type &amp; Category</h2>
@@ -7836,6 +7988,108 @@ The Posts JSONArray response structure is the same as returned in the main feed 
 <tr>
 <td>id</td>
 <td>Required. ID of the hair tip</td>
+</tr>
+</tbody></table>
+
+<h2 id="bookmark-a-hair-tip">Bookmark a hair tip</h2>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint bookmarks a specific hair tip by a user.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/&lt;hair_tip_id&gt;/bookmark</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<p><code class="prettyprint">Authorization: xxxxxxxxxxxxxxxxxx</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose is making the request</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hair_tip_id</td>
+<td>The ID of the hair tip</td>
+</tr>
+</tbody></table>
+
+<h2 id="unbookmark-a-post">UnBookmark a Post</h2>
+<pre class="highlight swift"><code>
+</code></pre>
+<pre class="highlight java"><code>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint unbookmark a specific hair tip.</p>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<p><code class="prettyprint">GET https://tressapi-staging.herokuapp.com/api/v3/hair_tips/&lt;hair_tip_id&gt;/undobookmark</code></p>
+
+<h5 id="headers">Headers</h5>
+
+<p><code class="prettyprint">Authorization: xxxxxxxxxxxxxxxxxx</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization</td>
+<td>Required. This is the authentication_token of the user whose is making the request</td>
+</tr>
+</tbody></table>
+
+<h4 id="url-parameters">URL Parameters</h4>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hair_tip_id</td>
+<td>The ID of the hair tip</td>
 </tr>
 </tbody></table>
 
